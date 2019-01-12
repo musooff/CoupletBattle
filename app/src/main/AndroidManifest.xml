@@ -3,6 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.ballboycorp.battle">
 
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -12,16 +17,20 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".MainActivity"
+            android:name=".main.MainActivity"
             android:label="@string/app_name">
+        </activity>
+        <activity android:name=".coupletlist.CoupletListActivity" />
+        <activity android:name=".coupletlist.newcouplet.NewCoupletActivity" />
+        <activity android:name=".main.home.newcoupletcarrier.NewCoupletCarrierActivity" />
+        <activity android:name=".splash.SplashActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".coupletlist.CoupletListActivity" />
-        <activity android:name=".coupletlist.newcouplet.NewCoupletActivity"/>
     </application>
 
 </manifest>

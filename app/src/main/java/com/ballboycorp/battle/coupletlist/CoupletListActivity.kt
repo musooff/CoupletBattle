@@ -19,8 +19,11 @@ import kotlinx.android.synthetic.main.activity_coupletlist.*
 class CoupletListActivity : BaseActivity() {
 
     companion object {
-        fun newIntent(context: Context) {
+        private const val COUPLET_CARRIER_ID = "coupletCarrierId"
+
+        fun newIntent(context: Context, coupletCarrierId: String) {
             val intent = Intent(context, CoupletListActivity::class.java)
+            intent.putExtra(COUPLET_CARRIER_ID, coupletCarrierId)
             context.startActivity(intent)
         }
     }
@@ -32,7 +35,7 @@ class CoupletListActivity : BaseActivity() {
     }
 
     private lateinit var adapter: CoupletListAdapter
-    private var coupletCarrierId: String = "6LbQwsFYHDJcgsTpH2tP"
+    private var coupletCarrierId: String? = null
     private var coupletsCount: Int = 0
     private lateinit var lastPostedUserId: String
     private lateinit var startingLetter: String
@@ -40,6 +43,8 @@ class CoupletListActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_coupletlist)
+
+        coupletCarrierId = intent.extras!!.getString(COUPLET_CARRIER_ID)
 
         val layoutManager = LinearLayoutManager(this)
         layoutManager.stackFromEnd = true
@@ -54,7 +59,7 @@ class CoupletListActivity : BaseActivity() {
 
 
         coupletlist_add.setOnClickListener {
-            NewCoupletActivity.newIntent(this, coupletCarrierId, coupletsCount, startingLetter)
+            NewCoupletActivity.newIntent(this, coupletCarrierId!!, coupletsCount, startingLetter, false)
         }
 
         viewModel.couplets.observe(this, Observer {
@@ -70,6 +75,6 @@ class CoupletListActivity : BaseActivity() {
 
     override fun onResume() {
         super.onResume()
-        viewModel.getCouplets(coupletCarrierId)
+        viewModel.getCouplets(coupletCarrierId!!)
     }
 }

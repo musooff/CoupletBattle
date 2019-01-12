@@ -1,6 +1,7 @@
 package com.ballboycorp.battle.coupletlist.model
 
 import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.ServerTimestamp
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -14,7 +15,8 @@ class Couplet() {
     var text: String? = null
     var creatorId: String? = null
     var creatorFullname: String? = null
-    var creatorImageUrl: String? = null
+    var creatorThumbnailUrl: String? = null
+    @ServerTimestamp
     var createdTime: Date? = null
     var author: String? = null
     var authorId: String? = null

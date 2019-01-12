@@ -14,6 +14,8 @@ class NewCoupletRepository {
 
     private val firebaseDatabase = FirebaseFirestore.getInstance()
 
+    fun getCoupletCarrier(coupletCarrierId: String) = firebaseDatabase.collection(COUPLET_CARRIERS_REF).document(coupletCarrierId)
+
     fun getCoupletsRef(coupletCarrierId: String) = firebaseDatabase.collection(COUPLET_CARRIERS_REF).document(coupletCarrierId).collection(COUPLETS_REF)
 
 }

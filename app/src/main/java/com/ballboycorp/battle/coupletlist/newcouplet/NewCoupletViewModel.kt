@@ -9,6 +9,9 @@ import com.google.android.gms.tasks.Task
  */
 
 class NewCoupletViewModel : ViewModel() {
+    companion object {
+        private const val COUPLET_COUNT = "coupletCount"
+    }
 
     private val repository = NewCoupletRepository()
 
@@ -16,5 +19,9 @@ class NewCoupletViewModel : ViewModel() {
         return repository.getCoupletsRef(coupletCarrierId)
                 .document(coupletsCount.toString())
                 .set(couplet)
+                .addOnCompleteListener {
+                    repository.getCoupletCarrier(coupletCarrierId)
+                            .update(mapOf(Pair(COUPLET_COUNT, (coupletsCount + 1).toLong())))
+                }
     }
 }
