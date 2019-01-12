@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "765672387101",
+    "firebase_url": "https://bayt-battle.firebaseio.com",
+    "project_id": "bayt-battle",
+    "storage_bucket": "bayt-battle.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:765672387101:android:838856a1b1532847",
+        "android_client_info": {
+          "package_name": "com.ballboycorp.battle"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "765672387101-rr6odbeu51r52lu535jj3b668r2t9a06.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyASFswGuXGQpnaFi_bw0ZCXH7JvAy55YDo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
