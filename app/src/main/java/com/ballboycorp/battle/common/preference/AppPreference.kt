@@ -2,7 +2,7 @@ package com.ballboycorp.battle.common.preference
 
 import android.content.Context
 import android.preference.PreferenceManager
-import com.ballboycorp.battle.splash.model.User
+import com.ballboycorp.battle.user.model.User
 
 /**
  * Created by musooff on 12/01/2019.

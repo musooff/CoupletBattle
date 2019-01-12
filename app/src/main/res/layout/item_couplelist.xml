@@ -10,42 +10,47 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <androidx.cardview.widget.CardView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_margin="2dp"
-            app:cardCornerRadius="25dp"
-            app:cardElevation="2dp"
-            android:id="@+id/couplet_thumb_cv">
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center">
-                <androidx.cardview.widget.CardView
-                    android:layout_width="46dp"
-                    android:layout_height="46dp"
-                    app:cardCornerRadius="23dp"
-                    app:cardPreventCornerOverlap="false">
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/ic_user_default"/>
-                </androidx.cardview.widget.CardView>
-            </RelativeLayout>
-        </androidx.cardview.widget.CardView>
-        <TextView
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tyrian Lannester"
-            android:textStyle="bold"
-            android:id="@+id/couplet_creator_fullname"
-            android:textColor="@color/colorBlack"
-            android:layout_toRightOf="@id/couplet_thumb_cv"
-            android:layout_toEndOf="@id/couplet_thumb_cv"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:layout_marginStart="10dp" />
+            android:id="@+id/couplet_user_section">
+            <androidx.cardview.widget.CardView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="2dp"
+                app:cardCornerRadius="25dp"
+                app:cardElevation="2dp"
+                android:id="@+id/couplet_thumb_cv">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="46dp"
+                        android:layout_height="46dp"
+                        app:cardCornerRadius="23dp"
+                        app:cardPreventCornerOverlap="false">
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/ic_user_default"/>
+                    </androidx.cardview.widget.CardView>
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tyrian Lannester"
+                android:textStyle="bold"
+                android:id="@+id/couplet_creator_fullname"
+                android:textColor="@color/colorBlack"
+                android:layout_toRightOf="@id/couplet_thumb_cv"
+                android:layout_toEndOf="@id/couplet_thumb_cv"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp" />
+        </RelativeLayout>
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

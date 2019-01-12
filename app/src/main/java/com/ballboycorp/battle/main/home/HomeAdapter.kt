@@ -3,6 +3,7 @@ package com.ballboycorp.battle.main.home
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
 import com.ballboycorp.battle.R
 import com.ballboycorp.battle.coupletlist.CoupletListActivity
@@ -43,6 +44,16 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.HomeViewHolder>(){
 
             view.setOnClickListener {
                 CoupletListActivity.newIntent(view.context, coupletCarrier.id!!)
+            }
+
+            view.coupletcarrier_more.setOnClickListener {
+                val moreMenu = PopupMenu(view.context, view.coupletcarrier_more)
+                moreMenu.inflate(R.menu.more_couplet)
+                moreMenu.setOnMenuItemClickListener {
+                    true
+                }
+
+                moreMenu.show()
             }
         }
     }

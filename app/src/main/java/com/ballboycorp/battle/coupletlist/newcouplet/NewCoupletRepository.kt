@@ -1,5 +1,6 @@
 package com.ballboycorp.battle.coupletlist.newcouplet
 
+import com.ballboycorp.battle.user.UserRepository
 import com.google.firebase.firestore.FirebaseFirestore
 
 /**
@@ -10,6 +11,8 @@ class NewCoupletRepository {
     companion object {
         private const val COUPLET_CARRIERS_REF = "coupletCarriers"
         private const val COUPLETS_REF = "couplets"
+        private const val USERS_REF = "users"
+
     }
 
     private val firebaseDatabase = FirebaseFirestore.getInstance()
@@ -17,5 +20,7 @@ class NewCoupletRepository {
     fun getCoupletCarrier(coupletCarrierId: String) = firebaseDatabase.collection(COUPLET_CARRIERS_REF).document(coupletCarrierId)
 
     fun getCoupletsRef(coupletCarrierId: String) = firebaseDatabase.collection(COUPLET_CARRIERS_REF).document(coupletCarrierId).collection(COUPLETS_REF)
+
+    fun getUser(userId: String) = firebaseDatabase.collection(USERS_REF).document(userId)
 
 }

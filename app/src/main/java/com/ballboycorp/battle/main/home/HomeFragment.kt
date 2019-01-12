@@ -40,11 +40,6 @@ class HomeFragment : BaseFragment() {
         adapter = HomeAdapter()
         coupletcarrier_rv.adapter = adapter
 
-
-        val dividerItemDecoration = DividerItemDecoration(activity, layoutManager.orientation)
-        dividerItemDecoration.setDrawable(resources.getDrawable(R.drawable.recycler_view_divider))
-        coupletcarrier_rv.addItemDecoration(dividerItemDecoration)
-
         viewModel.coupletCarriers.observe(this, Observer {
             adapter.submitList(it)
         })

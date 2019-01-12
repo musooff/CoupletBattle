@@ -1,4 +1,4 @@
-package com.ballboycorp.battle.splash.model
+package com.ballboycorp.battle.user.model
 
 import com.google.firebase.auth.FirebaseUser
 
@@ -11,6 +11,12 @@ class User() {
     var thumbnailUrl: String? = null
     var email: String? = null
     var phoneNumber: String? = null
+    var coupletCount: Int = 0
+    var friendCount: Int = 0
+    var friendList: List<String> = arrayListOf()
+    var friendsPendingTo: List<String> = arrayListOf()
+    var friendsPendingFrom: List<String> = arrayListOf()
+
 
     companion object {
         fun toUser(firebaseUser: FirebaseUser): User{

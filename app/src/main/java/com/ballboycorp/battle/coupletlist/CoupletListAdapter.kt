@@ -7,6 +7,7 @@ import android.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
 import com.ballboycorp.battle.R
 import com.ballboycorp.battle.coupletlist.model.Couplet
+import com.ballboycorp.battle.user.UserActivity
 import kotlinx.android.synthetic.main.item_couplelist.view.*
 
 
@@ -50,6 +51,10 @@ class CoupletListAdapter : RecyclerView.Adapter<CoupletListAdapter.CoupletListVi
                 }
 
                 moreMenu.show()
+            }
+
+            view.couplet_user_section.setOnClickListener {
+                UserActivity.newIntent(view.context, couplet.creatorId!!)
             }
         }
     }

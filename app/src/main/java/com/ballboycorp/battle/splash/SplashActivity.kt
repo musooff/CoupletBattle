@@ -9,7 +9,7 @@ import com.ballboycorp.battle.R
 import com.ballboycorp.battle.common.base.BaseActivity
 import com.ballboycorp.battle.common.preference.AppPreference
 import com.ballboycorp.battle.main.MainActivity
-import com.ballboycorp.battle.splash.model.User
+import com.ballboycorp.battle.user.model.User
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.ErrorCodes
 import com.firebase.ui.auth.IdpResponse
@@ -75,8 +75,7 @@ class SplashActivity : BaseActivity() {
                 // Successfully signed in
                 val firebaseUser = FirebaseAuth.getInstance().currentUser
                 val user = User.toUser(firebaseUser!!)
-                viewModel.saveUserCredentials(user)
-                appPreff.saveCredentials(user)
+                viewModel.updateUserCredentials(user, appPreff)
                 MainActivity.newIntent(this)
                 finish()
             } else {
