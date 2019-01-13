@@ -47,6 +47,9 @@ class CoupletListActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_coupletlist)
 
+        setTitle(getString(R.string.app_name))
+
+
         appPreff = AppPreference.getInstance(this)
 
         coupletCarrierId = intent.extras!!.getString(COUPLET_CARRIER_ID)

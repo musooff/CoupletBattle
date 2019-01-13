@@ -36,6 +36,7 @@
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".coupletlist.editcouplet.EditCoupletActivity"/>
         <activity android:name=".friendlist.FriendListActivity"/>
+        <activity android:name=".main.home.newcoupletcarrier.chooseFriends.ChooseFriendsActivity"/>
     </application>
 
 </manifest>

@@ -52,6 +52,9 @@ class NewCoupletActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_newcouplet)
 
+        setTitle(getString(R.string.create_couplet))
+        closeBackButton()
+
         appPreff = AppPreference.getInstance(this)
 
         coupletsCount = intent.extras!!.getInt(COUPLETS_COUNT)

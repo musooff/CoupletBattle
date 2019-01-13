@@ -12,21 +12,40 @@ import com.ballboycorp.battle.main.home.model.CoupletCarrier
 
 class HomeViewModel : ViewModel() {
 
+    companion object {
+        private const val WRITERS = "writers"
+    }
+
     private val repository = HomeRepository()
 
     var coupletCarriers: MutableLiveData<List<CoupletCarrier>> = MutableLiveData()
 
-    fun getCoupletCarriers(){
-        repository.getCoupletCarriersRef()
-                .addSnapshotListener { snapshot, exception ->
-                    if (exception != null){
-                        Log.e("ERROR", exception.message)
-                        return@addSnapshotListener
+    fun getCoupletCarriers(isMyBattles: Boolean = false, userId: String? = null){
+        if (isMyBattles){
+            repository.getCoupletCarriersRef()
+                    .whereArrayContains(WRITERS, userId!!)
+                    .addSnapshotListener { snapshot, exception ->
+                        if (exception != null){
+                            Log.e("ERROR", exception.message)
+                            return@addSnapshotListener
+                        }
+                        if (snapshot != null){
+                            coupletCarriers.postValue(CoupletCarrier.toCoupletList(snapshot.documents))
+                        }
                     }
-                    if (snapshot != null){
-                        coupletCarriers.postValue(CoupletCarrier.toCoupletList(snapshot.documents))
+        }
+        else {
+            repository.getCoupletCarriersRef()
+                    .addSnapshotListener { snapshot, exception ->
+                        if (exception != null){
+                            Log.e("ERROR", exception.message)
+                            return@addSnapshotListener
+                        }
+                        if (snapshot != null){
+                            coupletCarriers.postValue(CoupletCarrier.toCoupletList(snapshot.documents))
+                        }
                     }
-                }
+        }
     }
 
     fun updateThumbs() = repository.getCoupletCarriersRef()

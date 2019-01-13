@@ -1,5 +1,6 @@
 package com.ballboycorp.battle.common.base
 
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 
 /**
@@ -7,4 +8,8 @@ import androidx.fragment.app.Fragment
  */
 
 open class BaseFragment : Fragment() {
+
+    fun setTitle(title: String){
+        (activity as AppCompatActivity).title = title
+    }
 }

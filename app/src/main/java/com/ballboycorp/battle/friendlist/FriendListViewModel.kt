@@ -1,6 +1,8 @@
 package com.ballboycorp.battle.friendlist
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.ballboycorp.battle.user.model.User
 
@@ -9,6 +11,10 @@ import com.ballboycorp.battle.user.model.User
  */
 
 class FriendListViewModel : ViewModel() {
+
+    companion object {
+        private const val FRIEND_LIST_REF = "friendList"
+    }
 
     private val repository = FriendListRepository()
 
@@ -25,6 +31,15 @@ class FriendListViewModel : ViewModel() {
                             }
 
                     friedList.postValue(users)
+                }
+    }
+
+    fun getFriendIds(userId: String){
+        repository.getFriendList()
+                .document(userId)
+                .get()
+                .addOnSuccessListener {
+                    getFriendList(it.get(FRIEND_LIST_REF) as List<String>)
                 }
     }
 }

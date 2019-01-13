@@ -12,6 +12,7 @@ import com.ballboycorp.battle.R
 import com.ballboycorp.battle.common.base.BaseActivity
 import com.ballboycorp.battle.main.home.HomeFragment
 import com.ballboycorp.battle.main.me.MeFragment
+import com.ballboycorp.battle.main.mybattles.MyBattlesFragment
 import com.ballboycorp.battle.main.notification.NotificationFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -34,6 +35,7 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        supportActionBar?.setDisplayHomeAsUpEnabled(false)
 
         mFragmentManager = supportFragmentManager
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
@@ -49,7 +51,7 @@ class MainActivity : BaseActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_dashboard -> {
-                loadFragment(Fragment())
+                loadFragment(MyBattlesFragment())
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_me ->{

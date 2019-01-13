@@ -42,6 +42,9 @@ class MeFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setTitle(getString(R.string.title_me))
+
+
         appPreff = AppPreference.getInstance(view.context)
 
         userId = appPreff.getUserId()

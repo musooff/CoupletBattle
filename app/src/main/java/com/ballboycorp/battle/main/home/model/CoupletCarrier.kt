@@ -18,6 +18,7 @@ class CoupletCarrier() {
     var coupletCount: Long = 0
     var thumbnailUrl: String? = null
     var writers: List<String> = arrayListOf()
+    var privacy: String? = null
 
     companion object {
 
