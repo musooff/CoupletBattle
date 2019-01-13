@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.ballboycorp.battle.R
 import com.ballboycorp.battle.common.base.BaseActivity
 import com.ballboycorp.battle.common.preference.AppPreference
+import com.ballboycorp.battle.coupletlist.invite.InviteActivity
 import com.ballboycorp.battle.coupletlist.newcouplet.NewCoupletActivity
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_coupletlist.*
@@ -69,7 +70,9 @@ class CoupletListActivity : BaseActivity() {
         coupletlist_add.setOnClickListener {
             if (lastPostedUserId == appPreff.getUserId()){
                 Snackbar.make(coupletlist_add, getString(R.string.not_your_turn), Snackbar.LENGTH_LONG)
-                        .setAction(getString(R.string.action_invite)) {}
+                        .setAction(getString(R.string.action_invite)) {
+                            InviteActivity.newIntent(this)
+                        }
                         .show()
             }
             else {

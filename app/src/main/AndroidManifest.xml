@@ -37,6 +37,7 @@
         <activity android:name=".coupletlist.editcouplet.EditCoupletActivity"/>
         <activity android:name=".friendlist.FriendListActivity"/>
         <activity android:name=".main.home.newcoupletcarrier.chooseFriends.ChooseFriendsActivity"/>
+        <activity android:name=".coupletlist.invite.InviteActivity"/>
     </application>
 
 </manifest>
