@@ -16,6 +16,7 @@ class Notification() {
     var fromUserId: String? = null
     var type: String? = null
     var notificationThumbUrl: String? = null
+    var battleId: String? = null
 
     companion object {
         fun toNotificationList(documents: List<DocumentSnapshot>): List<Notification>{

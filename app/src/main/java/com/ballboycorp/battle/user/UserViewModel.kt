@@ -28,7 +28,7 @@ class UserViewModel : ViewModel() {
 
     fun getImageUrl(imageUrl: String) = repository.getImageRef(imageUrl)
 
-    fun createNotification(userId: String, notification: Notification): Task<DocumentReference>{
+    private fun createNotification(userId: String, notification: Notification): Task<DocumentReference>{
         return repository.getNotificationRef(userId)
                 .add(notification)
                 .addOnSuccessListener {

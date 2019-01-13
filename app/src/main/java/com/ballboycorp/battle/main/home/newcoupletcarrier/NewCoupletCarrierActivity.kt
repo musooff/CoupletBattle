@@ -14,6 +14,8 @@ import com.ballboycorp.battle.coupletlist.newcouplet.NewCoupletActivity
 import com.ballboycorp.battle.main.home.model.CoupletCarrier
 import com.ballboycorp.battle.main.home.model.Privacy
 import com.ballboycorp.battle.main.home.newcoupletcarrier.chooseFriends.ChooseFriendsActivity
+import com.ballboycorp.battle.main.notification.model.Notification
+import com.ballboycorp.battle.main.notification.model.NotificationType
 import kotlinx.android.synthetic.main.activity_newcoupletcarrier.*
 
 /**
@@ -66,7 +68,14 @@ class NewCoupletCarrierActivity : BaseActivity() {
             coupletCarrier.writers = writers
             coupletCarrier.privacy = getString(privacy.text)
 
-            viewModel.saveCouplet(coupletCarrier)
+
+            val notification = Notification()
+            notification.fromUser = appPreff.getUserFullname()
+            notification.fromUserId = appPreff.getUserId()
+            notification.notificationThumbUrl = appPreff.getUserThumbnail()
+            notification.type = NotificationType.BATTLE_JOINED.value
+
+            viewModel.saveCouplet(coupletCarrier, notification)
                     .addOnSuccessListener {
                         NewCoupletActivity.newIntent(this, it.id, 0, STARTING_LETTER, true)
                         this.finish()

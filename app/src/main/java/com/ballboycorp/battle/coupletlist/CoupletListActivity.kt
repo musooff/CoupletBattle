@@ -72,7 +72,7 @@ class CoupletListActivity : BaseActivity() {
                         .setAction(getString(R.string.action_invite)) {}
                         .show()
             }
-            else{
+            else {
                 NewCoupletActivity.newIntent(this, coupletCarrierId!!, coupletsCount, startingLetter, false)
             }
         }

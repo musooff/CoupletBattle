@@ -13,6 +13,8 @@ import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.item_notification.view.*
 import android.text.SpannableStringBuilder
 import android.text.style.StyleSpan
+import com.ballboycorp.battle.coupletlist.CoupletListActivity
+import com.ballboycorp.battle.main.home.model.CoupletCarrier
 import com.ballboycorp.battle.main.notification.model.NotificationType
 import com.ballboycorp.battle.user.UserActivity
 
@@ -58,12 +60,21 @@ class NotificationAdapter : RecyclerView.Adapter<NotificationAdapter.Notificatio
                     text.append("${notification.fromUser} accepted your friend request.")
 
                 }
+                NotificationType.BATTLE_JOINED.value -> {
+                    text.append("${notification.fromUser} added you to a Байтбарак")
+
+                }
             }
             text.setSpan(StyleSpan(Typeface.BOLD), 0, notification.fromUser!!.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
             view.notification_text.text = text
 
             view.setOnClickListener {
-                UserActivity.newIntent(view.context, notification.fromUserId!!)
+                if (notification.type == NotificationType.BATTLE_JOINED.value) {
+                    CoupletListActivity.newIntent(view.context, notification.battleId!!)
+                }
+                else {
+                    UserActivity.newIntent(view.context, notification.fromUserId!!)
+                }
             }
         }
     }

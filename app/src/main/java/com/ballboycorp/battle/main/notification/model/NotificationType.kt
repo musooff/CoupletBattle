@@ -6,5 +6,6 @@ package com.ballboycorp.battle.main.notification.model
 
 enum class NotificationType(typeCode: Int, val value: String) {
     FRIEND_REQUEST(0, "friendRequest"),
-    FRIEND_ACCEPTED(1, "friendAccepted")
+    FRIEND_ACCEPTED(1, "friendAccepted"),
+    BATTLE_JOINED(1, "battleJoined")
 }

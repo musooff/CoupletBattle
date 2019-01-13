@@ -9,9 +9,9 @@ import com.google.firebase.firestore.FirebaseFirestore
 
 class NewCoupletCarrierRepository {
     companion object {
-        private const val COUPLET_ID = "0"
         private const val COUPLET_CARRIERS_REF = "coupletCarriers"
-        private const val COUPLETS_REF = "couplets"
+        private const val USERS_REF = "users"
+        private const val NOTIFICATIONS_REF = "notifications"
     }
 
     private val firebaseDatabase = FirebaseFirestore.getInstance()
@@ -20,4 +20,6 @@ class NewCoupletCarrierRepository {
 
     fun getCoupletCarriers() = firebaseDatabase.collection(COUPLET_CARRIERS_REF)
 
+
+    fun getNotificationRef(userId: String) = firebaseDatabase.collection(USERS_REF).document(userId).collection(NOTIFICATIONS_REF)
 }
