@@ -70,6 +70,7 @@ class NewCoupletActivity : BaseActivity() {
             couplet.createdTime = Date()
             couplet.creatorId = appPreff.getUserId()
             couplet.creatorFullname = appPreff.getUserFullname()
+            couplet.creatorThumbnailUrl = appPreff.getUserThumbnail()
             couplet.authorId = "rudaki"
 
             viewModel.saveCouplet(coupletCarrierId!!, coupletsCount, couplet)

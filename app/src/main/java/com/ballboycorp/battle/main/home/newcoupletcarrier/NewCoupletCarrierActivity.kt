@@ -47,6 +47,7 @@ class NewCoupletCarrierActivity : BaseActivity() {
             val coupletCarrier = CoupletCarrier()
             coupletCarrier.name = coupletcarrier_name.text.toString()
             coupletCarrier.creatorId = appPreff.getUserId()
+            coupletCarrier.writers = arrayListOf(appPreff.getUserId())
 
             viewModel.saveCouplet(coupletCarrier)
                     .addOnSuccessListener {

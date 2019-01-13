@@ -9,7 +9,9 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ballboycorp.battle.R
 import com.ballboycorp.battle.common.base.BaseActivity
+import com.ballboycorp.battle.common.preference.AppPreference
 import com.ballboycorp.battle.coupletlist.newcouplet.NewCoupletActivity
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_coupletlist.*
 
 /**
@@ -39,10 +41,13 @@ class CoupletListActivity : BaseActivity() {
     private var coupletsCount: Int = 0
     private lateinit var lastPostedUserId: String
     private lateinit var startingLetter: String
+    private lateinit var appPreff: AppPreference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_coupletlist)
+
+        appPreff = AppPreference.getInstance(this)
 
         coupletCarrierId = intent.extras!!.getString(COUPLET_CARRIER_ID)
 
@@ -59,7 +64,14 @@ class CoupletListActivity : BaseActivity() {
 
 
         coupletlist_add.setOnClickListener {
-            NewCoupletActivity.newIntent(this, coupletCarrierId!!, coupletsCount, startingLetter, false)
+            if (lastPostedUserId == appPreff.getUserId()){
+                Snackbar.make(coupletlist_add, getString(R.string.not_your_turn), Snackbar.LENGTH_LONG)
+                        .setAction(getString(R.string.action_invite)) {}
+                        .show()
+            }
+            else{
+                NewCoupletActivity.newIntent(this, coupletCarrierId!!, coupletsCount, startingLetter, false)
+            }
         }
 
         viewModel.couplets.observe(this, Observer {

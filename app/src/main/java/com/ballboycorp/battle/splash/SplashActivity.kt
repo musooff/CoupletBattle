@@ -1,6 +1,7 @@
 package com.ballboycorp.battle.splash
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -25,6 +26,11 @@ class SplashActivity : BaseActivity() {
 
     companion object {
         private const val RC_SIGN_IN = 13
+
+        fun newIntent(context: Context){
+            val intent = Intent(context, SplashActivity::class.java)
+            context.startActivity(intent)
+        }
     }
 
     private val viewModel by lazy {
@@ -58,7 +64,6 @@ class SplashActivity : BaseActivity() {
                         .createSignInIntentBuilder()
                         .setAvailableProviders(providers)
                         .setIsSmartLockEnabled(false)
-                        .setLogo(R.drawable.ic_user_default)
                         .setTheme(R.style.AppTheme_NoActionBar)
                         .build(),
                 RC_SIGN_IN)

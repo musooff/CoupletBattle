@@ -11,11 +11,13 @@ import java.util.*
 class CoupletCarrier() {
     var id: String? = null
     var name: String? = null
+    var description: String? = null
     @ServerTimestamp
     var createdTime: Date? = null
     var creatorId: String? = null
     var coupletCount: Long = 0
     var thumbnailUrl: String? = null
+    var writers: List<String> = arrayListOf()
 
     companion object {
 

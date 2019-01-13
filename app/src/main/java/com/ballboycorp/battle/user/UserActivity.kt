@@ -3,12 +3,17 @@ package com.ballboycorp.battle.user
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.lifecycle.ViewModelProviders
+import com.ballboycorp.battle.GlideApp
 import com.ballboycorp.battle.R
 import com.ballboycorp.battle.common.base.BaseActivity
 import com.ballboycorp.battle.common.preference.AppPreference
+import com.ballboycorp.battle.friendlist.FriendListActivity
+import com.ballboycorp.battle.main.notification.model.Notification
+import com.ballboycorp.battle.main.notification.model.NotificationType
+import com.ballboycorp.battle.user.model.ActionButtonType
 import com.ballboycorp.battle.user.model.User
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_user.*
 
 /**
@@ -34,7 +39,9 @@ class UserActivity : BaseActivity() {
     }
 
     private lateinit var userId: String
+    private lateinit var mUser: User
     private lateinit var appPreff: AppPreference
+    private lateinit var actionButtonType: ActionButtonType
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,29 +52,73 @@ class UserActivity : BaseActivity() {
         userId = intent.extras!!.getString(USER_ID)!!
 
         viewModel.getUser(userId)
-                .addSnapshotListener { snapshot, exception ->
-                    if (exception != null){
-                        Log.e("ERROR", exception.message)
-                    }
-                    else if (snapshot != null){
-                        val user = snapshot.toObject(User::class.java)
-                        user_name.text = user!!.name
+                .get()
+                .addOnSuccessListener {
+                    if (it != null){
+                        val user = it.toObject(User::class.java)
+                        mUser = user!!
+
+                        setActionButtonType(user)
+                        user_name.text = user.name
                         user_couplet_count.text = "${user.coupletCount}"
                         user_friend_count.text = "${user.friendCount}"
 
-                        invalidateActionButton(user)
+                        GlideApp.with(this).load(viewModel.getImageUrl(user.thumbnailUrl!!)).into(user_thumb)
+                        GlideApp.with(this).load(viewModel.getImageUrl(user.coverUrl!!)).into(user_cover)
 
                     }
                 }
 
+        user_friend_count_container.setOnClickListener {
+            FriendListActivity.newIntent(this, mUser.friendList.toTypedArray())
+        }
 
     }
 
-    private fun invalidateActionButton(user: User) {
-        when {
-            appPreff.getUserId() == userId -> action_button.text = getString(R.string.edit_button)
-            user.friendList.contains(appPreff.getUserId()) -> action_button.text = getString(R.string.message_button)
-            else -> action_button.text = getString(R.string.button_addfriend)
+    private fun setActionButtonType(user: User) {
+        actionButtonType = when {
+            appPreff.getUserId() == userId -> ActionButtonType.EDIT
+            user.friendList.contains(appPreff.getUserId()) -> ActionButtonType.MESSAGE
+            user.friendsPendingFrom.contains(appPreff.getUserId()) -> ActionButtonType.FRIEND_REQUEST_PENDING
+            user.friendsPendingTo.contains(appPreff.getUserId()) -> ActionButtonType.FRIEND_REQUEST_SENT
+            else -> ActionButtonType.ADD_FRIEND
+        }
+
+        action_button.text = getString(actionButtonType.text)
+
+        action_button.setOnClickListener {
+            when (actionButtonType){
+                ActionButtonType.ADD_FRIEND -> {
+                    val notification = Notification()
+                    notification.fromUser = appPreff.getUserFullname()
+                    notification.fromUserId = appPreff.getUserId()
+                    notification.notificationThumbUrl = appPreff.getUserThumbnail()
+                    notification.type = NotificationType.FRIEND_REQUEST.value
+                    viewModel.sendFriendRequest(userId, notification)
+                            .addOnSuccessListener {
+                                actionButtonType = ActionButtonType.FRIEND_REQUEST_SENT
+                                action_button.text = getString(actionButtonType.text)
+                            }
+                }
+                ActionButtonType.FRIEND_REQUEST_PENDING -> {
+                    val notification = Notification()
+                    notification.fromUser = appPreff.getUserFullname()
+                    notification.fromUserId = appPreff.getUserId()
+                    notification.notificationThumbUrl = appPreff.getUserThumbnail()
+                    notification.type = NotificationType.FRIEND_ACCEPTED.value
+                    viewModel.acceptFriendRequest(userId, notification)
+                            .addOnSuccessListener {
+                                actionButtonType = ActionButtonType.MESSAGE
+                                action_button.text = getString(actionButtonType.text)
+                            }
+                }
+                ActionButtonType.FRIEND_REQUEST_SENT -> {
+                    Snackbar.make(it, getString(R.string.already_sent), Snackbar.LENGTH_SHORT).show()
+                }
+                else -> {
+                    Snackbar.make(it, getString(R.string.coming_soon), Snackbar.LENGTH_SHORT).show()
+                }
+            }
         }
     }
 }

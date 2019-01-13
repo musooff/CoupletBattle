@@ -1,6 +1,7 @@
 package com.ballboycorp.battle.user.model
 
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.DocumentSnapshot
 
 /**
  * Created by musooff on 12/01/2019.
@@ -9,6 +10,7 @@ import com.google.firebase.auth.FirebaseUser
 class User() {
     var name: String? = null
     var thumbnailUrl: String? = null
+    var coverUrl: String? = null
     var email: String? = null
     var phoneNumber: String? = null
     var coupletCount: Int = 0
@@ -24,8 +26,18 @@ class User() {
             user.email = firebaseUser.email
             user.name = firebaseUser.displayName
             user.phoneNumber = firebaseUser.phoneNumber
-            user.thumbnailUrl = firebaseUser.photoUrl.toString()
+            user.coverUrl = "user/covers/user_default_cover.jpg"
+            user.thumbnailUrl = "user/thumbnails/user_default_thumb.png"
             return user
+        }
+
+        fun toUserList(documents: List<DocumentSnapshot>): List<User>{
+            val result = ArrayList<User>()
+            documents.forEach {
+                val user = it.toObject(User::class.java)
+                result.add(user!!)
+            }
+            return result
         }
     }
 

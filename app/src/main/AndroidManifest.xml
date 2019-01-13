@@ -34,6 +34,8 @@
         </activity>
         <activity android:name=".user.UserActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".coupletlist.editcouplet.EditCoupletActivity"/>
+        <activity android:name=".friendlist.FriendListActivity"/>
     </application>
 
 </manifest>

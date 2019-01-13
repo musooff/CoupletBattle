@@ -23,6 +23,7 @@ class AppPreference(context: Context) {
 
         private const val USER_ID = "userId"
         private const val USER_NAME = "userName"
+        private const val USER_THUMB = "userThumbnail"
 
     }
 
@@ -37,16 +38,19 @@ class AppPreference(context: Context) {
         return sharedPreferences.getString(USER_NAME, null)!!
     }
 
-    fun getSecondaryUserId(): String {
-        return "targerian"
+    fun getUserThumbnail(): String {
+        return sharedPreferences.getString(USER_THUMB, null)!!
     }
 
-    fun getSecondaryUserFullname(): String {
-        return "Aegon Targaryan"
-    }
     fun saveCredentials(user: User){
         editor.putString(USER_ID, user.email).apply()
         editor.putString(USER_NAME, user.name).apply()
+        editor.putString(USER_THUMB, user.thumbnailUrl).apply()
+    }
+
+    fun signOut(){
+        editor.remove(USER_ID).apply()
+        editor.remove(USER_NAME).apply()
     }
 
 

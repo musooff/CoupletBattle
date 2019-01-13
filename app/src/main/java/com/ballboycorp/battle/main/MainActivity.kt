@@ -11,6 +11,8 @@ import androidx.fragment.app.FragmentManager
 import com.ballboycorp.battle.R
 import com.ballboycorp.battle.common.base.BaseActivity
 import com.ballboycorp.battle.main.home.HomeFragment
+import com.ballboycorp.battle.main.me.MeFragment
+import com.ballboycorp.battle.main.notification.NotificationFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -50,8 +52,12 @@ class MainActivity : BaseActivity() {
                 loadFragment(Fragment())
                 return@OnNavigationItemSelectedListener true
             }
+            R.id.navigation_me ->{
+                loadFragment(MeFragment())
+                return@OnNavigationItemSelectedListener true
+            }
             R.id.navigation_notifications -> {
-                loadFragment(Fragment())
+                loadFragment(NotificationFragment())
                 return@OnNavigationItemSelectedListener true
             }
         }

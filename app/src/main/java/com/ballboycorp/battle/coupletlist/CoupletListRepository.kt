@@ -1,6 +1,9 @@
 package com.ballboycorp.battle.coupletlist
 
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
+
+
 
 /**
  * Created by musooff on 12/01/2019.

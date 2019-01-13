@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Battle</string>
+    <string name="app_name">Байтбарак</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
@@ -31,4 +31,13 @@
     <string name="button_addfriend">Add Friend</string>
     <string name="edit_button">Edit</string>
     <string name="message_button">Message</string>
+    <string name="not_your_turn">Not your turn. Invite your friends to join</string>
+    <string name="action_invite">Invite</string>
+    <string name="hint_coupletcarrier_description">Маълумоти дираг, чун коидаву конунхо ва дигар дархостхо</string>
+    <string name="button_logout">Log Out</string>
+    <string name="title_me">Me</string>
+    <string name="button_friend_request_sent">Friend Request sent</string>
+    <string name="button_friend_request_pending">Accept Friend Request</string>
+    <string name="already_sent">Friend request already sent</string>
+    <string name="coming_soon">Coming soon</string>
 </resources>

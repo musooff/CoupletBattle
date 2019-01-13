@@ -28,8 +28,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="fitXY"
-                        android:background="@drawable/default_coupletcarriers_thumb"
-                        android:src="@drawable/black_gradient"/>
+                        android:id="@+id/user_cover"
+                        android:src="@drawable/user_cover_default"/>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/black_gradient">
+                    </RelativeLayout>
                 </RelativeLayout>
                 <androidx.cardview.widget.CardView
                     android:layout_width="100dp"
@@ -49,9 +54,9 @@
                             <ImageView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:id="@+id/home_header_thumb"
+                                android:id="@+id/user_thumb"
                                 android:scaleType="fitXY"
-                                android:src="@drawable/ic_user_default"/>
+                                android:src="@drawable/user_thumb_default"/>
                         </androidx.cardview.widget.CardView>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -98,6 +103,7 @@
                     android:layout_weight="1"
                     android:layout_height="100dp"
                     android:orientation="vertical"
+                    android:id="@+id/user_friend_count_container"
                     android:gravity="center">
                     <TextView
                         android:layout_width="wrap_content"
