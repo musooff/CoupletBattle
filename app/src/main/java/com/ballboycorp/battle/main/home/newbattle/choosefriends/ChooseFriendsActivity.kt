@@ -13,6 +13,7 @@ import com.ballboycorp.battle.common.base.BaseActivity
 import com.ballboycorp.battle.common.preference.AppPreference
 import com.ballboycorp.battle.friendlist.FriendListViewModel
 import kotlinx.android.synthetic.main.activity_choose_friends.*
+import kotlinx.android.synthetic.main.empty_list.*
 
 /**
  * Created by musooff on 14/01/2019.
@@ -55,6 +56,7 @@ class ChooseFriendsActivity  : BaseActivity(){
 
         viewModel.friedList.observe(this, Observer {
             adapter.submitList(it)
+            invalidateEmptyList(adapter.isEmpty())
         })
 
     }
@@ -68,5 +70,16 @@ class ChooseFriendsActivity  : BaseActivity(){
         intent.putStringArrayListExtra(SELECTED_LIST, adapter.chosenFriends)
         setResult(Activity.RESULT_OK, intent)
         finish()
+    }
+
+    private fun invalidateEmptyList(isEmpty: Boolean){
+        if (isEmpty){
+            empty.visibility = View.VISIBLE
+            empty_text.text = getString(R.string.empty_friends)
+        }
+        else{
+            empty.visibility = View.GONE
+
+        }
     }
 }

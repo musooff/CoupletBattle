@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.ballboycorp.battle.R
 import com.ballboycorp.battle.common.base.BaseFragment
 import com.ballboycorp.battle.common.preference.AppPreference
+import kotlinx.android.synthetic.main.empty_list.*
 import kotlinx.android.synthetic.main.fragment_notification.*
 
 /**
@@ -49,6 +50,7 @@ class NotificationFragment : BaseFragment(){
 
         viewModel.notifications.observe(this, Observer {
             adapter.submitList(it)
+            invalidateEmptyList(adapter.isEmpty())
         })
 
     }
@@ -56,5 +58,16 @@ class NotificationFragment : BaseFragment(){
     override fun onResume() {
         super.onResume()
         viewModel.getNotifications(appPreff.getUserId())
+    }
+
+    private fun invalidateEmptyList(isEmpty: Boolean){
+        if (isEmpty){
+            empty.visibility = View.VISIBLE
+            empty_text.text = getString(R.string.empty_notifications)
+        }
+        else{
+            empty.visibility = View.GONE
+
+        }
     }
 }

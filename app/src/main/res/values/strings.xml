@@ -58,4 +58,8 @@
     <string name="button_invite_friends">Invite friends</string>
     <string name="couplet_line_1">Мисраи аввал</string>
     <string name="couplet_line_2">Мисраи дуввум</string>
+    <string name="empty_friends">No friends are found</string>
+    <string name="empty_invite">No friends to invite. Everyone is already in the battle</string>
+    <string name="empty_notifications">No notifications has been found</string>
+    <string name="empty_my_battles">You are not part of any battle. Try creating one or join existing from Home</string>
 </resources>

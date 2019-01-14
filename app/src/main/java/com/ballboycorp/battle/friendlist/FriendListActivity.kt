@@ -3,13 +3,16 @@ package com.ballboycorp.battle.friendlist
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ballboycorp.battle.R
 import com.ballboycorp.battle.common.base.BaseActivity
 import com.ballboycorp.battle.common.preference.AppPreference
+import io.reactivex.internal.operators.maybe.MaybeIsEmpty
 import kotlinx.android.synthetic.main.activity_friendlist.*
+import kotlinx.android.synthetic.main.empty_list.*
 
 /**
  * Created by musooff on 12/01/2019.
@@ -55,6 +58,7 @@ class FriendListActivity : BaseActivity() {
 
         viewModel.friedList.observe(this, Observer {
             adapter.submitList(it)
+            invalidateEmptyList(adapter.isEmpty())
         })
 
     }
@@ -62,5 +66,16 @@ class FriendListActivity : BaseActivity() {
     override fun onResume() {
         super.onResume()
         viewModel.getFriendList(friendIds.toList())
+    }
+
+    private fun invalidateEmptyList(isEmpty: Boolean){
+        if (isEmpty){
+            empty.visibility = View.VISIBLE
+            empty_text.text = getString(R.string.empty_friends)
+        }
+        else{
+            empty.visibility = View.GONE
+
+        }
     }
 }

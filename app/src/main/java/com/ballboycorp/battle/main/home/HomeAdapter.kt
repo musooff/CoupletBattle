@@ -28,6 +28,10 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.HomeViewHolder>(){
         return battles.size
     }
 
+    fun isEmpty(): Boolean {
+        return battles.isEmpty()
+    }
+
     fun submitList(battles: List<Battle>){
         this.battles = battles.sortedByDescending {
             it.coupletCount

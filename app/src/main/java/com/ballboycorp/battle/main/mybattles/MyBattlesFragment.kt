@@ -13,6 +13,7 @@ import com.ballboycorp.battle.common.preference.AppPreference
 import com.ballboycorp.battle.main.home.HomeAdapter
 import com.ballboycorp.battle.main.home.HomeViewModel
 import com.ballboycorp.battle.main.home.newbattle.NewBattleActivity
+import kotlinx.android.synthetic.main.empty_list.*
 import kotlinx.android.synthetic.main.fragment_home.*
 
 /**
@@ -48,6 +49,7 @@ class MyBattlesFragment : BaseFragment() {
 
         viewModel.battles.observe(this, Observer {
             adapter.submitList(it)
+            invalidateEmptyList(adapter.isEmpty())
         })
 
         battle_add.setOnClickListener {
@@ -59,5 +61,16 @@ class MyBattlesFragment : BaseFragment() {
     override fun onResume() {
         super.onResume()
         viewModel.getBattlesRef(true, appPreff.getUserId())
+    }
+
+    private fun invalidateEmptyList(isEmpty: Boolean){
+        if (isEmpty){
+            empty.visibility = View.VISIBLE
+            empty_text.text = getString(R.string.empty_my_battles)
+        }
+        else{
+            empty.visibility = View.GONE
+
+        }
     }
 }

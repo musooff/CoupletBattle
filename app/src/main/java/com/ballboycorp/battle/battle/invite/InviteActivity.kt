@@ -3,6 +3,7 @@ package com.ballboycorp.battle.battle.invite
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -17,6 +18,7 @@ import com.ballboycorp.battle.main.notification.model.Notification
 import com.ballboycorp.battle.main.notification.model.NotificationType
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_invite_friends.*
+import kotlinx.android.synthetic.main.empty_list.*
 
 /**
  * Created by musooff on 14/01/2019.
@@ -67,6 +69,7 @@ class InviteActivity  : BaseActivity(){
                         !mBattle.writers.contains(it.id)
                     }
             )
+            invalidateEmptyList(adapter.isEmpty())
         })
 
         button_invite_friends.setOnClickListener {
@@ -88,5 +91,16 @@ class InviteActivity  : BaseActivity(){
     override fun onResume() {
         super.onResume()
         viewModel.getFriendIds(appPreff.getUserId())
+    }
+
+    private fun invalidateEmptyList(isEmpty: Boolean){
+        if (isEmpty){
+            empty.visibility = View.VISIBLE
+            empty_text.text = getString(R.string.empty_invite)
+        }
+        else{
+            empty.visibility = View.GONE
+
+        }
     }
 }

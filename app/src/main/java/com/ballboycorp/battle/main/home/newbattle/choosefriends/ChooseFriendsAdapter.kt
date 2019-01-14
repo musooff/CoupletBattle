@@ -29,6 +29,10 @@ class ChooseFriendsAdapter : RecyclerView.Adapter<ChooseFriendsAdapter.ChooseFri
         return chooseFriends.size
     }
 
+    fun isEmpty(): Boolean {
+        return chooseFriends.isEmpty()
+    }
+
     fun submitList(coupletList: List<User>){
         this.chooseFriends = coupletList
         notifyDataSetChanged()

@@ -36,6 +36,10 @@ class NotificationAdapter : RecyclerView.Adapter<NotificationAdapter.Notificatio
         return notifications.size
     }
 
+    fun isEmpty(): Boolean {
+        return notifications.isEmpty()
+    }
+
     fun submitList(coupletList: List<Notification>){
         this.notifications = coupletList.sortedByDescending {
             it.createdTime

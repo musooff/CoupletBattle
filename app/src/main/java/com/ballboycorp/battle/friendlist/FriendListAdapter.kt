@@ -30,6 +30,10 @@ class FriendListAdapter : RecyclerView.Adapter<FriendListAdapter.FriendListViewH
         return friendList.size
     }
 
+    fun isEmpty(): Boolean{
+        return friendList.isEmpty()
+    }
+
     fun submitList(coupletList: List<User>){
         this.friendList = coupletList
         notifyDataSetChanged()
