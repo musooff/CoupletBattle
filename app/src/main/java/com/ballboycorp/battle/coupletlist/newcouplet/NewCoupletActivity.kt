@@ -65,11 +65,13 @@ class NewCoupletActivity : BaseActivity() {
         couplet_submit.setOnClickListener {
             val couplet = Couplet()
             couplet.id = "${coupletCarrierId}_$coupletsCount"
-            val text = couplet_text.text.toString()
-            couplet.text = text
+            val line1 = couplet_line_1.text.toString()
+            val line2 = couplet_line_2.text.toString()
+            couplet.line1 = line1
+            couplet.line2 = line2
             couplet.author = couplet_author.text.toString()
             couplet.startingLetter = startingLetter
-            couplet.endingLetter = text[text.length - 1].toString()
+            couplet.endingLetter = line2[line2.length - 1].toString().toUpperCase()
             couplet.createdTime = Date()
             couplet.creatorId = appPreff.getUserId()
             couplet.creatorFullname = appPreff.getUserFullname()

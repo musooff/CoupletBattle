@@ -38,7 +38,9 @@ class NotificationAdapter : RecyclerView.Adapter<NotificationAdapter.Notificatio
     }
 
     fun submitList(coupletList: List<Notification>){
-        this.notifications = coupletList
+        this.notifications = coupletList.sortedByDescending {
+            it.createdTime
+        }
         notifyDataSetChanged()
     }
 

@@ -44,7 +44,8 @@ class CoupletListAdapter : RecyclerView.Adapter<CoupletListAdapter.CoupletListVi
 
     inner class CoupletListViewHolder(val view: View): RecyclerView.ViewHolder(view){
         fun bind(couplet: Couplet){
-            view.couplet_text.text = couplet.text!!.replace("\\n", "\n")
+            view.couplet_line_1.text = couplet.line1
+            view.couplet_line_2.text = couplet.line2
             view.couplet_author.text = couplet.author
             view.couplet_creator_fullname.text = couplet.creatorFullname
 

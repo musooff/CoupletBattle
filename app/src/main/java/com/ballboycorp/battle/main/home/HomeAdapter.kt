@@ -29,7 +29,9 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.HomeViewHolder>(){
     }
 
     fun submitList(coupletCarriers: List<CoupletCarrier>){
-        this.coupletCarriers = coupletCarriers
+        this.coupletCarriers = coupletCarriers.sortedByDescending {
+            it.coupletCount
+        }
         notifyDataSetChanged()
     }
 

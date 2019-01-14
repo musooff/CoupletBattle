@@ -44,12 +44,12 @@ class ChooseFriendsAdapter : RecyclerView.Adapter<ChooseFriendsAdapter.ChooseFri
             view.user_fullname.text = user.name
             GlideApp.with(view.context).load(firebaseStorage.getReference(user.thumbnailUrl!!)).into(view.user_thumb)
             view.user_checkbox.setOnClickListener {
-                if (chosenFriends.contains(user.email)){
-                    chosenFriends.remove(user.email)
+                if (chosenFriends.contains(user.id)){
+                    chosenFriends.remove(user.id)
                     view.user_checkbox.isChecked = false
                 }
                 else {
-                    chosenFriends.add(user.email!!)
+                    chosenFriends.add(user.id!!)
                     view.user_checkbox.isChecked = true
                 }
             }

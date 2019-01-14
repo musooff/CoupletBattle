@@ -10,24 +10,33 @@ import com.ballboycorp.battle.user.model.User
 
 class SplashViewModel : ViewModel() {
 
+    companion object {
+
+        private const val USER_ID = "id"
+    }
 
     private val repository = SplashRepository()
 
-    private fun saveUserCredentials(user: User){
-        repository.getUsersRef(user.email!!)
-                .set(user)
+    private fun saveUserCredentials(user: User, appPreference: AppPreference){
+        repository.getUsersRef()
+                .add(user)
+                .addOnSuccessListener {
+                    repository.getUsersRef().document(it.id)
+                            .update(USER_ID, it.id)
+                    user.id = it.id
+                    appPreference.saveCredentials(user)
+                }
     }
 
     fun updateUserCredentials(user: User, appPreference: AppPreference){
-        repository.getUsersRef(user.email!!)
+        repository.getUserRefByEmail(user.email!!)
                 .get()
                 .addOnSuccessListener {
-                    if (it.exists()){
-                        appPreference.saveCredentials(it.toObject(User::class.java)!!)
+                    if (!it.isEmpty){
+                        appPreference.saveCredentials(it.documents[0].toObject(User::class.java)!!)
                     }
                     else{
-                        saveUserCredentials(user)
-                        appPreference.saveCredentials(user)
+                        saveUserCredentials(user, appPreference)
                     }
                 }
     }

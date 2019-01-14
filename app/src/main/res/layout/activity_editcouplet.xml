@@ -10,12 +10,19 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <EditText
-            android:id="@+id/couplet_text"
+            android:id="@+id/couplet_line_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:lines="2"
-            android:hint="@string/couplet"/>
+            android:lines="1"
+            android:hint="@string/couplet_line_1"/>
+        <EditText
+            android:id="@+id/couplet_line_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:lines="1"
+            android:hint="@string/couplet_line_2"/>
 
         <EditText
             android:id="@+id/couplet_author"

@@ -9,8 +9,7 @@ import com.ballboycorp.battle.common.base.BaseActivity
 import com.ballboycorp.battle.common.preference.AppPreference
 import com.ballboycorp.battle.coupletlist.CoupletListActivity
 import com.ballboycorp.battle.coupletlist.model.Couplet
-import kotlinx.android.synthetic.main.activity_newcouplet.*
-import java.util.*
+import kotlinx.android.synthetic.main.activity_editcouplet.*
 
 /**
  * Created by musooff on 12/01/2019.
@@ -58,12 +57,14 @@ class EditCoupletActivity : BaseActivity() {
                 .addOnSuccessListener {
                     val couplet = it.toObject(Couplet::class.java)
                     mCouplet = couplet!!
-                    couplet_text.setText(couplet.text)
+                    couplet_line_1.setText(couplet.line1)
+                    couplet_line_2.setText(couplet.line2)
                     couplet_author.setText(couplet.author)
                 }
 
         couplet_submit.setOnClickListener {
-            mCouplet.text = couplet_text.text.toString()
+            mCouplet.line1 = couplet_line_1.text.toString()
+            mCouplet.line2 = couplet_line_2.text.toString()
             mCouplet.author = couplet_author.text.toString()
 
             viewModel.saveCouplet(getCoupletCarrierId(coupletId!!),coupletId!!, mCouplet)

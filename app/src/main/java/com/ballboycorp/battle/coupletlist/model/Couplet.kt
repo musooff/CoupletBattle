@@ -12,7 +12,8 @@ import kotlin.collections.ArrayList
 class Couplet() {
 
     var id: String? = null
-    var text: String? = null
+    var line1: String? = null
+    var line2: String? = null
     var creatorId: String? = null
     var creatorFullname: String? = null
     var creatorThumbnailUrl: String? = null

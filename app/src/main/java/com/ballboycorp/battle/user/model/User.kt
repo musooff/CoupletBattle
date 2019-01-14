@@ -8,6 +8,7 @@ import com.google.firebase.firestore.DocumentSnapshot
  */
 
 class User() {
+    var id: String? = null
     var name: String? = null
     var thumbnailUrl: String? = null
     var coverUrl: String? = null

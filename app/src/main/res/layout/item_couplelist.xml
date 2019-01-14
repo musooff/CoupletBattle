@@ -63,10 +63,15 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/couplet_text"
+        android:id="@+id/couplet_line_1"
         android:textColor="@color/colorBlack"
-        android:textSize="22sp"
-        android:text="Ангури мо ширин аст\nКанду асал барин аст"/>
+        android:textSize="22sp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/couplet_line_2"
+        android:textColor="@color/colorBlack"
+        android:textSize="22sp"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

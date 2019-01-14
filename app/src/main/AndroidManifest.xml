@@ -32,8 +32,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".user.UserActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".user.UserActivity"/>
         <activity android:name=".coupletlist.editcouplet.EditCoupletActivity"/>
         <activity android:name=".friendlist.FriendListActivity"/>
         <activity android:name=".main.home.newcoupletcarrier.chooseFriends.ChooseFriendsActivity"/>

@@ -27,7 +27,7 @@ class FriendListViewModel : ViewModel() {
                 .addOnSuccessListener {
                     val users = User.toUserList(it.documents)
                             .filter {
-                                friendIds.contains(it.email)
+                                friendIds.contains(it.id)
                             }
 
                     friedList.postValue(users)

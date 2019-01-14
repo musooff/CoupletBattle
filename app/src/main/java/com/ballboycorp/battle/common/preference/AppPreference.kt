@@ -43,7 +43,7 @@ class AppPreference(context: Context) {
     }
 
     fun saveCredentials(user: User){
-        editor.putString(USER_ID, user.email).apply()
+        editor.putString(USER_ID, user.id).apply()
         editor.putString(USER_NAME, user.name).apply()
         editor.putString(USER_THUMB, user.thumbnailUrl).apply()
     }
