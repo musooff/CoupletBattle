@@ -1,4 +1,4 @@
-package com.ballboycorp.battle.main.home.newcoupletcarrier
+package com.ballboycorp.battle.main.home.newbattle
 
 import android.app.Activity
 import android.content.Context
@@ -10,26 +10,26 @@ import androidx.lifecycle.ViewModelProviders
 import com.ballboycorp.battle.R
 import com.ballboycorp.battle.common.base.BaseActivity
 import com.ballboycorp.battle.common.preference.AppPreference
-import com.ballboycorp.battle.coupletlist.newcouplet.NewCoupletActivity
-import com.ballboycorp.battle.main.home.model.CoupletCarrier
+import com.ballboycorp.battle.battle.newcouplet.NewCoupletActivity
+import com.ballboycorp.battle.main.home.model.Battle
 import com.ballboycorp.battle.main.home.model.Privacy
-import com.ballboycorp.battle.main.home.newcoupletcarrier.chooseFriends.ChooseFriendsActivity
+import com.ballboycorp.battle.main.home.newbattle.choosefriends.ChooseFriendsActivity
 import com.ballboycorp.battle.main.notification.model.Notification
 import com.ballboycorp.battle.main.notification.model.NotificationType
-import kotlinx.android.synthetic.main.activity_newcoupletcarrier.*
+import kotlinx.android.synthetic.main.activity_new_battle.*
 
 /**
  * Created by musooff on 12/01/2019.
  */
 
-class NewCoupletCarrierActivity : BaseActivity() {
+class NewBattleActivity : BaseActivity() {
 
     companion object {
 
         private const val STARTING_LETTER = "А"
 
         fun newIntent(context: Context) {
-            val intent = Intent(context, NewCoupletCarrierActivity::class.java)
+            val intent = Intent(context, NewBattleActivity::class.java)
             context.startActivity(intent)
         }
     }
@@ -37,7 +37,7 @@ class NewCoupletCarrierActivity : BaseActivity() {
     private val viewModel by lazy {
         ViewModelProviders
                 .of(this)
-                .get(NewCoupletCarrierViewModel::class.java)
+                .get(NewBattleViewModel::class.java)
     }
 
     private lateinit var appPreff: AppPreference
@@ -50,7 +50,7 @@ class NewCoupletCarrierActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_newcoupletcarrier)
+        setContentView(R.layout.activity_new_battle)
 
         setTitle(getString(R.string.create_battle))
         closeBackButton()
@@ -59,14 +59,14 @@ class NewCoupletCarrierActivity : BaseActivity() {
 
         currentPrivacy = privacy_public_rb
 
-        coupletcarrier_submit.setOnClickListener {
+        continue_bt.setOnClickListener {
 
-            val coupletCarrier = CoupletCarrier()
-            coupletCarrier.name = coupletcarrier_name.text.toString()
-            coupletCarrier.creatorId = appPreff.getUserId()
+            val battle = Battle()
+            battle.name = battle_name.text.toString()
+            battle.creatorId = appPreff.getUserId()
             writers.add(appPreff.getUserId())
-            coupletCarrier.writers = writers
-            coupletCarrier.privacy = getString(privacy.text)
+            battle.writers = writers
+            battle.privacy = getString(privacy.text)
 
 
             val notification = Notification()
@@ -75,7 +75,7 @@ class NewCoupletCarrierActivity : BaseActivity() {
             notification.notificationThumbUrl = appPreff.getUserThumbnail()
             notification.type = NotificationType.BATTLE_JOINED.value
 
-            viewModel.saveCouplet(coupletCarrier, notification)
+            viewModel.saveCouplet(battle, notification)
                     .addOnSuccessListener {
                         NewCoupletActivity.newIntent(this, it.id, 0, STARTING_LETTER, true)
                         this.finish()

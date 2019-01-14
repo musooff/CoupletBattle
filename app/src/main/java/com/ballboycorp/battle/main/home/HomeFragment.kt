@@ -6,11 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ballboycorp.battle.R
 import com.ballboycorp.battle.common.base.BaseFragment
-import com.ballboycorp.battle.main.home.newcoupletcarrier.NewCoupletCarrierActivity
+import com.ballboycorp.battle.main.home.newbattle.NewBattleActivity
 import kotlinx.android.synthetic.main.fragment_home.*
 
 /**
@@ -38,23 +37,23 @@ class HomeFragment : BaseFragment() {
 
 
         val layoutManager = LinearLayoutManager(activity)
-        coupletcarrier_rv.layoutManager = layoutManager
+        battle_rv.layoutManager = layoutManager
 
         adapter = HomeAdapter()
-        coupletcarrier_rv.adapter = adapter
+        battle_rv.adapter = adapter
 
-        viewModel.coupletCarriers.observe(this, Observer {
+        viewModel.battles.observe(this, Observer {
             adapter.submitList(it)
         })
 
-        coupletcarrier_add.setOnClickListener {
-            NewCoupletCarrierActivity.newIntent(activity!!)
+        battle_add.setOnClickListener {
+            NewBattleActivity.newIntent(activity!!)
         }
 
     }
 
     override fun onResume() {
         super.onResume()
-        viewModel.getCoupletCarriers()
+        viewModel.getBattlesRef()
     }
 }

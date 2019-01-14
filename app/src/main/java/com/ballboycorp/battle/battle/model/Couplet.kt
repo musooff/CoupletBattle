@@ -1,4 +1,4 @@
-package com.ballboycorp.battle.coupletlist.model
+package com.ballboycorp.battle.battle.model
 
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.ServerTimestamp

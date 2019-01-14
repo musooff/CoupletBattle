@@ -1,4 +1,4 @@
-package com.ballboycorp.battle.main.home.newcoupletcarrier.chooseFriends
+package com.ballboycorp.battle.main.home.newbattle.choosefriends
 
 import android.view.LayoutInflater
 import android.view.View

@@ -17,13 +17,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="fitXY"
-                android:background="@drawable/couplet_carrier_default"
+                android:background="@drawable/battle_default_cover"
                 android:src="@drawable/black_gradient"/>
             <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/ic_more_horiz_white_24dp"
-                android:id="@+id/coupletcarrier_more"
+                android:id="@+id/battle_more"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true" />
 
@@ -37,7 +37,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/coupletcarrier_name"
+                    android:id="@+id/battle_name"
                     android:textStyle="bold"
                     android:textColor="@color/colorWhite"
                     android:textSize="22sp"
@@ -48,7 +48,7 @@
                     android:textColor="@color/colorWhite"
                     android:textSize="16sp"
                     android:lines="1"
-                    android:id="@+id/coupletcarrier_count"/>
+                    android:id="@+id/battle_count"/>
             </LinearLayout>
         </RelativeLayout>
     </androidx.cardview.widget.CardView>

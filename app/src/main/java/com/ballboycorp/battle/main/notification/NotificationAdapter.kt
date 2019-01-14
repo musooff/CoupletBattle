@@ -13,8 +13,7 @@ import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.item_notification.view.*
 import android.text.SpannableStringBuilder
 import android.text.style.StyleSpan
-import com.ballboycorp.battle.coupletlist.CoupletListActivity
-import com.ballboycorp.battle.main.home.model.CoupletCarrier
+import com.ballboycorp.battle.battle.BattleActivity
 import com.ballboycorp.battle.main.notification.model.NotificationType
 import com.ballboycorp.battle.user.UserActivity
 
@@ -72,7 +71,7 @@ class NotificationAdapter : RecyclerView.Adapter<NotificationAdapter.Notificatio
 
             view.setOnClickListener {
                 if (notification.type == NotificationType.BATTLE_JOINED.value) {
-                    CoupletListActivity.newIntent(view.context, notification.battleId!!)
+                    BattleActivity.newIntent(view.context, notification.battleId!!)
                 }
                 else {
                     UserActivity.newIntent(view.context, notification.fromUserId!!)

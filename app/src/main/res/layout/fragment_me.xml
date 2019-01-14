@@ -126,7 +126,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/action_button"
-                android:text="@string/edit_button"/>
+                android:text="@string/button_edit"/>
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

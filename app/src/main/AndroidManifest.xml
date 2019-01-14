@@ -21,9 +21,9 @@
             android:name=".main.MainActivity"
             android:label="@string/app_name">
         </activity>
-        <activity android:name=".coupletlist.CoupletListActivity" />
-        <activity android:name=".coupletlist.newcouplet.NewCoupletActivity" />
-        <activity android:name=".main.home.newcoupletcarrier.NewCoupletCarrierActivity" />
+        <activity android:name=".battle.BattleActivity" />
+        <activity android:name=".battle.newcouplet.NewCoupletActivity" />
+        <activity android:name=".main.home.newbattle.NewBattleActivity" />
         <activity android:name=".splash.SplashActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -33,10 +33,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".user.UserActivity"/>
-        <activity android:name=".coupletlist.editcouplet.EditCoupletActivity"/>
+        <activity android:name=".battle.editcouplet.EditCoupletActivity"/>
         <activity android:name=".friendlist.FriendListActivity"/>
-        <activity android:name=".main.home.newcoupletcarrier.chooseFriends.ChooseFriendsActivity"/>
-        <activity android:name=".coupletlist.invite.InviteActivity"/>
+        <activity android:name=".main.home.newbattle.choosefriends.ChooseFriendsActivity"/>
+        <activity android:name=".battle.invite.InviteActivity"/>
     </application>
 
 </manifest>

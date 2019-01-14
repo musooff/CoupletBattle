@@ -1,4 +1,4 @@
-package com.ballboycorp.battle.coupletlist.editcouplet
+package com.ballboycorp.battle.battle.editcouplet
 
 import android.content.Context
 import android.content.Intent
@@ -7,8 +7,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.ballboycorp.battle.R
 import com.ballboycorp.battle.common.base.BaseActivity
 import com.ballboycorp.battle.common.preference.AppPreference
-import com.ballboycorp.battle.coupletlist.CoupletListActivity
-import com.ballboycorp.battle.coupletlist.model.Couplet
+import com.ballboycorp.battle.battle.model.Couplet
 import kotlinx.android.synthetic.main.activity_editcouplet.*
 
 /**
@@ -53,7 +52,7 @@ class EditCoupletActivity : BaseActivity() {
         coupletId = intent.extras!!.getString(COUPLET_ID)
         startingLetter = intent.extras!!.getString(STARTING_LETTER)
 
-        viewModel.getCouplet(getCoupletCarrierId(coupletId!!), coupletId!!)
+        viewModel.getCouplet(getBattleId(coupletId!!), coupletId!!)
                 .addOnSuccessListener {
                     val couplet = it.toObject(Couplet::class.java)
                     mCouplet = couplet!!
@@ -67,7 +66,7 @@ class EditCoupletActivity : BaseActivity() {
             mCouplet.line2 = couplet_line_2.text.toString()
             mCouplet.author = couplet_author.text.toString()
 
-            viewModel.saveCouplet(getCoupletCarrierId(coupletId!!),coupletId!!, mCouplet)
+            viewModel.saveCouplet(getBattleId(coupletId!!),coupletId!!, mCouplet)
                     .addOnSuccessListener {
                         this.finish()
                     }
@@ -75,7 +74,7 @@ class EditCoupletActivity : BaseActivity() {
 
     }
 
-    private fun getCoupletCarrierId(coupletId: String) : String{
+    private fun getBattleId(coupletId: String) : String{
         return coupletId.substring(0, coupletId.indexOf("_"))
     }
 

@@ -12,7 +12,7 @@ import com.ballboycorp.battle.common.base.BaseFragment
 import com.ballboycorp.battle.common.preference.AppPreference
 import com.ballboycorp.battle.main.home.HomeAdapter
 import com.ballboycorp.battle.main.home.HomeViewModel
-import com.ballboycorp.battle.main.home.newcoupletcarrier.NewCoupletCarrierActivity
+import com.ballboycorp.battle.main.home.newbattle.NewBattleActivity
 import kotlinx.android.synthetic.main.fragment_home.*
 
 /**
@@ -41,23 +41,23 @@ class MyBattlesFragment : BaseFragment() {
         appPreff = AppPreference.getInstance(view.context)
 
         val layoutManager = LinearLayoutManager(activity)
-        coupletcarrier_rv.layoutManager = layoutManager
+        battle_rv.layoutManager = layoutManager
 
         adapter = HomeAdapter()
-        coupletcarrier_rv.adapter = adapter
+        battle_rv.adapter = adapter
 
-        viewModel.coupletCarriers.observe(this, Observer {
+        viewModel.battles.observe(this, Observer {
             adapter.submitList(it)
         })
 
-        coupletcarrier_add.setOnClickListener {
-            NewCoupletCarrierActivity.newIntent(activity!!)
+        battle_add.setOnClickListener {
+            NewBattleActivity.newIntent(activity!!)
         }
 
     }
 
     override fun onResume() {
         super.onResume()
-        viewModel.getCoupletCarriers(true, appPreff.getUserId())
+        viewModel.getBattlesRef(true, appPreff.getUserId())
     }
 }

@@ -1,4 +1,4 @@
-package com.ballboycorp.battle.coupletlist
+package com.ballboycorp.battle.battle
 
 import android.content.Context
 import android.content.Intent
@@ -10,8 +10,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.ballboycorp.battle.R
 import com.ballboycorp.battle.common.base.BaseActivity
 import com.ballboycorp.battle.common.preference.AppPreference
-import com.ballboycorp.battle.coupletlist.invite.InviteActivity
-import com.ballboycorp.battle.coupletlist.newcouplet.NewCoupletActivity
+import com.ballboycorp.battle.battle.invite.InviteActivity
+import com.ballboycorp.battle.battle.newcouplet.NewCoupletActivity
+import com.ballboycorp.battle.main.home.model.Battle
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_coupletlist.*
 
@@ -19,14 +20,14 @@ import kotlinx.android.synthetic.main.activity_coupletlist.*
  * Created by musooff on 12/01/2019.
  */
 
-class CoupletListActivity : BaseActivity() {
+class BattleActivity : BaseActivity() {
 
     companion object {
-        private const val COUPLET_CARRIER_ID = "coupletCarrierId"
+        private const val BATTLE_ID = "battleId"
 
-        fun newIntent(context: Context, coupletCarrierId: String) {
-            val intent = Intent(context, CoupletListActivity::class.java)
-            intent.putExtra(COUPLET_CARRIER_ID, coupletCarrierId)
+        fun newIntent(context: Context, battleId: String) {
+            val intent = Intent(context, BattleActivity::class.java)
+            intent.putExtra(BATTLE_ID, battleId)
             context.startActivity(intent)
         }
     }
@@ -34,11 +35,12 @@ class CoupletListActivity : BaseActivity() {
     private val viewModel by lazy {
         ViewModelProviders
                 .of(this)
-                .get(CoupletListViewModel::class.java)
+                .get(BattleViewModel::class.java)
     }
 
-    private lateinit var adapter: CoupletListAdapter
-    private var coupletCarrierId: String? = null
+    private lateinit var adapter: BattleAdapter
+    private lateinit var battleId: String
+    private lateinit var mBattle: Battle
     private var coupletsCount: Int = 0
     private lateinit var lastPostedUserId: String
     private lateinit var startingLetter: String
@@ -53,13 +55,13 @@ class CoupletListActivity : BaseActivity() {
 
         appPreff = AppPreference.getInstance(this)
 
-        coupletCarrierId = intent.extras!!.getString(COUPLET_CARRIER_ID)
+        battleId = intent.extras!!.getString(BATTLE_ID)!!
 
         val layoutManager = LinearLayoutManager(this)
         layoutManager.stackFromEnd = true
         coupletlist_rv.layoutManager = layoutManager
 
-        adapter = CoupletListAdapter()
+        adapter = BattleAdapter()
         coupletlist_rv.adapter = adapter
 
         val dividerItemDecoration = DividerItemDecoration(this, layoutManager.orientation)
@@ -71,12 +73,12 @@ class CoupletListActivity : BaseActivity() {
             if (lastPostedUserId == appPreff.getUserId()){
                 Snackbar.make(coupletlist_add, getString(R.string.not_your_turn), Snackbar.LENGTH_LONG)
                         .setAction(getString(R.string.action_invite)) {
-                            InviteActivity.newIntent(this)
+                            InviteActivity.newIntent(this, mBattle)
                         }
                         .show()
             }
             else {
-                NewCoupletActivity.newIntent(this, coupletCarrierId!!, coupletsCount, startingLetter, false)
+                NewCoupletActivity.newIntent(this, battleId, coupletsCount, startingLetter, false)
             }
         }
 
@@ -89,10 +91,15 @@ class CoupletListActivity : BaseActivity() {
 
         })
 
+        viewModel.battle.observe(this, Observer {
+            mBattle = it
+        })
+
     }
 
     override fun onResume() {
         super.onResume()
-        viewModel.getCouplets(coupletCarrierId!!)
+        viewModel.getBattle(battleId)
+        viewModel.getCouplets(battleId)
     }
 }

@@ -9,8 +9,8 @@ import com.ballboycorp.battle.R
 enum class ActionButtonType(val text: Int) {
     FRIEND_REQUEST_SENT(R.string.button_friend_request_sent),
     FRIEND_REQUEST_PENDING(R.string.button_friend_request_pending),
-    MESSAGE(R.string.message_button),
-    EDIT(R.string.edit_button),
-    ADD_FRIEND(R.string.button_addfriend);
+    MESSAGE(R.string.button_message),
+    EDIT(R.string.button_edit),
+    ADD_FRIEND(R.string.button_add_friend);
 
 }

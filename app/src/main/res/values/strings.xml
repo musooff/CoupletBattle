@@ -11,7 +11,7 @@
     <string name="couplet">Couplet</string>
     <string name="submit">Submit</string>
     <string name="button_continue">Continue</string>
-    <string name="hint_coupletcarrier_name">Номи байтбарак</string>
+    <string name="hint_battle_name">Номи байтбарак</string>
     <string name="title_activity_login">Sign in</string>
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
@@ -29,18 +29,18 @@
     <string name="sign_in_cancelled">Sign in is cancelled</string>
     <string name="unknown_error">Unknown error occured</string>
     <string name="lorem">Some long text</string>
-    <string name="button_addfriend">Add Friend</string>
-    <string name="edit_button">Edit</string>
-    <string name="message_button">Message</string>
+    <string name="button_add_friend">Add Friend</string>
+    <string name="button_edit">Edit</string>
+    <string name="button_message">Message</string>
     <string name="not_your_turn">Not your turn. Invite your friends to join</string>
     <string name="action_invite">Invite</string>
-    <string name="hint_coupletcarrier_description">Маълумоти дираг, чун коидаву конунхо ва дигар дархостхо</string>
+    <string name="hint_battle_description">Маълумоти дираг, чун коидаву конунхо ва дигар дархостхо</string>
     <string name="button_logout">Log Out</string>
     <string name="button_friend_request_sent">Friend Request sent</string>
     <string name="button_friend_request_pending">Accept Friend Request</string>
     <string name="already_sent">Friend request already sent</string>
     <string name="coming_soon">Coming soon</string>
-    <string name="coupletbatter_type">Public</string>
+    <string name="battle_type">Public</string>
     <string name="section_privacy">Privacy</string>
     <string name="privacy_public">Public</string>
     <string name="privacy_public_desc">Anyone can see the battle and join it</string>

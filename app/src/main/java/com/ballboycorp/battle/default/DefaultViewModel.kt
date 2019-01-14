@@ -10,7 +10,7 @@ class DefaultViewModel : ViewModel() {
 
     private val repository = DefaultRepository()
 
-    fun getCoupletCarriers(){
-        repository.getCoupletCarriersRef()
+    fun getBattlesRef(){
+        repository.getBattlesRef()
     }
 }

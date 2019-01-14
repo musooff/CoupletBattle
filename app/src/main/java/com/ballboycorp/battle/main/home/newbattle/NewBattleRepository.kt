@@ -1,4 +1,4 @@
-package com.ballboycorp.battle.main.home.newcoupletcarrier
+package com.ballboycorp.battle.main.home.newbattle
 
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
@@ -7,9 +7,9 @@ import com.google.firebase.firestore.FirebaseFirestore
  * Created by musooff on 12/01/2019.
  */
 
-class NewCoupletCarrierRepository {
+class NewBattleRepository {
     companion object {
-        private const val COUPLET_CARRIERS_REF = "coupletCarriers"
+        private const val BATTLES_REF = "battles"
         private const val USERS_REF = "users"
         private const val NOTIFICATIONS_REF = "notifications"
     }
@@ -18,7 +18,7 @@ class NewCoupletCarrierRepository {
 
     fun getServerTime() = FieldValue.serverTimestamp()
 
-    fun getCoupletCarriers() = firebaseDatabase.collection(COUPLET_CARRIERS_REF)
+    fun getBattlesRef() = firebaseDatabase.collection(BATTLES_REF)
 
 
     fun getNotificationRef(userId: String) = firebaseDatabase.collection(USERS_REF).document(userId).collection(NOTIFICATIONS_REF)

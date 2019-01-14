@@ -2,13 +2,14 @@ package com.ballboycorp.battle.main.home.model
 
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.ServerTimestamp
+import java.io.Serializable
 import java.util.*
 
 /**
  * Created by musooff on 12/01/2019.
  */
 
-class CoupletCarrier() {
+class Battle() : Serializable{
     var id: String? = null
     var name: String? = null
     var description: String? = null
@@ -22,11 +23,11 @@ class CoupletCarrier() {
 
     companion object {
 
-        fun toCoupletList(documents: List<DocumentSnapshot>): List<CoupletCarrier>{
-            val result = ArrayList<CoupletCarrier>()
+        fun toCoupletList(documents: List<DocumentSnapshot>): List<Battle>{
+            val result = ArrayList<Battle>()
             documents.forEach {
-                val coupletCarrier = it.toObject(CoupletCarrier::class.java)
-                result.add(coupletCarrier!!)
+                val battle = it.toObject(Battle::class.java)
+                result.add(battle!!)
             }
             return result
         }

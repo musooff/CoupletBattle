@@ -1,7 +1,7 @@
-package com.ballboycorp.battle.coupletlist.editcouplet
+package com.ballboycorp.battle.battle.editcouplet
 
 import androidx.lifecycle.ViewModel
-import com.ballboycorp.battle.coupletlist.model.Couplet
+import com.ballboycorp.battle.battle.model.Couplet
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FieldValue
@@ -17,22 +17,22 @@ class EditCoupletViewModel : ViewModel() {
 
     private val repository = EditCoupletRepository()
 
-    fun getCouplet(coupletCarrierId: String, coupletNumber: String): Task<DocumentSnapshot> {
-        return repository.getCoupletRef(coupletCarrierId, coupletNumber)
+    fun getCouplet(battleId: String, coupletNumber: String): Task<DocumentSnapshot> {
+        return repository.getCoupletRef(battleId, coupletNumber)
                 .get()
     }
 
-    fun saveCouplet(coupletCarrierId: String, coupletNumber: String, couplet: Couplet): Task<Void> {
-        return repository.getCoupletsRef(coupletCarrierId)
+    fun saveCouplet(battleId: String, coupletNumber: String, couplet: Couplet): Task<Void> {
+        return repository.getCoupletsRef(battleId)
                 .document(coupletNumber)
                 .set(couplet)
                 .addOnCompleteListener {
-                    repository.getCoupletCarrier(coupletCarrierId)
+                    repository.getBattle(battleId)
                             .get()
                             .addOnSuccessListener {
                                 val writers = it.get(WRITERS_REF) as List<*>
                                 if (!writers.contains(couplet.creatorId)){
-                                    repository.getCoupletCarrier(coupletCarrierId)
+                                    repository.getBattle(battleId)
                                             .update(WRITERS_REF, FieldValue.arrayUnion(couplet.creatorId))
                                 }
 

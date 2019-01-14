@@ -9,11 +9,11 @@ import com.google.firebase.firestore.FirebaseFirestore
 class DefaultRepository {
 
     companion object {
-        private const val COUPLET_CARRIERS_REF = "coupletCarriers"
+        private const val BATTLES_REF = "battles"
     }
 
     private val firebaseDatabase = FirebaseFirestore.getInstance()
 
-    fun getCoupletCarriersRef() = firebaseDatabase.collection(COUPLET_CARRIERS_REF)
+    fun getBattlesRef() = firebaseDatabase.collection(BATTLES_REF)
 
 }

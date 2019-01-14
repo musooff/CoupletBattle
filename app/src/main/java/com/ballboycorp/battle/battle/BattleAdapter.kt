@@ -1,4 +1,4 @@
-package com.ballboycorp.battle.coupletlist
+package com.ballboycorp.battle.battle
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,10 +7,9 @@ import android.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
 import com.ballboycorp.battle.GlideApp
 import com.ballboycorp.battle.R
-import com.ballboycorp.battle.coupletlist.editcouplet.EditCoupletActivity
-import com.ballboycorp.battle.coupletlist.model.Couplet
+import com.ballboycorp.battle.battle.editcouplet.EditCoupletActivity
+import com.ballboycorp.battle.battle.model.Couplet
 import com.ballboycorp.battle.user.UserActivity
-import com.bumptech.glide.Glide
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.item_couplelist.view.*
 
@@ -19,14 +18,14 @@ import kotlinx.android.synthetic.main.item_couplelist.view.*
  * Created by musooff on 12/01/2019.
  */
 
-class CoupletListAdapter : RecyclerView.Adapter<CoupletListAdapter.CoupletListViewHolder>(){
+class BattleAdapter : RecyclerView.Adapter<BattleAdapter.BattleViewModel>(){
 
     private var coupletList: List<Couplet> = ArrayList()
     private val firebaseStorage = FirebaseStorage.getInstance()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CoupletListViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BattleViewModel {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_couplelist, parent, false)
-        return CoupletListViewHolder(view)
+        return BattleViewModel(view)
     }
 
     override fun getItemCount(): Int {
@@ -38,11 +37,11 @@ class CoupletListAdapter : RecyclerView.Adapter<CoupletListAdapter.CoupletListVi
         notifyDataSetChanged()
     }
 
-    override fun onBindViewHolder(holder: CoupletListViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: BattleViewModel, position: Int) {
         holder.bind(coupletList[position])
     }
 
-    inner class CoupletListViewHolder(val view: View): RecyclerView.ViewHolder(view){
+    inner class BattleViewModel(val view: View): RecyclerView.ViewHolder(view){
         fun bind(couplet: Couplet){
             view.couplet_line_1.text = couplet.line1
             view.couplet_line_2.text = couplet.line2

@@ -6,9 +6,9 @@ import android.view.ViewGroup
 import android.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
 import com.ballboycorp.battle.R
-import com.ballboycorp.battle.coupletlist.CoupletListActivity
-import com.ballboycorp.battle.main.home.model.CoupletCarrier
-import kotlinx.android.synthetic.main.item_home_coupletcarriers.view.*
+import com.ballboycorp.battle.battle.BattleActivity
+import com.ballboycorp.battle.main.home.model.Battle
+import kotlinx.android.synthetic.main.item_home_battle.view.*
 
 
 /**
@@ -17,39 +17,39 @@ import kotlinx.android.synthetic.main.item_home_coupletcarriers.view.*
 
 class HomeAdapter : RecyclerView.Adapter<HomeAdapter.HomeViewHolder>(){
 
-    private var coupletCarriers: List<CoupletCarrier> = ArrayList()
+    private var battles: List<Battle> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_home_coupletcarriers, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_home_battle, parent, false)
         return HomeViewHolder(view)
     }
 
     override fun getItemCount(): Int {
-        return coupletCarriers.size
+        return battles.size
     }
 
-    fun submitList(coupletCarriers: List<CoupletCarrier>){
-        this.coupletCarriers = coupletCarriers.sortedByDescending {
+    fun submitList(battles: List<Battle>){
+        this.battles = battles.sortedByDescending {
             it.coupletCount
         }
         notifyDataSetChanged()
     }
 
     override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
-        holder.bind(coupletCarriers[position])
+        holder.bind(battles[position])
     }
 
     inner class HomeViewHolder(val view: View): RecyclerView.ViewHolder(view){
-        fun bind(coupletCarrier: CoupletCarrier){
-            view.coupletcarrier_name.text = coupletCarrier.name
-            view.coupletcarrier_count.text = "Алъон ${coupletCarrier.coupletCount} байт"
+        fun bind(battle: Battle){
+            view.battle_name.text = battle.name
+            view.battle_count.text = "Алъон ${battle.coupletCount} байт"
 
             view.setOnClickListener {
-                CoupletListActivity.newIntent(view.context, coupletCarrier.id!!)
+                BattleActivity.newIntent(view.context, battle.id!!)
             }
 
-            view.coupletcarrier_more.setOnClickListener {
-                val moreMenu = PopupMenu(view.context, view.coupletcarrier_more)
+            view.battle_more.setOnClickListener {
+                val moreMenu = PopupMenu(view.context, view.battle_more)
                 moreMenu.inflate(R.menu.more_couplet)
                 moreMenu.setOnMenuItemClickListener {
                     true

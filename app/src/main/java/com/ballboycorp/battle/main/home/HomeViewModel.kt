@@ -3,8 +3,8 @@ package com.ballboycorp.battle.main.home
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.ballboycorp.battle.coupletlist.model.Couplet
-import com.ballboycorp.battle.main.home.model.CoupletCarrier
+import com.ballboycorp.battle.battle.model.Couplet
+import com.ballboycorp.battle.main.home.model.Battle
 
 /**
  * Created by musooff on 12/01/2019.
@@ -18,11 +18,11 @@ class HomeViewModel : ViewModel() {
 
     private val repository = HomeRepository()
 
-    var coupletCarriers: MutableLiveData<List<CoupletCarrier>> = MutableLiveData()
+    var battles: MutableLiveData<List<Battle>> = MutableLiveData()
 
-    fun getCoupletCarriers(isMyBattles: Boolean = false, userId: String? = null){
+    fun getBattlesRef(isMyBattles: Boolean = false, userId: String? = null){
         if (isMyBattles){
-            repository.getCoupletCarriersRef()
+            repository.getBattlesRef()
                     .whereArrayContains(WRITERS, userId!!)
                     .addSnapshotListener { snapshot, exception ->
                         if (exception != null){
@@ -30,37 +30,37 @@ class HomeViewModel : ViewModel() {
                             return@addSnapshotListener
                         }
                         if (snapshot != null){
-                            coupletCarriers.postValue(CoupletCarrier.toCoupletList(snapshot.documents))
+                            battles.postValue(Battle.toCoupletList(snapshot.documents))
                         }
                     }
         }
         else {
-            repository.getCoupletCarriersRef()
+            repository.getBattlesRef()
                     .addSnapshotListener { snapshot, exception ->
                         if (exception != null){
                             Log.e("ERROR", exception.message)
                             return@addSnapshotListener
                         }
                         if (snapshot != null){
-                            coupletCarriers.postValue(CoupletCarrier.toCoupletList(snapshot.documents))
+                            battles.postValue(Battle.toCoupletList(snapshot.documents))
                         }
                     }
         }
     }
 
-    fun updateThumbs() = repository.getCoupletCarriersRef()
+    fun updateThumbs() = repository.getBattlesRef()
             .get()
             .addOnSuccessListener {
-                val coupletCarriers = CoupletCarrier.toCoupletList(it.documents)
-                coupletCarriers.forEach { ccId ->
-                    repository.getCoupletCarriersRef()
+                val battles = Battle.toCoupletList(it.documents)
+                battles.forEach { ccId ->
+                    repository.getBattlesRef()
                             .document(ccId.id!!)
                             .collection("couplets")
                             .get().addOnSuccessListener {
                                 val couplets = Couplet.toCoupletList(it.documents)
                                 couplets.forEachIndexed {index, it ->
                                     if (it.creatorId == "lannester@gmail.com"){
-                                        repository.getCoupletCarriersRef()
+                                        repository.getBattlesRef()
                                                 .document(ccId.id!!)
                                                 .collection("couplets")
                                                 .document(index.toString())

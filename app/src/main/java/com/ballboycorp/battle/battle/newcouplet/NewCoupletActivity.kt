@@ -1,4 +1,4 @@
-package com.ballboycorp.battle.coupletlist.newcouplet
+package com.ballboycorp.battle.battle.newcouplet
 
 import android.content.Context
 import android.content.Intent
@@ -7,9 +7,9 @@ import androidx.lifecycle.ViewModelProviders
 import com.ballboycorp.battle.R
 import com.ballboycorp.battle.common.base.BaseActivity
 import com.ballboycorp.battle.common.preference.AppPreference
-import com.ballboycorp.battle.coupletlist.CoupletListActivity
-import com.ballboycorp.battle.coupletlist.model.Couplet
-import kotlinx.android.synthetic.main.activity_newcouplet.*
+import com.ballboycorp.battle.battle.BattleActivity
+import com.ballboycorp.battle.battle.model.Couplet
+import kotlinx.android.synthetic.main.activity_new_couplet.*
 import java.util.*
 
 /**
@@ -21,16 +21,16 @@ class NewCoupletActivity : BaseActivity() {
     companion object {
 
         private const val COUPLETS_COUNT = "coupletsCount"
-        private const val COUPLET_CARRIER_ID = "coupletCarrierId"
+        private const val BATTLE_ID = "battleId"
         private const val STARTING_LETTER = "startingLetter"
-        private const val OPEN_COUPLETLIST = "openCoupletList"
+        private const val SHOULD_OPEN_BATTLE = "shouldOpenBattle"
 
-        fun newIntent(context: Context, coupletCarrierId: String, coupletsCount: Int, startingLetter: String, openCoupletList: Boolean) {
+        fun newIntent(context: Context, battleId: String, coupletsCount: Int, startingLetter: String, shouldOpenBattle: Boolean) {
             val intent = Intent(context, NewCoupletActivity::class.java)
             intent.putExtra(COUPLETS_COUNT, coupletsCount)
-            intent.putExtra(COUPLET_CARRIER_ID, coupletCarrierId)
+            intent.putExtra(BATTLE_ID, battleId)
             intent.putExtra(STARTING_LETTER, startingLetter)
-            intent.putExtra(OPEN_COUPLETLIST, openCoupletList)
+            intent.putExtra(SHOULD_OPEN_BATTLE, shouldOpenBattle)
             context.startActivity(intent)
         }
     }
@@ -42,15 +42,15 @@ class NewCoupletActivity : BaseActivity() {
     }
 
     private var coupletsCount: Int = 0
-    private var openCoupletList: Boolean = false
-    private var coupletCarrierId: String? = null
+    private var shouldOpenBattle: Boolean = false
+    private var battleId: String? = null
     private var startingLetter: String? = null
 
     private lateinit var appPreff: AppPreference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_newcouplet)
+        setContentView(R.layout.activity_new_couplet)
 
         setTitle(getString(R.string.create_couplet))
         closeBackButton()
@@ -58,13 +58,13 @@ class NewCoupletActivity : BaseActivity() {
         appPreff = AppPreference.getInstance(this)
 
         coupletsCount = intent.extras!!.getInt(COUPLETS_COUNT)
-        coupletCarrierId = intent.extras!!.getString(COUPLET_CARRIER_ID)
+        battleId = intent.extras!!.getString(BATTLE_ID)
         startingLetter = intent.extras!!.getString(STARTING_LETTER)
-        openCoupletList = intent.extras!!.getBoolean(OPEN_COUPLETLIST)
+        shouldOpenBattle = intent.extras!!.getBoolean(SHOULD_OPEN_BATTLE)
 
         couplet_submit.setOnClickListener {
             val couplet = Couplet()
-            couplet.id = "${coupletCarrierId}_$coupletsCount"
+            couplet.id = "${battleId}_$coupletsCount"
             val line1 = couplet_line_1.text.toString()
             val line2 = couplet_line_2.text.toString()
             couplet.line1 = line1
@@ -78,10 +78,10 @@ class NewCoupletActivity : BaseActivity() {
             couplet.creatorThumbnailUrl = appPreff.getUserThumbnail()
             couplet.authorId = "rudaki"
 
-            viewModel.saveCouplet(coupletCarrierId!!, coupletsCount, couplet)
+            viewModel.saveCouplet(battleId!!, coupletsCount, couplet)
                     .addOnSuccessListener {
-                        if (openCoupletList){
-                            CoupletListActivity.newIntent(this, coupletCarrierId!!)
+                        if (shouldOpenBattle){
+                            BattleActivity.newIntent(this, battleId!!)
                         }
                         this.finish()
                     }
