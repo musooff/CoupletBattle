@@ -3,6 +3,7 @@ package com.ballboycorp.battle.battle.invite
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,6 +13,8 @@ import com.ballboycorp.battle.common.preference.AppPreference
 import com.ballboycorp.battle.friendlist.FriendListViewModel
 import com.ballboycorp.battle.main.home.model.Battle
 import com.ballboycorp.battle.main.home.newbattle.choosefriends.ChooseFriendsAdapter
+import com.ballboycorp.battle.main.notification.model.Notification
+import com.ballboycorp.battle.main.notification.model.NotificationType
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_invite_friends.*
 
@@ -67,7 +70,17 @@ class InviteActivity  : BaseActivity(){
         })
 
         button_invite_friends.setOnClickListener {
-            adapter.chosenFriends
+
+            val notification = Notification()
+            notification.fromUser = appPreff.getUserFullname()
+            notification.fromUserId = appPreff.getUserId()
+            notification.notificationThumbUrl = appPreff.getUserThumbnail()
+            notification.type = NotificationType.BATTLE_INVITATION.value
+            notification.battleId = mBattle.id
+
+            viewModel.sendInvitations(adapter.chosenFriends, notification)
+            Toast.makeText(this, "Invitations to join the battle has been sent.", Toast.LENGTH_SHORT).show()
+            finish()
         }
 
     }

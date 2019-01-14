@@ -65,12 +65,16 @@ class NotificationAdapter : RecyclerView.Adapter<NotificationAdapter.Notificatio
                     text.append("${notification.fromUser} added you to a Байтбарак")
 
                 }
+                NotificationType.BATTLE_INVITATION.value -> {
+                    text.append("${notification.fromUser} invited you to join a Байтбарак")
+
+                }
             }
             text.setSpan(StyleSpan(Typeface.BOLD), 0, notification.fromUser!!.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
             view.notification_text.text = text
 
             view.setOnClickListener {
-                if (notification.type == NotificationType.BATTLE_JOINED.value) {
+                if (NotificationType.isBattleType(notification.type!!)) {
                     BattleActivity.newIntent(view.context, notification.battleId!!)
                 }
                 else {

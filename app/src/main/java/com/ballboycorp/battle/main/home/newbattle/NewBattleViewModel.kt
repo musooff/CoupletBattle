@@ -12,7 +12,7 @@ import com.google.firebase.firestore.DocumentReference
 
 class NewBattleViewModel : ViewModel() {
     companion object {
-        private const val COUPLET_CARRIER_ID = "id"
+        private const val BATTLE_ID = "id"
         private const val NOTIFICATION_ID = "id"
     }
 
@@ -22,7 +22,7 @@ class NewBattleViewModel : ViewModel() {
         return repository.getBattlesRef()
                 .add(battle)
                 .addOnSuccessListener {
-                    it.update(mapOf(Pair(COUPLET_CARRIER_ID, it.id)))
+                    it.update(mapOf(Pair(BATTLE_ID, it.id)))
                 }
                 .addOnSuccessListener {
                     battle.writers

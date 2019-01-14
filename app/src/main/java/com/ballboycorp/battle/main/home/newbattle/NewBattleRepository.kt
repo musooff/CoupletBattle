@@ -1,6 +1,5 @@
 package com.ballboycorp.battle.main.home.newbattle
 
-import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 
 /**
@@ -15,8 +14,6 @@ class NewBattleRepository {
     }
 
     private val firebaseDatabase = FirebaseFirestore.getInstance()
-
-    fun getServerTime() = FieldValue.serverTimestamp()
 
     fun getBattlesRef() = firebaseDatabase.collection(BATTLES_REF)
 
