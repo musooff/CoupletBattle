@@ -22,6 +22,6 @@ class NewCoupletRepository {
 
     fun getUser(userId: String) = firebaseDatabase.collection(USERS_REF).document(userId)
 
-    fun getAuthors() = firebaseDatabase.collection(AUTHORS_REF).document()
+    fun getAuthors() = firebaseDatabase.collection(AUTHORS_REF)
 
 }

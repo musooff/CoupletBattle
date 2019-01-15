@@ -5,6 +5,7 @@ import com.ballboycorp.battle.battle.model.Couplet
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FieldValue
+import com.google.firebase.firestore.QuerySnapshot
 
 /**
  * Created by musooff on 12/01/2019.
@@ -44,7 +45,7 @@ class NewCoupletViewModel : ViewModel() {
                 }
     }
 
-    fun getAuthors(): Task<DocumentSnapshot> {
+    fun getAuthors(): Task<QuerySnapshot> {
         return repository.getAuthors()
                 .get()
     }

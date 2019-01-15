@@ -115,7 +115,7 @@ class NewBattleActivity : BaseActivity() {
                         ?.let {
                             writers = it
                             if (writers.isNotEmpty()){
-                                selected_friends.text = "${writers.size} friends are added"
+                                selected_friends.text = String.format(getString(R.string.number_of_friends_added), it.size)
                             }
                             else{
                                 selected_friends.text = getString(R.string.choose_friends_desc)

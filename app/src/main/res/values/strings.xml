@@ -48,9 +48,11 @@
     <string name="not_your_turn">Навбати шумо нест. Дустонро фарёд кунед то ба Байтбарак дохил шаванд.</string>
     <string name="already_sent">Дархости дусти аллакай равон карда шудааст.</string>
     <string name="coming_soon">Coming soon</string>
+    <string name="no_author">Шумо метавонед танхо аз Шоирони тастикшуда байтгузори кунед.</string>
 
     <!-- Strings related to SnackBar action -->
     <string name="action_invite">Фарёд кардан</string>
+    <string name="action_request_author">Дохили шоири нав</string>
 
     <!-- Strings related to Empty list  -->
     <string name="empty_friends">Дустон мавчуд надоранд</string>
@@ -76,5 +78,6 @@
     <string name="notification_battle_invitation">%s шуморо ба Байтбарак фарёд кард</string>
     <string name="author_couplet_count">Байт дар барнома</string>
     <string name="section_biography">Зиндагиномаи Шоир</string>
+    <string name="number_of_friends_added">%d дуст дохил карда шуд</string>
 
 </resources>

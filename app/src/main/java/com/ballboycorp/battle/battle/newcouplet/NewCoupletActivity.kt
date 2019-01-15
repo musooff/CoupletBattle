@@ -3,6 +3,7 @@ package com.ballboycorp.battle.battle.newcouplet
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.widget.ArrayAdapter
 import androidx.lifecycle.ViewModelProviders
 import com.ballboycorp.battle.R
 import com.ballboycorp.battle.common.base.BaseActivity
@@ -12,6 +13,9 @@ import com.ballboycorp.battle.battle.model.Couplet
 import kotlinx.android.synthetic.main.activity_new_couplet.*
 import java.util.*
 import kotlin.collections.HashMap
+import com.google.android.material.snackbar.Snackbar
+import kotlin.collections.ArrayList
+
 
 /**
  * Created by musooff on 12/01/2019.
@@ -25,6 +29,9 @@ class NewCoupletActivity : BaseActivity() {
         private const val BATTLE_ID = "battleId"
         private const val STARTING_LETTER = "startingLetter"
         private const val SHOULD_OPEN_BATTLE = "shouldOpenBattle"
+
+
+        private const val PEN_NAME = "penName"
 
         fun newIntent(context: Context, battleId: String, coupletsCount: Int, startingLetter: String, shouldOpenBattle: Boolean) {
             val intent = Intent(context, NewCoupletActivity::class.java)
@@ -47,7 +54,9 @@ class NewCoupletActivity : BaseActivity() {
     private var battleId: String? = null
     private var startingLetter: String? = null
 
-    private var authors: Map<String, String> = HashMap()
+    private var authorIds = ArrayList<String>()
+    private var authorPenNames = ArrayList<String>()
+    private lateinit var authorArrayAdapter: ArrayAdapter<String>
 
     private lateinit var appPreff: AppPreference
 
@@ -73,14 +82,15 @@ class NewCoupletActivity : BaseActivity() {
             val line2 = couplet_line_2.text.toString()
             couplet.line1 = line1
             couplet.line2 = line2
-            couplet.author = couplet_author.text.toString()
+            val authorPenName = couplet_author.text.toString()
+            couplet.author = authorPenName
+            couplet.authorId = authorIds[authorPenNames.indexOf(authorPenName)]
             couplet.startingLetter = startingLetter
             couplet.endingLetter = line2[line2.length - 1].toString().toUpperCase()
             couplet.createdTime = Date()
             couplet.creatorId = appPreff.getUserId()
             couplet.creatorFullname = appPreff.getUserFullname()
             couplet.creatorThumbnailUrl = appPreff.getUserThumbnail()
-            couplet.authorId = "rudaki"
 
             viewModel.saveCouplet(battleId!!, coupletsCount, couplet)
                     .addOnSuccessListener {
@@ -91,13 +101,32 @@ class NewCoupletActivity : BaseActivity() {
                     }
         }
 
+
     }
 
     override fun onResume() {
         super.onResume()
         viewModel.getAuthors()
                 .addOnSuccessListener {
-                    authors = it.data as Map<String, String>
+                    it.documents.forEach {
+                        authorIds.add(it.id)
+                        authorPenNames.add(it.getString(PEN_NAME)!!)
+                    }
+
+                    authorArrayAdapter = ArrayAdapter(this, android.R.layout.select_dialog_item, authorPenNames)
+                    couplet_author.setAdapter(authorArrayAdapter)
+                    couplet_author.threshold = 1
+                    couplet_author.setOnFocusChangeListener { v, hasFocus ->
+                        if (!hasFocus) {
+                            if (!authorPenNames.contains(couplet_author.text.toString())){
+                                Snackbar.make(couplet_author, R.string.no_author, Snackbar.LENGTH_LONG)
+                                        .setAction(R.string.action_request_author) {
+
+                                        }
+                                        .show()
+                            }
+                        }
+                    }
                 }
     }
 }
