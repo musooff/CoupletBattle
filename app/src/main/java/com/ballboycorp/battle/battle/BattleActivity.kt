@@ -14,7 +14,7 @@ import com.ballboycorp.battle.battle.invite.InviteActivity
 import com.ballboycorp.battle.battle.newcouplet.NewCoupletActivity
 import com.ballboycorp.battle.main.home.model.Battle
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.activity_coupletlist.*
+import kotlinx.android.synthetic.main.activity_battle.*
 
 /**
  * Created by musooff on 12/01/2019.
@@ -48,9 +48,10 @@ class BattleActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_coupletlist)
+        setContentView(R.layout.activity_battle)
 
-        setTitle(getString(R.string.app_name))
+        customAppBar(my_appbar)
+        setTitle(getString(R.string.app_name), "alon 7 bajt")
 
 
         appPreff = AppPreference.getInstance(this)
@@ -59,19 +60,19 @@ class BattleActivity : BaseActivity() {
 
         val layoutManager = LinearLayoutManager(this)
         layoutManager.stackFromEnd = true
-        coupletlist_rv.layoutManager = layoutManager
+        battle_rv.layoutManager = layoutManager
 
         adapter = BattleAdapter()
-        coupletlist_rv.adapter = adapter
+        battle_rv.adapter = adapter
 
         val dividerItemDecoration = DividerItemDecoration(this, layoutManager.orientation)
         dividerItemDecoration.setDrawable(resources.getDrawable(R.drawable.recycler_view_divider))
-        coupletlist_rv.addItemDecoration(dividerItemDecoration)
+        battle_rv.addItemDecoration(dividerItemDecoration)
 
 
-        coupletlist_add.setOnClickListener {
+        couplet_add.setOnClickListener {
             if (lastPostedUserId == appPreff.getUserId()){
-                Snackbar.make(coupletlist_add, getString(R.string.not_your_turn), Snackbar.LENGTH_LONG)
+                Snackbar.make(couplet_add, getString(R.string.not_your_turn), Snackbar.LENGTH_LONG)
                         .setAction(getString(R.string.action_invite)) {
                             InviteActivity.newIntent(this, mBattle)
                         }
@@ -87,7 +88,7 @@ class BattleActivity : BaseActivity() {
             lastPostedUserId = it[coupletsCount - 1].creatorId!!
             startingLetter = it[coupletsCount - 1].endingLetter!!
             adapter.submitList(it)
-            coupletlist_rv.smoothScrollToPosition(adapter.itemCount - 1)
+            battle_rv.smoothScrollToPosition(adapter.itemCount - 1)
 
         })
 

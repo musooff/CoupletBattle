@@ -9,34 +9,37 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
+
         <EditText
             android:id="@+id/couplet_line_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:lines="1"
-            android:hint="@string/couplet_line_1"/>
+            android:hint="@string/hint_couplet_line_1"/>
         <EditText
             android:id="@+id/couplet_line_2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:lines="1"
-            android:hint="@string/couplet_line_2"/>
+            android:hint="@string/hint_couplet_line_2"/>
 
-        <EditText
+        <AutoCompleteTextView
             android:id="@+id/couplet_author"
-            android:layout_gravity="right"
+            android:layout_gravity="end"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName"
-            android:hint="@string/author" />
+            android:hint="@string/hint_author" />
+
     </LinearLayout>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:id="@+id/couplet_submit"
-        android:text="@string/submit"/>
+        android:text="@string/button_submit"/>
 </RelativeLayout>

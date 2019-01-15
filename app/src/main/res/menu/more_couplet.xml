@@ -2,10 +2,10 @@
 
     <item
         android:id="@+id/couplet_edit"
-        android:title="@string/couplet_edit"/>
+        android:title="@string/menu_couplet_edit"/>
 
     <item
         android:id="@+id/couplet_report"
-        android:title="@string/couplet_report"/>
+        android:title="@string/menu_couplet_report"/>
 
 </menu>

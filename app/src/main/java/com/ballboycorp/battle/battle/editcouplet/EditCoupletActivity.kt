@@ -47,6 +47,10 @@ class EditCoupletActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_editcouplet)
 
+        setTitle(getString(R.string.title_edit_couplet))
+        enableBackButton(true)
+
+
         appPreff = AppPreference.getInstance(this)
 
         coupletId = intent.extras!!.getString(COUPLET_ID)

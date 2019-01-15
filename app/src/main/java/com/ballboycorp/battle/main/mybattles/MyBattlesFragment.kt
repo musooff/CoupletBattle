@@ -36,7 +36,7 @@ class MyBattlesFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setTitle(getString(R.string.title_dashboard))
+        setTitle(getString(R.string.title_my))
 
 
         appPreff = AppPreference.getInstance(view.context)

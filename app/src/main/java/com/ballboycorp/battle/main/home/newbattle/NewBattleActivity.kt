@@ -52,8 +52,8 @@ class NewBattleActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_battle)
 
-        setTitle(getString(R.string.create_battle))
-        closeBackButton()
+        setTitle(getString(R.string.title_create_battle))
+        enableBackButton(true)
 
         appPreff = AppPreference.getInstance(this)
 

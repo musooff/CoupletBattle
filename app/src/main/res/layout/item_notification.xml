@@ -54,12 +54,5 @@
                     android:textColor="@color/colorBlack" />
             </LinearLayout>
         </RelativeLayout>
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ic_more_horiz_black_24dp"
-            android:id="@+id/user_more"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
     </RelativeLayout>
 </LinearLayout>

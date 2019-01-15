@@ -11,6 +11,7 @@ class NewCoupletRepository {
         private const val BATTLES_REF = "battles"
         private const val COUPLETS_REF = "couplets"
         private const val USERS_REF = "users"
+        private const val AUTHORS_REF = "authors"
     }
 
     private val firebaseDatabase = FirebaseFirestore.getInstance()
@@ -20,5 +21,7 @@ class NewCoupletRepository {
     fun getCoupletsRef(battleId: String) = getBattle(battleId).collection(COUPLETS_REF)
 
     fun getUser(userId: String) = firebaseDatabase.collection(USERS_REF).document(userId)
+
+    fun getAuthors() = firebaseDatabase.collection(AUTHORS_REF).document()
 
 }

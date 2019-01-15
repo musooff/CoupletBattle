@@ -71,7 +71,7 @@ class MeFragment : BaseFragment() {
         }
 
         view.user_friend_count_container.setOnClickListener {
-            FriendListActivity.newIntent(view.context, mUser.friendList.toTypedArray())
+            FriendListActivity.newIntent(view.context, userId, mUser.friendList.toTypedArray())
         }
     }
 

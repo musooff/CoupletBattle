@@ -92,7 +92,7 @@ class SplashActivity : BaseActivity() {
                 }
 
                 if (response.error!!.errorCode == ErrorCodes.NO_NETWORK) {
-                    showSnackbar(R.string.no_internet_connection)
+                    showSnackbar(R.string.no_connection)
                     return
                 }
 

@@ -8,7 +8,6 @@ import com.ballboycorp.battle.GlideApp
 import com.ballboycorp.battle.R
 import com.ballboycorp.battle.user.UserActivity
 import com.ballboycorp.battle.user.model.User
-import com.bumptech.glide.Glide
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.item_friendlist.view.*
 

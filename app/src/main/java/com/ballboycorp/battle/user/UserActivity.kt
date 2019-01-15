@@ -47,6 +47,8 @@ class UserActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user)
 
+        customAppBar(my_appbar)
+
         appPreff = AppPreference.getInstance(this)
 
         userId = intent.extras!!.getString(USER_ID)!!
@@ -60,8 +62,8 @@ class UserActivity : BaseActivity() {
 
                         setActionButtonType(user)
                         user_name.text = user.name
-                        user_couplet_count.text = "${user.coupletCount}"
-                        user_friend_count.text = "${user.friendCount}"
+                        user_couplet_count.text = user.coupletCount.toString()
+                        user_friend_count.text = user.friendCount.toString()
 
                         GlideApp.with(this).load(viewModel.getImageUrl(user.thumbnailUrl!!)).into(user_thumb)
                         GlideApp.with(this).load(viewModel.getImageUrl(user.coverUrl!!)).into(user_cover)
@@ -70,7 +72,7 @@ class UserActivity : BaseActivity() {
                 }
 
         user_friend_count_container.setOnClickListener {
-            FriendListActivity.newIntent(this, mUser.friendList.toTypedArray())
+            FriendListActivity.newIntent(this, userId, mUser.friendList.toTypedArray())
         }
 
     }

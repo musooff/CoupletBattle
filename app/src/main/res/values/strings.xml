@@ -1,65 +1,80 @@
 <resources>
     <string name="app_name">Байтбарак</string>
+
+    <!-- Strings related to toolbar titles -->
     <string name="title_home">Хона</string>
-    <string name="title_dashboard">Аз ман</string>
+    <string name="title_my">Аз ман</string>
     <string name="title_me">Ман</string>
-    <string name="title_notifications">Нотификасён</string>
-    <string name="couplet_edit">Edit</string>
-    <string name="couplet_report">Report</string>
-    <string name="title_activity_main2">Main2Activity</string>
-    <string name="author">Муаллиф</string>
-    <string name="couplet">Couplet</string>
-    <string name="submit">Submit</string>
-    <string name="button_continue">Continue</string>
+    <string name="title_notifications">Хотиррасонак</string>
+    <string name="title_create_battle">Байтбараки нав</string>
+    <string name="title_create_couplet">Байти нав</string>
+    <string name="title_edit_couplet">Ислохи байт</string>
+    <string name="title_friend_list">Дустон</string>
+
+
+    <!-- Strings related to EditText text -->
+
+
+    <!-- Strings related to EditText hint -->
+    <string name="hint_author">Муаллиф</string>
     <string name="hint_battle_name">Номи байтбарак</string>
-    <string name="title_activity_login">Sign in</string>
-    <!-- Strings related to login -->
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password (optional)</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="error_invalid_email">This email address is invalid</string>
-    <string name="error_invalid_password">This password is too short</string>
-    <string name="error_incorrect_password">This password is incorrect</string>
-    <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
-    <string name="no_internet_connection">No Internet connection</string>
-    <string name="sign_in_cancelled">Sign in is cancelled</string>
-    <string name="unknown_error">Unknown error occured</string>
-    <string name="lorem">Some long text</string>
-    <string name="button_add_friend">Add Friend</string>
-    <string name="button_edit">Edit</string>
-    <string name="button_message">Message</string>
-    <string name="not_your_turn">Not your turn. Invite your friends to join</string>
-    <string name="action_invite">Invite</string>
     <string name="hint_battle_description">Маълумоти дираг, чун коидаву конунхо ва дигар дархостхо</string>
-    <string name="button_logout">Log Out</string>
-    <string name="button_friend_request_sent">Friend Request sent</string>
-    <string name="button_friend_request_pending">Accept Friend Request</string>
-    <string name="already_sent">Friend request already sent</string>
+    <string name="hint_couplet_line_1">Мисраи аввал</string>
+    <string name="hint_couplet_line_2">Мисраи дуввум</string>
+
+
+    <!-- Strings related to Button text -->
+    <string name="button_submit">Пахш</string>
+    <string name="button_continue">Ба пеш</string>
+    <string name="button_add_friend">Дархости дусти</string>
+    <string name="button_edit">Ивазкунии маълумот</string>
+    <string name="button_message">Паёмак</string>
+    <string name="button_logout">Баромад</string>
+    <string name="button_friend_request_sent">Дусти дархост карда шуд</string>
+    <string name="button_friend_request_pending">Дархости дустиро кабул кунед</string>
+    <string name="button_add_friends">Дохил кунед</string>
+    <string name="button_invite_friends">Фарёд кунед</string>
+
+
+    <!-- Strings related to Menu text -->
+    <string name="menu_couplet_edit">Ислохи байт</string>
+    <string name="menu_couplet_report">Репорт</string>
+
+
+    <!-- Strings related to SnackBar text -->
+    <string name="no_connection">Ба интернет пайваст нестед!</string>
+    <string name="sign_in_cancelled">Sign in is cancelled</string>
+    <string name="unknown_error">Unknown error occurred</string>
+    <string name="not_your_turn">Навбати шумо нест. Дустонро фарёд кунед то ба Байтбарак дохил шаванд.</string>
+    <string name="already_sent">Дархости дусти аллакай равон карда шудааст.</string>
     <string name="coming_soon">Coming soon</string>
-    <string name="battle_type">Public</string>
-    <string name="section_privacy">Privacy</string>
-    <string name="privacy_public">Public</string>
-    <string name="privacy_public_desc">Anyone can see the battle and join it</string>
-    <string name="privacy_private">Private</string>
-    <string name="privacy_private_desc">Anyone can see the battle and can request to join it</string>
-    <string name="privacy_secret">Secret</string>
-    <string name="privacy_secret_desc">Only members can see the battle and join it</string>
-    <string name="section_basics">Battle information</string>
-    <string name="section_members">Members</string>
-    <string name="choose_friends">Choose Friends</string>
-    <string name="choose_friends_desc">Add friends whom you want to be in the battle</string>
-    <string name="button_add_friends">Select friends</string>
-    <string name="create_battle">Байтбараки нав</string>
-    <string name="create_couplet">Байти нав</string>
-    <string name="button_invite_friends">Invite friends</string>
-    <string name="couplet_line_1">Мисраи аввал</string>
-    <string name="couplet_line_2">Мисраи дуввум</string>
-    <string name="empty_friends">No friends are found</string>
-    <string name="empty_invite">No friends to invite. Everyone is already in the battle</string>
-    <string name="empty_notifications">No notifications has been found</string>
-    <string name="empty_my_battles">You are not part of any battle. Try creating one or join existing from Home</string>
+
+    <!-- Strings related to SnackBar action -->
+    <string name="action_invite">Фарёд кардан</string>
+
+    <!-- Strings related to Empty list  -->
+    <string name="empty_friends">Дустон мавчуд надоранд</string>
+    <string name="empty_invite">Барои фарёд дустон ёфт нашуд. Хамаи дустон дар ин байтбараканд.</string>
+    <string name="empty_notifications">Хотиррасонакхо вучуд надорад.</string>
+    <string name="empty_my_battles">Шумо ба ягон байтбарак дохил нестед. Метавонед аз Хона ба байтбараке дохил шавад ваё байбараки худро кушоед.</string>
+
+    <!-- Other strings -->
+    <string name="section_privacy">Тарзи байтбарак</string>
+    <string name="privacy_public">Кушод</string>
+    <string name="privacy_public_desc">Хама метавонад байтбаракро пайдо кунад ва ба он дохил шавад.</string>
+    <string name="privacy_private">Пушида</string>
+    <string name="privacy_private_desc">Хама метавонад байтбаракро пайдо кунад ва метавонад аз рохбарони байтбарак ичозат пурсад барои дохилшави.</string>
+    <string name="privacy_secret">Махфи</string>
+    <string name="privacy_secret_desc">Танхо бозингарони дохили метавонанд пайдо кунанд.</string>
+    <string name="section_basics">Маълумот оиди байтбарак</string>
+    <string name="section_members">Бозингарон</string>
+    <string name="choose_friends">Дохили дустон</string>
+    <string name="choose_friends_desc">Дустони худро ба ин байтбарак дохил кунед.</string>
+    <string name="notification_friend_request">"%s ба шумо дархости дусти равона кард"</string>
+    <string name="notification_accpet_friend_request">%s дархости дустии шуморо кабул кард</string>
+    <string name="notification_battle_join">%s шуморо ба байтбарак дохил кард</string>
+    <string name="notification_battle_invitation">%s шуморо ба Байтбарак фарёд кард</string>
+    <string name="author_couplet_count">Байт дар барнома</string>
+    <string name="section_biography">Зиндагиномаи Шоир</string>
+
 </resources>

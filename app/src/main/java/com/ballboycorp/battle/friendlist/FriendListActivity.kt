@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.ballboycorp.battle.R
 import com.ballboycorp.battle.common.base.BaseActivity
 import com.ballboycorp.battle.common.preference.AppPreference
-import io.reactivex.internal.operators.maybe.MaybeIsEmpty
 import kotlinx.android.synthetic.main.activity_friendlist.*
 import kotlinx.android.synthetic.main.empty_list.*
 
@@ -22,9 +21,11 @@ class FriendListActivity : BaseActivity() {
 
     companion object {
         private const val FRIEND_IDS = "friendIds"
+        private const val USER_ID = "userId"
 
-        fun newIntent(context: Context, friendIds: Array<String>) {
+        fun newIntent(context: Context, userId: String, friendIds: Array<String>) {
             val intent = Intent(context, FriendListActivity::class.java)
+            intent.putExtra(USER_ID, userId)
             intent.putExtra(FRIEND_IDS, friendIds)
             context.startActivity(intent)
         }
@@ -37,6 +38,7 @@ class FriendListActivity : BaseActivity() {
     }
 
     private lateinit var adapter: FriendListAdapter
+    private lateinit var userId: String
     private var friendIds: Array<String> = arrayOf()
     private lateinit var appPreff: AppPreference
 
@@ -44,9 +46,13 @@ class FriendListActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_friendlist)
 
+        enableBackButton()
+        setTitle(getString(R.string.title_friend_list))
+
         appPreff = AppPreference.getInstance(this)
 
         friendIds = intent.extras!!.getStringArray(FRIEND_IDS)!!
+        userId = intent.extras!!.getString(USER_ID)!!
 
         val layoutManager = LinearLayoutManager(this)
         layoutManager.stackFromEnd = true
@@ -55,11 +61,16 @@ class FriendListActivity : BaseActivity() {
         adapter = FriendListAdapter()
         friendlist_rv.adapter = adapter
 
+        if (userId == appPreff.getUserId()){
+            friend_add.visibility = View.VISIBLE
+        }
+
 
         viewModel.friedList.observe(this, Observer {
             adapter.submitList(it)
             invalidateEmptyList(adapter.isEmpty())
         })
+
 
     }
 

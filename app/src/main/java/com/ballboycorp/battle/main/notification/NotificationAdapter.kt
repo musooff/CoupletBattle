@@ -59,18 +59,18 @@ class NotificationAdapter : RecyclerView.Adapter<NotificationAdapter.Notificatio
             val text = SpannableStringBuilder()
             when (notification.type){
                 NotificationType.FRIEND_REQUEST.value -> {
-                    text.append("${notification.fromUser} sent you friend request.")
+                    text.append(String.format(view.context.getString(R.string.notification_friend_request), notification.fromUser))
                 }
                 NotificationType.FRIEND_ACCEPTED.value -> {
-                    text.append("${notification.fromUser} accepted your friend request.")
+                    text.append(String.format(view.context.getString(R.string.notification_accpet_friend_request), notification.fromUser))
 
                 }
                 NotificationType.BATTLE_JOINED.value -> {
-                    text.append("${notification.fromUser} added you to a Байтбарак")
+                    text.append(String.format(view.context.getString(R.string.notification_battle_join), notification.fromUser))
 
                 }
                 NotificationType.BATTLE_INVITATION.value -> {
-                    text.append("${notification.fromUser} invited you to join a Байтбарак")
+                    text.append(String.format(view.context.getString(R.string.notification_battle_invitation), notification.fromUser))
 
                 }
             }

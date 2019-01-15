@@ -7,6 +7,7 @@ import android.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
 import com.ballboycorp.battle.GlideApp
 import com.ballboycorp.battle.R
+import com.ballboycorp.battle.author.AuthorActivity
 import com.ballboycorp.battle.battle.editcouplet.EditCoupletActivity
 import com.ballboycorp.battle.battle.model.Couplet
 import com.ballboycorp.battle.user.UserActivity
@@ -65,6 +66,10 @@ class BattleAdapter : RecyclerView.Adapter<BattleAdapter.BattleViewModel>(){
 
             view.couplet_user_section.setOnClickListener {
                 UserActivity.newIntent(view.context, couplet.creatorId!!)
+            }
+
+            view.couplet_author.setOnClickListener {
+                AuthorActivity.newIntent(view.context, couplet.authorId!!)
             }
         }
     }

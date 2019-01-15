@@ -3,6 +3,7 @@ package com.ballboycorp.battle.battle.newcouplet
 import androidx.lifecycle.ViewModel
 import com.ballboycorp.battle.battle.model.Couplet
 import com.google.android.gms.tasks.Task
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FieldValue
 
 /**
@@ -41,5 +42,10 @@ class NewCoupletViewModel : ViewModel() {
 
                             }
                 }
+    }
+
+    fun getAuthors(): Task<DocumentSnapshot> {
+        return repository.getAuthors()
+                .get()
     }
 }

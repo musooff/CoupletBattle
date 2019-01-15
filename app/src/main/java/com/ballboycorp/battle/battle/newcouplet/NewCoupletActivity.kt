@@ -11,6 +11,7 @@ import com.ballboycorp.battle.battle.BattleActivity
 import com.ballboycorp.battle.battle.model.Couplet
 import kotlinx.android.synthetic.main.activity_new_couplet.*
 import java.util.*
+import kotlin.collections.HashMap
 
 /**
  * Created by musooff on 12/01/2019.
@@ -46,14 +47,16 @@ class NewCoupletActivity : BaseActivity() {
     private var battleId: String? = null
     private var startingLetter: String? = null
 
+    private var authors: Map<String, String> = HashMap()
+
     private lateinit var appPreff: AppPreference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_couplet)
 
-        setTitle(getString(R.string.create_couplet))
-        closeBackButton()
+        setTitle(getString(R.string.title_create_couplet))
+        enableBackButton(true)
 
         appPreff = AppPreference.getInstance(this)
 
@@ -61,6 +64,7 @@ class NewCoupletActivity : BaseActivity() {
         battleId = intent.extras!!.getString(BATTLE_ID)
         startingLetter = intent.extras!!.getString(STARTING_LETTER)
         shouldOpenBattle = intent.extras!!.getBoolean(SHOULD_OPEN_BATTLE)
+
 
         couplet_submit.setOnClickListener {
             val couplet = Couplet()
@@ -87,5 +91,13 @@ class NewCoupletActivity : BaseActivity() {
                     }
         }
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getAuthors()
+                .addOnSuccessListener {
+                    authors = it.data as Map<String, String>
+                }
     }
 }
