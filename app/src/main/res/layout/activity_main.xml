@@ -24,7 +24,9 @@
         android:background="?android:attr/windowBackground"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:itemTextColor="@color/colorGreen"
         app:layout_constraintRight_toRightOf="parent"
+        android:theme="@style/BottomNavigationView"
         app:menu="@menu/navigation"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

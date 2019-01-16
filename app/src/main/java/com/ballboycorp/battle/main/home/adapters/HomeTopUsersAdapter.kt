@@ -3,16 +3,13 @@ package com.ballboycorp.battle.main.home.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.ballboycorp.battle.GlideApp
 import com.ballboycorp.battle.R
-import com.ballboycorp.battle.R.id.rank
 import com.ballboycorp.battle.user.UserActivity
 import com.ballboycorp.battle.user.model.User
 import com.google.firebase.storage.FirebaseStorage
-import kotlinx.android.synthetic.main.activity_user.*
 import kotlinx.android.synthetic.main.item_top_user.view.*
 
 /**

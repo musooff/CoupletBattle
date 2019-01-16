@@ -24,7 +24,7 @@ open class BaseActivity : AppCompatActivity() {
     fun enableBackButton(closeBackButton: Boolean = false){
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         if (closeBackButton){
-            supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_close_white_24dp)
+            supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_close_black_24dp)
         }
     }
 

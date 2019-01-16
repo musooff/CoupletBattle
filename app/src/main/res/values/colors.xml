@@ -7,6 +7,9 @@
 
     <color name="colorBlack">#000000</color>
     <color name="colorBlackLight">#222222</color>
+    <color name="basicRipple">#88AAAAAA</color>
     <color name="colorWhite">#ffffff</color>
     <color name="colorWhiteDark">#bbbbbb</color>
+    <color name="colorGreen">#00d564</color>
+    <color name="colorGreenDark">#8805f269</color>
 </resources>
