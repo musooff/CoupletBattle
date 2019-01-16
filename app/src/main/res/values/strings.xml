@@ -10,6 +10,7 @@
     <string name="title_create_couplet">Байти нав</string>
     <string name="title_edit_couplet">Ислохи байт</string>
     <string name="title_friend_list">Дустон</string>
+    <string name="title_invite_friends">Фарёд кунед</string>
 
 
     <!-- Strings related to EditText text -->
@@ -49,6 +50,7 @@
     <string name="already_sent">Дархости дусти аллакай равон карда шудааст.</string>
     <string name="coming_soon">Coming soon</string>
     <string name="no_author">Шумо метавонед танхо аз Шоирони тастикшуда байтгузори кунед.</string>
+    <string name="incorrect_lines">Мисрахои шумо нодурустанд.</string>
 
     <!-- Strings related to SnackBar action -->
     <string name="action_invite">Фарёд кардан</string>
@@ -77,7 +79,12 @@
     <string name="notification_battle_join">%s шуморо ба байтбарак дохил кард</string>
     <string name="notification_battle_invitation">%s шуморо ба Байтбарак фарёд кард</string>
     <string name="author_couplet_count">Байт дар барнома</string>
+    <string name="couplet_count_format">%d байт</string>
     <string name="section_biography">Зиндагиномаи Шоир</string>
     <string name="number_of_friends_added">%d дуст дохил карда шуд</string>
+    <string name="couple_count">Алъон %d байт</string>
+    <string name="section_authors">Шоирон</string>
+    <string name="section_todays_couplet">Байти имруза</string>
+    <string name="section_top_users">Пешсафони барнома</string>
 
 </resources>

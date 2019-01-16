@@ -10,11 +10,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.ballboycorp.battle.R
 import com.ballboycorp.battle.common.base.BaseFragment
 import com.ballboycorp.battle.common.preference.AppPreference
-import com.ballboycorp.battle.main.home.HomeAdapter
+import com.ballboycorp.battle.main.home.adapters.HomeAdapter
 import com.ballboycorp.battle.main.home.HomeViewModel
 import com.ballboycorp.battle.main.home.newbattle.NewBattleActivity
 import kotlinx.android.synthetic.main.empty_list.*
-import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.fragment_my.*
 
 /**
  * Created by musooff on 14/01/2019.
@@ -30,7 +30,7 @@ class MyBattlesFragment : BaseFragment() {
     private lateinit var adapter: HomeAdapter
     private lateinit var appPreff: AppPreference
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        return inflater.inflate(R.layout.fragment_my, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

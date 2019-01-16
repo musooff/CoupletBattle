@@ -51,7 +51,6 @@ class BattleActivity : BaseActivity() {
         setContentView(R.layout.activity_battle)
 
         customAppBar(my_appbar)
-        setTitle(getString(R.string.app_name), "alon 7 bajt")
 
 
         appPreff = AppPreference.getInstance(this)
@@ -94,6 +93,7 @@ class BattleActivity : BaseActivity() {
 
         viewModel.battle.observe(this, Observer {
             mBattle = it
+            my_collapsing.title = it.name
         })
 
     }

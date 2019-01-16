@@ -44,5 +44,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:id="@+id/couplet_submit"
+        android:onClick="submitCouplet"
         android:text="@string/button_submit"/>
 </RelativeLayout>

@@ -30,7 +30,7 @@ class NewCoupletViewModel : ViewModel() {
                             .get()
                             .addOnSuccessListener {
                                 repository.getUser(couplet.creatorId!!)
-                                        .update(mapOf(Pair(COUPLET_COUNT, it.getLong(COUPLET_COUNT)!!.plus(1))))
+                                        .update(COUPLET_COUNT, it.getLong(COUPLET_COUNT)!!.plus(1))
                             }
                     repository.getBattle(battleId)
                             .get()
@@ -41,6 +41,12 @@ class NewCoupletViewModel : ViewModel() {
                                             .update(WRITERS_REF, FieldValue.arrayUnion(couplet.creatorId))
                                 }
 
+                            }
+                    repository.getAuthor(couplet.authorId!!)
+                            .get()
+                            .addOnSuccessListener {
+                                repository.getAuthor(couplet.authorId!!)
+                                        .update(COUPLET_COUNT, it.getLong(COUPLET_COUNT)!!.plus(1))
                             }
                 }
     }

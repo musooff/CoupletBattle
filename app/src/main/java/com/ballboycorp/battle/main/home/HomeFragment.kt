@@ -9,7 +9,9 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ballboycorp.battle.R
 import com.ballboycorp.battle.common.base.BaseFragment
-import com.ballboycorp.battle.main.home.newbattle.NewBattleActivity
+import com.ballboycorp.battle.main.home.adapters.HomeAuthorsAdapter
+import com.ballboycorp.battle.main.home.adapters.HomeFeaturedAdapter
+import com.ballboycorp.battle.main.home.adapters.HomeTopUsersAdapter
 import kotlinx.android.synthetic.main.fragment_home.*
 
 /**
@@ -19,7 +21,9 @@ import kotlinx.android.synthetic.main.fragment_home.*
 class HomeFragment : BaseFragment() {
 
 
-    private lateinit var adapter: HomeAdapter
+    private lateinit var featuredAdapter: HomeFeaturedAdapter
+    private lateinit var authorsAdapted: HomeAuthorsAdapter
+    private lateinit var topUsersAdapter: HomeTopUsersAdapter
     private val viewModel by lazy {
         ViewModelProviders
                 .of(this)
@@ -35,25 +39,45 @@ class HomeFragment : BaseFragment() {
 
         setTitle(getString(R.string.title_home))
 
+        featuredAdapter = HomeFeaturedAdapter()
+        battle_featured_tl.setupWithViewPager(battle_featured_vp)
+        battle_featured_vp.adapter = featuredAdapter
 
-        val layoutManager = LinearLayoutManager(activity)
-        battle_rv.layoutManager = layoutManager
+        authors_rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        authorsAdapted = HomeAuthorsAdapter()
+        authors_rv.adapter = authorsAdapted
 
-        adapter = HomeAdapter()
-        battle_rv.adapter = adapter
 
-        viewModel.battles.observe(this, Observer {
-            adapter.submitList(it)
+        top_users_rv.layoutManager = LinearLayoutManager(context)
+        topUsersAdapter = HomeTopUsersAdapter()
+        top_users_rv.adapter = topUsersAdapter
+
+
+        viewModel.featuredBattles.observe(this, Observer {
+            featuredAdapter.submitList(it)
         })
 
-        battle_add.setOnClickListener {
-            NewBattleActivity.newIntent(activity!!)
-        }
+        viewModel.featuredCouplet.observe(this, Observer {
+            couplet_line_1.text = it.line1
+            couplet_line_2.text = it.line2
+            couplet_author.text = it.author
+        })
+
+        viewModel.topUsers.observe(this, Observer {
+            topUsersAdapter.submitList(it)
+        })
+
+        viewModel.authors.observe(this, Observer {
+            authorsAdapted.submitList(it)
+        })
 
     }
 
     override fun onResume() {
         super.onResume()
-        viewModel.getBattlesRef()
+        viewModel.getFeaturedBattles()
+        viewModel.getFeaturedCouplet()
+        viewModel.getTopUsers()
+        viewModel.getAuthors()
     }
 }

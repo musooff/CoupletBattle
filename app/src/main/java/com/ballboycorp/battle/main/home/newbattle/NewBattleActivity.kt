@@ -26,8 +26,6 @@ class NewBattleActivity : BaseActivity() {
 
     companion object {
 
-        private const val STARTING_LETTER = "А"
-
         fun newIntent(context: Context) {
             val intent = Intent(context, NewBattleActivity::class.java)
             context.startActivity(intent)
@@ -77,7 +75,7 @@ class NewBattleActivity : BaseActivity() {
 
             viewModel.saveCouplet(battle, notification)
                     .addOnSuccessListener {
-                        NewCoupletActivity.newIntent(this, it.id, 0, STARTING_LETTER, true)
+                        NewCoupletActivity.newIntent(this, it.id, 0, null, true)
                         this.finish()
                     }
         }

@@ -52,6 +52,8 @@ class InviteActivity  : BaseActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_invite_friends)
 
+        enableBackButton(true)
+        setTitle(getString(R.string.title_invite_friends))
 
         appPreff = AppPreference.getInstance(this)
 

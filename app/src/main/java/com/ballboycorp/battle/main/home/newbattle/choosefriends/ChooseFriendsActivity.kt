@@ -45,6 +45,8 @@ class ChooseFriendsActivity  : BaseActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_choose_friends)
 
+        enableBackButton(true)
+        setTitle(getString(R.string.choose_friends))
 
         appPreff = AppPreference.getInstance(this)
 

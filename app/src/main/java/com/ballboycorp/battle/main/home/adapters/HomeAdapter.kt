@@ -1,4 +1,4 @@
-package com.ballboycorp.battle.main.home
+package com.ballboycorp.battle.main.home.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -45,7 +45,7 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.HomeViewHolder>(){
     inner class HomeViewHolder(val view: View): RecyclerView.ViewHolder(view){
         fun bind(battle: Battle){
             view.battle_name.text = battle.name
-            view.battle_count.text = "Алъон ${battle.coupletCount} байт"
+            view.battle_count.text = String.format(view.context.getString(R.string.couple_count), battle.coupletCount)
 
             view.setOnClickListener {
                 BattleActivity.newIntent(view.context, battle.id!!)

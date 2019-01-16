@@ -3,6 +3,7 @@ package com.ballboycorp.battle.battle.newcouplet
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.ArrayAdapter
 import androidx.lifecycle.ViewModelProviders
 import com.ballboycorp.battle.R
@@ -10,9 +11,9 @@ import com.ballboycorp.battle.common.base.BaseActivity
 import com.ballboycorp.battle.common.preference.AppPreference
 import com.ballboycorp.battle.battle.BattleActivity
 import com.ballboycorp.battle.battle.model.Couplet
+import com.ballboycorp.battle.common.utils.CoupletUtils
 import kotlinx.android.synthetic.main.activity_new_couplet.*
 import java.util.*
-import kotlin.collections.HashMap
 import com.google.android.material.snackbar.Snackbar
 import kotlin.collections.ArrayList
 
@@ -33,7 +34,7 @@ class NewCoupletActivity : BaseActivity() {
 
         private const val PEN_NAME = "penName"
 
-        fun newIntent(context: Context, battleId: String, coupletsCount: Int, startingLetter: String, shouldOpenBattle: Boolean) {
+        fun newIntent(context: Context, battleId: String, coupletsCount: Int, startingLetter: String?, shouldOpenBattle: Boolean) {
             val intent = Intent(context, NewCoupletActivity::class.java)
             intent.putExtra(COUPLETS_COUNT, coupletsCount)
             intent.putExtra(BATTLE_ID, battleId)
@@ -51,7 +52,7 @@ class NewCoupletActivity : BaseActivity() {
 
     private var coupletsCount: Int = 0
     private var shouldOpenBattle: Boolean = false
-    private var battleId: String? = null
+    private lateinit var battleId: String
     private var startingLetter: String? = null
 
     private var authorIds = ArrayList<String>()
@@ -70,38 +71,48 @@ class NewCoupletActivity : BaseActivity() {
         appPreff = AppPreference.getInstance(this)
 
         coupletsCount = intent.extras!!.getInt(COUPLETS_COUNT)
-        battleId = intent.extras!!.getString(BATTLE_ID)
+        battleId = intent.extras!!.getString(BATTLE_ID)!!
         startingLetter = intent.extras!!.getString(STARTING_LETTER)
         shouldOpenBattle = intent.extras!!.getBoolean(SHOULD_OPEN_BATTLE)
 
 
-        couplet_submit.setOnClickListener {
-            val couplet = Couplet()
-            couplet.id = "${battleId}_$coupletsCount"
-            val line1 = couplet_line_1.text.toString()
-            val line2 = couplet_line_2.text.toString()
-            couplet.line1 = line1
-            couplet.line2 = line2
-            val authorPenName = couplet_author.text.toString()
-            couplet.author = authorPenName
-            couplet.authorId = authorIds[authorPenNames.indexOf(authorPenName)]
-            couplet.startingLetter = startingLetter
-            couplet.endingLetter = line2[line2.length - 1].toString().toUpperCase()
-            couplet.createdTime = Date()
-            couplet.creatorId = appPreff.getUserId()
-            couplet.creatorFullname = appPreff.getUserFullname()
-            couplet.creatorThumbnailUrl = appPreff.getUserThumbnail()
 
-            viewModel.saveCouplet(battleId!!, coupletsCount, couplet)
-                    .addOnSuccessListener {
-                        if (shouldOpenBattle){
-                            BattleActivity.newIntent(this, battleId!!)
-                        }
-                        this.finish()
-                    }
+    }
+
+
+    fun submitCouplet(view: View){
+
+
+        val line1 = couplet_line_1.text.toString()
+        val line2 = couplet_line_2.text.toString()
+
+        if (!CoupletUtils.canSubmit(startingLetter, line1, line2)){
+            Snackbar.make(couplet_author, R.string.incorrect_lines, Snackbar.LENGTH_SHORT).show()
+            return
         }
 
 
+        val couplet = Couplet()
+        couplet.id = "${battleId}_$coupletsCount"
+        couplet.line1 = line1
+        couplet.line2 = line2
+        val authorPenName = couplet_author.text.toString()
+        couplet.author = authorPenName
+        couplet.authorId = authorIds[authorPenNames.indexOf(authorPenName)]
+        couplet.startingLetter = startingLetter
+        couplet.endingLetter = CoupletUtils.getEndingLetter(line2)
+        couplet.createdTime = Date()
+        couplet.creatorId = appPreff.getUserId()
+        couplet.creatorFullname = appPreff.getUserFullname()
+        couplet.creatorThumbnailUrl = appPreff.getUserThumbnail()
+
+        viewModel.saveCouplet(battleId, coupletsCount, couplet)
+                .addOnSuccessListener {
+                    if (shouldOpenBattle){
+                        BattleActivity.newIntent(this, battleId)
+                    }
+                    this.finish()
+                }
     }
 
     override fun onResume() {

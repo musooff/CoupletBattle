@@ -20,6 +20,9 @@ class Battle() : Serializable{
     var thumbnailUrl: String? = null
     var writers: List<String> = arrayListOf()
     var privacy: String? = null
+    var isFeatured: Boolean = false
+    var hasFeaturedCouplet: Boolean = false
+    var featuredCoupletId: String? = null
 
     companion object {
 

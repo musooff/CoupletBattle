@@ -3,8 +3,10 @@ package com.ballboycorp.battle.main.home
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.ballboycorp.battle.author.model.Author
 import com.ballboycorp.battle.battle.model.Couplet
 import com.ballboycorp.battle.main.home.model.Battle
+import com.ballboycorp.battle.user.model.User
 
 /**
  * Created by musooff on 12/01/2019.
@@ -14,11 +16,20 @@ class HomeViewModel : ViewModel() {
 
     companion object {
         private const val WRITERS = "writers"
+        private const val COUPLETS_REF = "couplets"
+        private const val COUPLET_ID = "id"
+        private const val IS_FEATURED = "isFeatured"
+        private const val HAS_FEATURED_COUPLET = "hasFeaturedCouplet"
     }
 
     private val repository = HomeRepository()
 
     var battles: MutableLiveData<List<Battle>> = MutableLiveData()
+    var authors: MutableLiveData<List<Author>> = MutableLiveData()
+
+    var featuredBattles: MutableLiveData<List<Battle>> = MutableLiveData()
+    var featuredCouplet: MutableLiveData<Couplet> = MutableLiveData()
+    var topUsers: MutableLiveData<List<User>> = MutableLiveData()
 
     fun getBattlesRef(isMyBattles: Boolean = false, userId: String? = null){
         if (isMyBattles){
@@ -70,4 +81,47 @@ class HomeViewModel : ViewModel() {
                             }
                 }
             }
+
+    fun getAuthors() {
+        repository.getAuthors()
+                .get()
+                .addOnSuccessListener {
+                    authors.postValue(Author.toAuthorList(it.documents))
+                }
+    }
+
+    fun getFeaturedBattles(){
+        repository.getBattlesRef()
+                .whereEqualTo(IS_FEATURED, true)
+                .get()
+                .addOnSuccessListener {
+                    featuredBattles.postValue(Battle.toCoupletList(it.documents))
+                }
+    }
+
+    fun getFeaturedCouplet(){
+        repository.getBattlesRef()
+                .whereEqualTo(HAS_FEATURED_COUPLET, true)
+                .get()
+                .addOnSuccessListener {
+                    val battle = Battle.toCoupletList(it.documents)[0]
+                    repository.getBattlesRef()
+                            .document(battle.id!!)
+                            .collection(COUPLETS_REF)
+                            .whereEqualTo(COUPLET_ID, battle.featuredCoupletId)
+                            .get()
+                            .addOnSuccessListener {
+                                featuredCouplet.postValue(Couplet.toCoupletList(it.documents)[0])
+
+                            }
+                }
+    }
+
+    fun getTopUsers(){
+        repository.getUsers()
+                .get()
+                .addOnSuccessListener {
+                    topUsers.postValue(User.toUserList(it.documents))
+                }
+    }
 }
