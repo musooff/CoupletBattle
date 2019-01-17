@@ -4,7 +4,9 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.ballboycorp.battle.battle.model.Couplet
+import com.ballboycorp.battle.common.utils.add
 import com.ballboycorp.battle.main.home.model.Battle
+import com.ballboycorp.battle.user.model.User
 
 /**
  * Created by musooff on 12/01/2019.
@@ -16,6 +18,8 @@ class BattleViewModel : ViewModel() {
 
     var couplets: MutableLiveData<List<Couplet>> = MutableLiveData()
     var battle: MutableLiveData<Battle> = MutableLiveData()
+    var friends = MutableLiveData<List<User>>()
+
 
     fun getCouplets(battleId: String){
         repository.getCoupletsRef(battleId)
@@ -30,7 +34,28 @@ class BattleViewModel : ViewModel() {
                 }
     }
 
-    fun getBattle(battleId: String) {
+    private fun getFriends(writers: List<String>, userId: String){
+        repository.getUser(userId)
+                .get()
+                .addOnSuccessListener {
+                    val userRemote = it.toObject(User::class.java)
+                    userRemote!!.friendList
+                            .filter {
+                                writers.contains(it)
+                            }
+                            .take(3)
+                            .forEach {
+                                repository.getUser(it)
+                                        .get()
+                                        .addOnSuccessListener {
+                                            val friendRemote = it.toObject(User::class.java)
+                                            friends.add(friendRemote!!)
+                                        }
+                            }
+                }
+    }
+
+    fun getBattle(battleId: String, userId: String) {
         repository.getBattle(battleId)
                 .addSnapshotListener { snapshot, exception ->
                     if (exception != null){
@@ -38,9 +63,15 @@ class BattleViewModel : ViewModel() {
                         return@addSnapshotListener
                     }
                     if (snapshot != null){
-                        battle.postValue(snapshot.toObject(Battle::class.java))
+                        val battleRemote = snapshot.toObject(Battle::class.java)
+                        battle.postValue(battleRemote)
+                        getFriends(battleRemote!!.writers, userId)
+
                     }
                 }
     }
+
+    fun getImageUrl(imageUrl: String) = repository.getImageRef(imageUrl)
+
 
 }

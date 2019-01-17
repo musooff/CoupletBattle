@@ -38,7 +38,7 @@
                         android:layout_height="match_parent"
                         android:scaleType="fitXY"
                         android:id="@+id/author_cover"
-                        android:src="@drawable/user_cover_default"/>
+                        android:src="@drawable/default_author_cover"/>
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"

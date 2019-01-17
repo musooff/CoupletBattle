@@ -45,7 +45,7 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.HomeViewHolder>(){
     inner class HomeViewHolder(val view: View): RecyclerView.ViewHolder(view){
         fun bind(battle: Battle){
             view.battle_name.text = battle.name
-            view.battle_count.text = String.format(view.context.getString(R.string.couple_count), battle.coupletCount)
+            view.battle_count.text = String.format(view.context.getString(R.string.battle_couplet_count_format), battle.coupletCount)
 
             view.setOnClickListener {
                 BattleActivity.newIntent(view.context, battle.id!!)

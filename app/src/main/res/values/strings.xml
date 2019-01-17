@@ -82,9 +82,12 @@
     <string name="couplet_count_format">%d байт</string>
     <string name="section_biography">Зиндагиномаи Шоир</string>
     <string name="number_of_friends_added">%d дуст дохил карда шуд</string>
-    <string name="couple_count">Алъон %d байт</string>
+    <string name="battle_couplet_count_format">Алъон %d байт</string>
     <string name="section_authors">Шоирон</string>
     <string name="section_todays_couplet">Байти имруза</string>
     <string name="section_top_users">Пешсафони барнома</string>
+    <string name="action_info">Маълумот</string>
+    <string name="friend_count_format">%d дустон пайрави доранд</string>
+    <string name="invite_friends">Дустонро фарёд кунед</string>
 
 </resources>

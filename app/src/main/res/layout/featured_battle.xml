@@ -16,7 +16,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="fitXY"
-                android:background="@drawable/battle_default_cover"
+                android:background="@drawable/default_battle_cover"
                 android:src="@drawable/black_gradient"/>
 
             <LinearLayout

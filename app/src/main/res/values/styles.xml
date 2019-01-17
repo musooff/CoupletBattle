@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -11,9 +11,16 @@
 
     </style>
 
-    <style name="AppTheme.NoActionBar">
+    <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="colorPrimary">@color/colorWhite</item>
+        <item name="colorPrimaryDark">@color/colorWhiteDark</item>
+        <item name="colorAccent">@color/colorGreen</item>
+    </style>
+
+    <style name="TextAppearance.Design.Snackbar.Message" parent="android:TextAppearance" tools:override="true">
+        <item name="android:textColor">@color/colorWhite</item>
     </style>
 
     <style name="Activity.Basic" parent="Theme.AppCompat.NoActionBar">
@@ -35,6 +42,7 @@
     <style name="ActionbarTheme">
         <item name="android:textColor">@color/colorBlack</item>
         <item name="android:background">@color/colorWhite</item>
+
     </style>
 
     <style name="HomeSection">

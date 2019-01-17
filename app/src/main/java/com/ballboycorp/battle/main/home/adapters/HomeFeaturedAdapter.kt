@@ -34,7 +34,7 @@ class HomeFeaturedAdapter : PagerAdapter() {
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         val view = LayoutInflater.from(container.context).inflate(R.layout.featured_battle, container, false)
         view.battle_name.text = battles[position].name
-        view.battle_count.text = String.format(view.context.getString(R.string.couple_count), battles[position].coupletCount)
+        view.battle_count.text = String.format(view.context.getString(R.string.battle_couplet_count_format), battles[position].coupletCount)
         view.setOnClickListener {
             BattleActivity.newIntent(view.context, battles[position].id!!)
         }
