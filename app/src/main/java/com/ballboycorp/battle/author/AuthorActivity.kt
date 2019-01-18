@@ -39,6 +39,7 @@ class AuthorActivity : BaseActivity() {
         setContentView(R.layout.activity_author)
 
         customAppBar(my_appbar)
+        enableBackButton()
 
 
         authorId = intent.extras!!.getString(AUTHOR_ID)!!

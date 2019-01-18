@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -55,6 +56,7 @@ class BattleActivity : BaseActivity() {
         setContentView(R.layout.activity_battle)
 
         customAppBar(my_appbar)
+        enableBackButton()
 
 
         appPreff = AppPreference.getInstance(this)
@@ -70,20 +72,6 @@ class BattleActivity : BaseActivity() {
         val dividerItemDecoration = DividerItemDecoration(this, layoutManager.orientation)
         dividerItemDecoration.setDrawable(resources.getDrawable(R.drawable.recycler_view_divider))
         battle_rv.addItemDecoration(dividerItemDecoration)
-
-
-        new_couplet.setOnClickListener {
-            if (lastPostedUserId == appPreff.getUserId()){
-                Snackbar.make(new_couplet, getString(R.string.not_your_turn), Snackbar.LENGTH_LONG)
-                        .setAction(getString(R.string.action_invite)) {
-                            InviteActivity.newIntent(this, mBattle)
-                        }
-                        .show()
-            }
-            else {
-                NewCoupletActivity.newIntent(this, battleId, coupletsCount, startingLetter, false)
-            }
-        }
 
         viewModel.couplets.observe(this, Observer {
             coupletsCount = it.size
@@ -111,6 +99,19 @@ class BattleActivity : BaseActivity() {
         viewModel.getBattle(battleId, appPreff.getUserId())
         viewModel.getCouplets(battleId)
 
+    }
+
+    fun newCouplet(view: View){
+        if (lastPostedUserId == appPreff.getUserId()){
+            Snackbar.make(view, getString(R.string.not_your_turn), Snackbar.LENGTH_LONG)
+                    .setAction(getString(R.string.action_invite)) {
+                        InviteActivity.newIntent(this, mBattle)
+                    }
+                    .show()
+        }
+        else {
+            NewCoupletActivity.newIntent(this, battleId, coupletsCount, startingLetter, false)
+        }
     }
 
     override fun onCreatePanelMenu(featureId: Int, menu: Menu): Boolean {

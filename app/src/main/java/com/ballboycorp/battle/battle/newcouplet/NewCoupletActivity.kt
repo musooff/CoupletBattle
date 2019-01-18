@@ -75,13 +75,12 @@ class NewCoupletActivity : BaseActivity() {
         startingLetter = intent.extras!!.getString(STARTING_LETTER)
         shouldOpenBattle = intent.extras!!.getBoolean(SHOULD_OPEN_BATTLE)
 
-
+        couplet_line_1.hint = CoupletUtils.allowedLetters(startingLetter)
 
     }
 
 
     fun submitCouplet(view: View){
-
 
         val line1 = couplet_line_1.text.toString()
         val line2 = couplet_line_2.text.toString()
@@ -131,9 +130,6 @@ class NewCoupletActivity : BaseActivity() {
                         if (!hasFocus) {
                             if (!authorPenNames.contains(couplet_author.text.toString())){
                                 Snackbar.make(couplet_author, R.string.no_author, Snackbar.LENGTH_LONG)
-                                        .setAction(R.string.action_request_author) {
-
-                                        }
                                         .show()
                             }
                         }
