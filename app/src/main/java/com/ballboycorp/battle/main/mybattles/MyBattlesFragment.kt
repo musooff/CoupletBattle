@@ -1,9 +1,7 @@
 package com.ballboycorp.battle.main.mybattles
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -29,6 +27,11 @@ class MyBattlesFragment : BaseFragment() {
     }
     private lateinit var adapter: HomeAdapter
     private lateinit var appPreff: AppPreference
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_my, container, false)
     }
@@ -72,5 +75,11 @@ class MyBattlesFragment : BaseFragment() {
             empty.visibility = View.GONE
 
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        menu.clear()
+        inflater.inflate(R.menu.my, menu)
+        super.onCreateOptionsMenu(menu, inflater)
     }
 }

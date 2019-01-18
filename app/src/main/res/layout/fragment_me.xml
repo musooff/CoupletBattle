@@ -126,18 +126,13 @@
                             android:text="Дуст"/>
                     </LinearLayout>
                 </LinearLayout>
-
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/action_button"
-                    android:text="@string/button_edit"/>
             </LinearLayout>
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/button_logout"
+                style="@style/ButtonDefault"
                 android:layout_alignParentBottom="true"
                 android:text="@string/button_logout"/>
         </RelativeLayout>

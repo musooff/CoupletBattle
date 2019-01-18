@@ -1,17 +1,17 @@
 package com.ballboycorp.battle.main.home
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ballboycorp.battle.R
 import com.ballboycorp.battle.common.base.BaseFragment
+import com.ballboycorp.battle.common.utils.StringUtils
 import com.ballboycorp.battle.main.home.adapters.HomeAuthorsAdapter
 import com.ballboycorp.battle.main.home.adapters.HomeFeaturedAdapter
 import com.ballboycorp.battle.main.home.adapters.HomeTopUsersAdapter
+import com.ballboycorp.battle.search.SearchActivity
 import kotlinx.android.synthetic.main.fragment_home.*
 
 /**
@@ -30,6 +30,11 @@ class HomeFragment : BaseFragment() {
                 .get(HomeViewModel::class.java)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
@@ -37,7 +42,7 @@ class HomeFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setTitle(getString(R.string.title_home))
+        setTitle(" ")
 
         featuredAdapter = HomeFeaturedAdapter()
         battle_featured_tl.setupWithViewPager(battle_featured_vp)
@@ -80,4 +85,19 @@ class HomeFragment : BaseFragment() {
         viewModel.getTopUsers()
         viewModel.getAuthors()
     }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        menu.clear()
+        inflater.inflate(R.menu.home, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId){
+            R.id.action_search -> SearchActivity.newIntent(context!!)
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+
 }

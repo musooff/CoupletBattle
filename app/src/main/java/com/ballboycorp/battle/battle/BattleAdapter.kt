@@ -3,6 +3,7 @@ package com.ballboycorp.battle.battle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
 import com.ballboycorp.battle.GlideApp
@@ -10,9 +11,10 @@ import com.ballboycorp.battle.R
 import com.ballboycorp.battle.author.AuthorActivity
 import com.ballboycorp.battle.battle.editcouplet.EditCoupletActivity
 import com.ballboycorp.battle.battle.model.Couplet
+import com.ballboycorp.battle.common.utils.StringUtils
 import com.ballboycorp.battle.user.UserActivity
 import com.google.firebase.storage.FirebaseStorage
-import kotlinx.android.synthetic.main.item_couplelist.view.*
+import kotlinx.android.synthetic.main.item_couplet.view.*
 
 
 /**
@@ -25,7 +27,7 @@ class BattleAdapter : RecyclerView.Adapter<BattleAdapter.BattleViewModel>(){
     private val firebaseStorage = FirebaseStorage.getInstance()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BattleViewModel {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_couplelist, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_couplet, parent, false)
         return BattleViewModel(view)
     }
 
@@ -44,8 +46,8 @@ class BattleAdapter : RecyclerView.Adapter<BattleAdapter.BattleViewModel>(){
 
     inner class BattleViewModel(val view: View): RecyclerView.ViewHolder(view){
         fun bind(couplet: Couplet){
-            view.couplet_line_1.text = couplet.line1
-            view.couplet_line_2.text = couplet.line2
+            StringUtils.stylizeText(couplet.line1, view.couplet_line_1 as LinearLayout)
+            StringUtils.stylizeText(couplet.line2, view.couplet_line_2 as LinearLayout)
             view.couplet_author.text = couplet.author
             view.couplet_creator_fullname.text = couplet.creatorFullname
 

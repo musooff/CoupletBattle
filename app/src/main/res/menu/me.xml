@@ -1,0 +1,12 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.naver.linewebtoon.episode.list.EpisodeListActivity">
+
+    <item
+        android:id="@+id/action_edit"
+        android:orderInCategory="100"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_edit_white_24dp"
+        android:title="@string/action_edit"/>
+</menu>

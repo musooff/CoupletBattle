@@ -87,7 +87,7 @@
                     app:cardElevation="0dp"
                     android:layout_marginLeft="50dp"
                     android:layout_marginStart="50dp"
-                    android:id="@+id/friend_cv_1">
+                    android:id="@+id/friend_cv_3">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -141,7 +141,7 @@
                     android:layout_height="32dp"
                     app:cardCornerRadius="16sp"
                     app:cardElevation="0dp"
-                    android:id="@+id/friend_cv_3">
+                    android:id="@+id/friend_cv_1">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"

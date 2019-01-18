@@ -1,9 +1,7 @@
 package com.ballboycorp.battle.main.notification
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -27,6 +25,11 @@ class NotificationFragment : BaseFragment(){
         ViewModelProviders
                 .of(this)
                 .get(NotificationViewModel::class.java)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -69,5 +72,11 @@ class NotificationFragment : BaseFragment(){
             empty.visibility = View.GONE
 
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        menu.clear()
+        inflater.inflate(R.menu.notification, menu)
+        super.onCreateOptionsMenu(menu, inflater)
     }
 }

@@ -43,6 +43,9 @@
         <activity android:name=".main.home.newbattle.choosefriends.ChooseFriendsActivity"/>
         <activity android:name=".battle.invite.InviteActivity"/>
         <activity android:name=".author.newauthor.NewAuthorActivity"/>
+        <activity android:name=".search.SearchActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysVisible"/>
     </application>
 
 </manifest>

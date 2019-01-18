@@ -2,9 +2,7 @@ package com.ballboycorp.battle.main.me
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.lifecycle.ViewModelProviders
 import com.ballboycorp.battle.GlideApp
 import com.ballboycorp.battle.R
@@ -35,6 +33,11 @@ class MeFragment : BaseFragment() {
                 .get(MeViewModel::class.java)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_me, container, false)
     }
@@ -42,8 +45,7 @@ class MeFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setTitle(getString(R.string.title_me))
-
+        setTitle(" ")
 
         appPreff = AppPreference.getInstance(view.context)
 
@@ -73,6 +75,12 @@ class MeFragment : BaseFragment() {
         view.user_friend_count_container.setOnClickListener {
             FriendListActivity.newIntent(view.context, userId, mUser.friendList.toTypedArray())
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        menu.clear()
+        inflater.inflate(R.menu.me, menu)
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
 }

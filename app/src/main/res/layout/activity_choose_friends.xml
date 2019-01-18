@@ -23,6 +23,7 @@
         android:layout_alignParentBottom="true"
         android:id="@+id/button_add_friends"
         android:onClick="selectFriends"
+        style="@style/ButtonDefault"
         android:text="@string/button_add_friends"/>
 
 </RelativeLayout>

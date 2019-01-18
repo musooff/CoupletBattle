@@ -89,5 +89,8 @@
     <string name="action_info">Маълумот</string>
     <string name="friend_count_format">%d дустон пайрави доранд</string>
     <string name="invite_friends">Дустонро фарёд кунед</string>
+    <string name="new_couplet">Байти нав</string>
+    <string name="action_search">Кофтукоб</string>
+    <string name="action_edit">Ивазкуни</string>
 
 </resources>

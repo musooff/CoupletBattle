@@ -18,7 +18,6 @@ open class BaseActivity : AppCompatActivity() {
 
     fun customAppBar(view: View){
         setSupportActionBar(view.findViewById(R.id.my_toolbar))
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     fun enableBackButton(closeBackButton: Boolean = false){

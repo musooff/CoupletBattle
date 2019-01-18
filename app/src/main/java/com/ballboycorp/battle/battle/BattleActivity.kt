@@ -19,7 +19,6 @@ import com.ballboycorp.battle.main.home.model.Battle
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_battle.*
 import kotlinx.android.synthetic.main.battle_header.*
-import kotlinx.android.synthetic.main.battle_header.view.*
 
 /**
  * Created by musooff on 12/01/2019.
@@ -63,7 +62,6 @@ class BattleActivity : BaseActivity() {
         battleId = intent.extras!!.getString(BATTLE_ID)!!
 
         val layoutManager = LinearLayoutManager(this)
-        layoutManager.stackFromEnd = true
         battle_rv.layoutManager = layoutManager
 
         adapter = BattleAdapter()
@@ -74,9 +72,9 @@ class BattleActivity : BaseActivity() {
         battle_rv.addItemDecoration(dividerItemDecoration)
 
 
-        couplet_add.setOnClickListener {
+        new_couplet.setOnClickListener {
             if (lastPostedUserId == appPreff.getUserId()){
-                Snackbar.make(couplet_add, getString(R.string.not_your_turn), Snackbar.LENGTH_LONG)
+                Snackbar.make(new_couplet, getString(R.string.not_your_turn), Snackbar.LENGTH_LONG)
                         .setAction(getString(R.string.action_invite)) {
                             InviteActivity.newIntent(this, mBattle)
                         }

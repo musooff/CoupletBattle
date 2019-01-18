@@ -48,6 +48,7 @@ class UserActivity : BaseActivity() {
         setContentView(R.layout.activity_user)
 
         customAppBar(my_appbar)
+        enableBackButton()
 
         appPreff = AppPreference.getInstance(this)
 
