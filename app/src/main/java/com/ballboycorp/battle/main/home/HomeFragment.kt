@@ -2,6 +2,7 @@ package com.ballboycorp.battle.main.home
 
 import android.os.Bundle
 import android.view.*
+import android.widget.LinearLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,6 +14,7 @@ import com.ballboycorp.battle.main.home.adapters.HomeFeaturedAdapter
 import com.ballboycorp.battle.main.home.adapters.HomeTopUsersAdapter
 import com.ballboycorp.battle.search.SearchActivity
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.item_couplet.view.*
 
 /**
  * Created by musooff on 12/01/2019.
@@ -63,8 +65,8 @@ class HomeFragment : BaseFragment() {
         })
 
         viewModel.featuredCouplet.observe(this, Observer {
-            couplet_line_1.text = it.line1
-            couplet_line_2.text = it.line2
+            StringUtils.stylizeText(it.line1, view.couplet_line_1 as LinearLayout)
+            StringUtils.stylizeText(it.line2, view.couplet_line_2 as LinearLayout)
             couplet_author.text = it.author
         })
 

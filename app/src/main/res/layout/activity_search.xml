@@ -1,23 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/search_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <SearchView
+    android:layout_height="match_parent">
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/search"
-        android:iconifiedByDefault="false"
-        android:queryHint="@string/hint_author">
-    </SearchView>
-
+        android:id="@+id/my_appbar"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:fitsSystemWindows="true">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/my_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <SearchView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/search"
+                android:iconifiedByDefault="false"
+                android:background="@color/colorWhite"
+                android:queryBackground="@color/colorWhite"
+                android:queryHint="@string/hint_search_all">
+            </SearchView>
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
     <FrameLayout
         android:id="@+id/content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/my_appbar"
         android:background="#FFF">
 
         <LinearLayout
@@ -27,18 +40,12 @@
             android:orientation="vertical">
 
 
-            <TableLayout
+            <com.google.android.material.tabs.TabLayout
                 android:id="@+id/search_tab_indicator"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="wrap_content"
                 app:tabGravity="fill"
-                app:tabIndicatorHeight="0dp"
-                app:tabMode="fixed"
-                app:tabPadding="0dp"
-                app:tabPaddingEnd="0dp"
-                app:tabPaddingStart="0dp"
-                app:tabSelectedTextColor="#ffffff"
-                app:tabTextColor="#848484" />
+                app:tabMode="fixed"/>
 
             <androidx.viewpager.widget.ViewPager
                 android:id="@+id/search_result_pager"
@@ -50,7 +57,9 @@
         <include
             android:id="@+id/empty"
             layout="@layout/empty_list"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </FrameLayout>
-</LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
