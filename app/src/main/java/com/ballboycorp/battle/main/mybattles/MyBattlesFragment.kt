@@ -11,6 +11,7 @@ import com.ballboycorp.battle.common.preference.AppPreference
 import com.ballboycorp.battle.main.home.adapters.HomeAdapter
 import com.ballboycorp.battle.main.home.HomeViewModel
 import com.ballboycorp.battle.main.home.newbattle.NewBattleActivity
+import com.ballboycorp.battle.search.SearchActivity
 import kotlinx.android.synthetic.main.empty_list.*
 import kotlinx.android.synthetic.main.fragment_my.*
 
@@ -81,5 +82,12 @@ class MyBattlesFragment : BaseFragment() {
         menu.clear()
         inflater.inflate(R.menu.my, menu)
         super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId){
+            R.id.action_search -> SearchActivity.newIntent(context!!)
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

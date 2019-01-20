@@ -8,5 +8,11 @@
         android:layout_height="match_parent"
         android:id="@+id/recycler_view">
     </androidx.recyclerview.widget.RecyclerView>
+    <include
+        android:id="@+id/empty"
+        layout="@layout/empty_list"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </RelativeLayout>

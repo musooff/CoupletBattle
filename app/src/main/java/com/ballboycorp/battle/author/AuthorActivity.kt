@@ -53,7 +53,7 @@ class AuthorActivity : BaseActivity() {
                     author_couplet_count.text = author.coupletCount.toString()
                     author_biography.text = author.biography
 
-                    //GlideApp.with(this).load(viewModel.getImageRef(author.thumbnailUrl!!)).into(author_thumb)
+                    GlideApp.with(this).load(viewModel.getImageRef(author.thumbnailUrl!!)).into(author_thumb)
                 }
     }
 

@@ -6,9 +6,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ballboycorp.battle.GlideApp
 import com.ballboycorp.battle.R
+import com.ballboycorp.battle.author.AuthorActivity
 import com.ballboycorp.battle.author.model.Author
+import com.ballboycorp.battle.battle.BattleActivity
 import com.ballboycorp.battle.main.home.model.Battle
 import com.ballboycorp.battle.search.model.SearchType
+import com.ballboycorp.battle.user.UserActivity
 import com.ballboycorp.battle.user.model.User
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.item_search_result.view.*
@@ -44,10 +47,7 @@ class SearchResultAdapter(private val searchType: SearchType): RecyclerView.Adap
         }
     }
 
-    fun submitList(items: List<Any>, empty: View){
-        if (items.isEmpty()){
-            empty.visibility = View.VISIBLE
-        }
+    fun submitList(items: List<Any>){
         this.items = items
         notifyDataSetChanged()
     }
@@ -72,6 +72,10 @@ class SearchResultAdapter(private val searchType: SearchType): RecyclerView.Adap
             battle.thumbnailUrl?.let {
                 GlideApp.with(view).load(firebaseStorage.getReference(it)).into(view.image)
             }
+
+            view.setOnClickListener {
+                BattleActivity.newIntent(view.context, battle.id!!)
+            }
         }
     }
 
@@ -82,6 +86,10 @@ class SearchResultAdapter(private val searchType: SearchType): RecyclerView.Adap
             user.thumbnailUrl?.let {
                 GlideApp.with(view).load(firebaseStorage.getReference(it)).into(view.image)
             }
+
+            view.setOnClickListener {
+                UserActivity.newIntent(view.context, user.id!!)
+            }
         }
     }
 
@@ -91,6 +99,10 @@ class SearchResultAdapter(private val searchType: SearchType): RecyclerView.Adap
             view.search_sub_title.text = String.format(view.context.getString(R.string.couplet_count_format), author.coupletCount)
             author.thumbnailUrl?.let {
                 GlideApp.with(view).load(firebaseStorage.getReference(it)).into(view.image)
+            }
+
+            view.setOnClickListener {
+                AuthorActivity.newIntent(view.context, author.id!!)
             }
         }
     }

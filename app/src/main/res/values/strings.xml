@@ -95,5 +95,8 @@
     <string name="action_edit">Ивазкуни</string>
     <string name="button_cancel">Cancel</string>
     <string name="action_cancel">Cancel</string>
+    <string name="search_section_battle">Байтбарак</string>
+    <string name="search_section_users">Шахсон</string>
+    <string name="search_section_authors">Шоирон</string>
 
 </resources>

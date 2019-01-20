@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/container"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/colorWhite"
+                android:layout_marginTop="5dp"
+                android:padding="15dp">
+                <TextView
+                    android:text="@string/search_section_battle"
+                    android:id="@+id/battles_tv"
+                    android:drawableRight="@drawable/ic_chevron_right_black_24dp"
+                    style="@style/HomeSection"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/battle_rv">
+                </androidx.recyclerview.widget.RecyclerView>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/colorWhite"
+                android:layout_marginTop="5dp"
+                android:padding="15dp">
+                <TextView
+                    android:text="@string/search_section_users"
+                    android:id="@+id/users_tv"
+                    android:drawableRight="@drawable/ic_chevron_right_black_24dp"
+                    style="@style/HomeSection"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/users_rv">
+                </androidx.recyclerview.widget.RecyclerView>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/colorWhite"
+                android:layout_marginTop="5dp"
+                android:padding="15dp">
+                <TextView
+                    android:text="@string/search_section_authors"
+                    android:id="@+id/authors_tv"
+                    style="@style/HomeSection"
+                    android:drawableRight="@drawable/ic_chevron_right_black_24dp"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/authors_rv">
+                </androidx.recyclerview.widget.RecyclerView>
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+    <include
+        android:id="@+id/empty_all"
+        layout="@layout/empty_list"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</RelativeLayout>

@@ -4,9 +4,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.ballboycorp.battle.GlideApp
 import com.ballboycorp.battle.R
 import com.ballboycorp.battle.author.AuthorActivity
 import com.ballboycorp.battle.author.model.Author
+import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.item_author.view.*
 
 /**
@@ -16,6 +18,7 @@ import kotlinx.android.synthetic.main.item_author.view.*
 class HomeAuthorsAdapter : RecyclerView.Adapter<HomeAuthorsAdapter.HomeAuthorsViewHolder>() {
 
     private var authors: List<Author> = ArrayList()
+    private val firebaseStorage = FirebaseStorage.getInstance()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeAuthorsViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_author, parent, false)
@@ -44,6 +47,7 @@ class HomeAuthorsAdapter : RecyclerView.Adapter<HomeAuthorsAdapter.HomeAuthorsVi
             view.setOnClickListener {
                 AuthorActivity.newIntent(view.context, author.id!!)
             }
+            GlideApp.with(view).load(firebaseStorage.getReference(author.thumbnailUrl!!)).into(view.author_thumb)
         }
     }
 }
