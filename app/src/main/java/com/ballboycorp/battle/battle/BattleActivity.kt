@@ -16,6 +16,7 @@ import com.ballboycorp.battle.common.preference.AppPreference
 import com.ballboycorp.battle.battle.invite.InviteActivity
 import com.ballboycorp.battle.battle.newcouplet.NewCoupletActivity
 import com.ballboycorp.battle.battle.utils.FriendUtil
+import com.ballboycorp.battle.friendlist.FriendListActivity
 import com.ballboycorp.battle.main.home.model.Battle
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_battle.*
@@ -86,6 +87,10 @@ class BattleActivity : BaseActivity() {
             mBattle = it
             battle_name.text = it.name
             battle_count.text = String.format(getString(R.string.battle_couplet_count_format), it.coupletCount)
+
+            container.setOnClickListener {
+                InviteActivity.newIntent(this, mBattle)
+            }
         })
 
         viewModel.friends.observe(this, Observer {
@@ -93,6 +98,11 @@ class BattleActivity : BaseActivity() {
             friends_in_tv.setCompoundDrawables(null, null, null, null)
 
             FriendUtil.updateFriendThumb(it, battle_header)
+
+            container.setOnClickListener { view ->
+                val friendIds = it.map { it.id!! }
+                FriendListActivity.newIntent(this, appPreff.getUserId(), friendIds.toTypedArray())
+            }
         })
 
 
