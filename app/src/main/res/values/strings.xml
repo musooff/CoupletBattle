@@ -98,5 +98,12 @@
     <string name="search_section_battle">Байтбарак</string>
     <string name="search_section_users">Шахсон</string>
     <string name="search_section_authors">Шоирон</string>
+    <string name="edit_cover">Ивази сурати ковер</string>
+    <string name="section_posts">Байтхои Охирин</string>
+    <string name="section_about">Маълумоти шахси</string>
+    <string name="about_name">Ному насаб</string>
+    <string name="about_email">Email</string>
+    <string name="about_phone">Телефон</string>
+    <string name="does_not_exists">Нест</string>
 
 </resources>

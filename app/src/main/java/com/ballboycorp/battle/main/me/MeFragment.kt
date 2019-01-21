@@ -1,8 +1,8 @@
 package com.ballboycorp.battle.main.me
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
+import android.widget.ImageView
 import androidx.lifecycle.ViewModelProviders
 import com.ballboycorp.battle.GlideApp
 import com.ballboycorp.battle.R
@@ -11,9 +11,7 @@ import com.ballboycorp.battle.common.preference.AppPreference
 import com.ballboycorp.battle.friendlist.FriendListActivity
 import com.ballboycorp.battle.splash.SplashActivity
 import com.ballboycorp.battle.user.model.User
-import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.fragment_me.view.*
 
 /**
@@ -62,6 +60,10 @@ class MeFragment : BaseFragment() {
 
                     GlideApp.with(view.context).load(viewModel.getImageUrl(user.thumbnailUrl!!)).into(view.user_thumb)
                     GlideApp.with(view.context).load(viewModel.getImageUrl(user.coverUrl!!)).into(view.user_cover)
+
+                    view.about_name.text = user.name
+                    view.about_email.text = user.email ?: getString(R.string.does_not_exists)
+                    view.about_phone.text = user.phoneNumber ?: getString(R.string.does_not_exists)
                 }
 
 
@@ -75,12 +77,13 @@ class MeFragment : BaseFragment() {
         view.user_friend_count_container.setOnClickListener {
             FriendListActivity.newIntent(view.context, userId, mUser.friendList.toTypedArray())
         }
-    }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        menu.clear()
-        inflater.inflate(R.menu.me, menu)
-        super.onCreateOptionsMenu(menu, inflater)
-    }
+        view.edit_cover.setOnClickListener {
 
+        }
+
+        view.edit_thumb.setOnClickListener {
+
+        }
+    }
 }

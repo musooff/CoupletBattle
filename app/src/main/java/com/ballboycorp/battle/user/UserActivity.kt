@@ -3,6 +3,7 @@ package com.ballboycorp.battle.user
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.lifecycle.ViewModelProviders
 import com.ballboycorp.battle.GlideApp
 import com.ballboycorp.battle.R
@@ -79,15 +80,20 @@ class UserActivity : BaseActivity() {
     }
 
     private fun setActionButtonType(user: User) {
+        if (appPreff.getUserId() == userId){
+            return
+        }
         actionButtonType = when {
-            appPreff.getUserId() == userId -> ActionButtonType.EDIT
             user.friendList.contains(appPreff.getUserId()) -> ActionButtonType.MESSAGE
             user.friendsPendingFrom.contains(appPreff.getUserId()) -> ActionButtonType.FRIEND_REQUEST_PENDING
             user.friendsPendingTo.contains(appPreff.getUserId()) -> ActionButtonType.FRIEND_REQUEST_SENT
             else -> ActionButtonType.ADD_FRIEND
         }
 
+        action_button.visibility = View.VISIBLE
+
         action_button.text = getString(actionButtonType.text)
+
 
         action_button.setOnClickListener {
             when (actionButtonType){
