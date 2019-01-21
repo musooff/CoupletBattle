@@ -1,6 +1,11 @@
 package com.ballboycorp.battle.user
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.ballboycorp.battle.battle.model.Couplet
+import com.ballboycorp.battle.common.utils.add
+import com.ballboycorp.battle.common.utils.addAll
+import com.ballboycorp.battle.main.home.model.Battle
 import com.ballboycorp.battle.main.notification.model.Notification
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.DocumentReference
@@ -21,6 +26,8 @@ class UserViewModel : ViewModel() {
     }
 
     private val repository = UserRepository()
+
+    val userPosts: MutableLiveData<List<Couplet>> = MutableLiveData()
 
     fun getUser(userId: String): DocumentReference {
         return repository.getUser(userId)
@@ -76,6 +83,21 @@ class UserViewModel : ViewModel() {
                     val friendCount = it.getLong(FRIEND_COUNT)
                     repository.getUser(userId)
                             .update(FRIEND_COUNT, friendCount!! + 1)
+                }
+    }
+
+    fun getUserPosts(userId: String){
+        repository.getBattles()
+                .get()
+                .addOnSuccessListener {
+                    val battles = it.documents
+                    battles.forEach {
+                        repository.getCouplets(it.id, userId)
+                                .get()
+                                .addOnSuccessListener {
+                                    userPosts.addAll(Couplet.toCoupletList(it.documents))
+                                }
+                    }
                 }
     }
 

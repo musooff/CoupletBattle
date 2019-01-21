@@ -105,5 +105,6 @@
     <string name="about_email">Email</string>
     <string name="about_phone">Телефон</string>
     <string name="does_not_exists">Нест</string>
+    <string name="empty_battles">Байт вучуд надорад. Аввалин бошед ва байти худро гузоред.</string>
 
 </resources>

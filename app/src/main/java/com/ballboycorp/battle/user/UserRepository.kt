@@ -11,7 +11,10 @@ class UserRepository {
 
     companion object {
         private const val USERS_REF = "users"
+        private const val BATTLES_REF = "battles"
+        private const val COUPLETS_REF = "couplets"
         private const val NOTIFICATIONS_REF = "notifications"
+        private const val CREATOR_FIELD = "creatorId"
     }
 
     private val firebaseDatabase = FirebaseFirestore.getInstance()
@@ -22,5 +25,9 @@ class UserRepository {
     fun getImageRef(imageUrl: String) = firebaseStorage.getReference(imageUrl)
 
     fun getNotificationRef(userId: String) = firebaseDatabase.collection(USERS_REF).document(userId).collection(NOTIFICATIONS_REF)
+
+    fun getBattles() = firebaseDatabase.collection(BATTLES_REF)
+
+    fun getCouplets(battleId: String, creatorId: String) = getBattles().document(battleId).collection(COUPLETS_REF).whereEqualTo(CREATOR_FIELD, creatorId)
 
 }

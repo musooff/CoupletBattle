@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.RadioButton
 import androidx.lifecycle.ViewModelProviders
 import com.ballboycorp.battle.R
+import com.ballboycorp.battle.battle.BattleActivity
 import com.ballboycorp.battle.common.base.BaseActivity
 import com.ballboycorp.battle.common.preference.AppPreference
 import com.ballboycorp.battle.battle.newcouplet.NewCoupletActivity
@@ -68,14 +69,14 @@ class NewBattleActivity : BaseActivity() {
 
 
             val notification = Notification()
-            notification.fromUser = appPreff.getUserFullname()
+            notification.fromUser = appPreff.getUserName()
             notification.fromUserId = appPreff.getUserId()
             notification.notificationThumbUrl = appPreff.getUserThumbnail()
             notification.type = NotificationType.BATTLE_JOINED.value
 
             viewModel.saveCouplet(battle, notification)
                     .addOnSuccessListener {
-                        NewCoupletActivity.newIntent(this, it.id, 0, null, true)
+                        BattleActivity.newIntent(this, it.id)
                         this.finish()
                     }
         }

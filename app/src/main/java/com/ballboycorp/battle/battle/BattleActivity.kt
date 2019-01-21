@@ -21,6 +21,7 @@ import com.ballboycorp.battle.main.home.model.Battle
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_battle.*
 import kotlinx.android.synthetic.main.battle_header.*
+import kotlinx.android.synthetic.main.empty_list.*
 
 /**
  * Created by musooff on 12/01/2019.
@@ -49,7 +50,7 @@ class BattleActivity : BaseActivity() {
     private lateinit var mBattle: Battle
     private var coupletsCount: Int = 0
     private lateinit var lastPostedUserId: String
-    private lateinit var startingLetter: String
+    private var startingLetter: String? = null
     private lateinit var appPreff: AppPreference
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -76,10 +77,17 @@ class BattleActivity : BaseActivity() {
 
         viewModel.couplets.observe(this, Observer {
             coupletsCount = it.size
-            lastPostedUserId = it[coupletsCount - 1].creatorId!!
-            startingLetter = it[coupletsCount - 1].endingLetter!!
-            adapter.submitList(it)
-            battle_rv.smoothScrollToPosition(adapter.itemCount - 1)
+            if (coupletsCount == 0) {
+                empty_list.visibility = View.VISIBLE
+                empty_text.text = getString(R.string.empty_battles)
+            }
+            else {
+                empty_list.visibility = View.GONE
+                lastPostedUserId = it[coupletsCount - 1].creatorId!!
+                startingLetter = it[coupletsCount - 1].endingLetter!!
+                adapter.submitList(it)
+                battle_rv.smoothScrollToPosition(adapter.itemCount - 1)
+            }
 
         })
 
@@ -112,7 +120,7 @@ class BattleActivity : BaseActivity() {
     }
 
     fun newCouplet(view: View){
-        if (lastPostedUserId == appPreff.getUserId()){
+        if (::lastPostedUserId.isInitialized && lastPostedUserId == appPreff.getUserId()){
             Snackbar.make(view, getString(R.string.not_your_turn), Snackbar.LENGTH_LONG)
                     .setAction(getString(R.string.action_invite)) {
                         InviteActivity.newIntent(this, mBattle)
@@ -120,7 +128,7 @@ class BattleActivity : BaseActivity() {
                     .show()
         }
         else {
-            NewCoupletActivity.newIntent(this, battleId, coupletsCount, startingLetter, false)
+            NewCoupletActivity.newIntent(this, mBattle, startingLetter, false)
         }
     }
 

@@ -42,9 +42,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tyrian Lannester"
                 android:textStyle="bold"
-                android:id="@+id/couplet_creator_fullname"
+                android:id="@+id/couplet_creator_name"
                 android:textColor="@color/colorBlack"
                 android:layout_toRightOf="@id/couplet_thumb_cv"
                 android:layout_toEndOf="@id/couplet_thumb_cv"
@@ -72,7 +71,6 @@
         android:layout_height="wrap_content"
         android:textAlignment="viewEnd"
         android:layout_marginTop="5dp"
-        android:text="Рудаки"
         android:gravity="end"
         android:textSize="16sp"
         android:id="@+id/couplet_author"/>

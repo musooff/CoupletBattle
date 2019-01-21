@@ -49,7 +49,7 @@ class BattleAdapter : RecyclerView.Adapter<BattleAdapter.BattleViewModel>(){
             StringUtils.stylizeText(couplet.line1, view.couplet_line_1 as LinearLayout)
             StringUtils.stylizeText(couplet.line2, view.couplet_line_2 as LinearLayout)
             view.couplet_author.text = couplet.author
-            view.couplet_creator_fullname.text = couplet.creatorFullname
+            view.couplet_creator_name.text = couplet.creatorName
 
             GlideApp.with(view.context).load(firebaseStorage.getReference(couplet.creatorThumbnailUrl!!)).into(view.couplet_creator_thumb)
 

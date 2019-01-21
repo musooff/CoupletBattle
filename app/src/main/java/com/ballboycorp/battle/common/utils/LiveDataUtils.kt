@@ -15,3 +15,13 @@ fun <T> MutableLiveData<List<T>>.add(item: T) {
     updatedItems.add(item)
     this.value = updatedItems
 }
+
+fun <T> MutableLiveData<List<T>>.addAll(items: List<T>) {
+    if (this.value == null){
+        this.value = items
+        return
+    }
+    val updatedItems = this.value as ArrayList
+    updatedItems.addAll(items)
+    this.value = updatedItems
+}

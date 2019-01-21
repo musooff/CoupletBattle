@@ -12,10 +12,12 @@ import kotlin.collections.ArrayList
 class Couplet() {
 
     var id: String? = null
+    var battleId: String? = null
+    var battleName: String? = null
     var line1: String? = null
     var line2: String? = null
     var creatorId: String? = null
-    var creatorFullname: String? = null
+    var creatorName: String? = null
     var creatorThumbnailUrl: String? = null
     @ServerTimestamp
     var createdTime: Date? = null

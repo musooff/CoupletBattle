@@ -16,7 +16,6 @@ import com.ballboycorp.battle.main.home.model.Battle
 import com.ballboycorp.battle.main.home.newbattle.choosefriends.ChooseFriendsAdapter
 import com.ballboycorp.battle.main.notification.model.Notification
 import com.ballboycorp.battle.main.notification.model.NotificationType
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_invite_friends.*
 import kotlinx.android.synthetic.main.empty_list.*
 
@@ -77,7 +76,7 @@ class InviteActivity  : BaseActivity(){
         button_invite_friends.setOnClickListener {
 
             val notification = Notification()
-            notification.fromUser = appPreff.getUserFullname()
+            notification.fromUser = appPreff.getUserName()
             notification.fromUserId = appPreff.getUserId()
             notification.notificationThumbUrl = appPreff.getUserThumbnail()
             notification.type = NotificationType.BATTLE_INVITATION.value

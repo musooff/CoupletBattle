@@ -12,6 +12,7 @@ import com.ballboycorp.battle.common.preference.AppPreference
 import com.ballboycorp.battle.battle.BattleActivity
 import com.ballboycorp.battle.battle.model.Couplet
 import com.ballboycorp.battle.common.utils.CoupletUtils
+import com.ballboycorp.battle.main.home.model.Battle
 import kotlinx.android.synthetic.main.activity_new_couplet.*
 import java.util.*
 import com.google.android.material.snackbar.Snackbar
@@ -26,18 +27,16 @@ class NewCoupletActivity : BaseActivity() {
 
     companion object {
 
-        private const val COUPLETS_COUNT = "coupletsCount"
-        private const val BATTLE_ID = "battleId"
+        private const val BATTLE = "battle"
         private const val STARTING_LETTER = "startingLetter"
         private const val SHOULD_OPEN_BATTLE = "shouldOpenBattle"
 
 
         private const val PEN_NAME = "penName"
 
-        fun newIntent(context: Context, battleId: String, coupletsCount: Int, startingLetter: String?, shouldOpenBattle: Boolean) {
+        fun newIntent(context: Context, battle: Battle, startingLetter: String?, shouldOpenBattle: Boolean) {
             val intent = Intent(context, NewCoupletActivity::class.java)
-            intent.putExtra(COUPLETS_COUNT, coupletsCount)
-            intent.putExtra(BATTLE_ID, battleId)
+            intent.putExtra(BATTLE, battle)
             intent.putExtra(STARTING_LETTER, startingLetter)
             intent.putExtra(SHOULD_OPEN_BATTLE, shouldOpenBattle)
             context.startActivity(intent)
@@ -50,9 +49,9 @@ class NewCoupletActivity : BaseActivity() {
                 .get(NewCoupletViewModel::class.java)
     }
 
-    private var coupletsCount: Int = 0
+    private var coupletsCount: Long = 0
     private var shouldOpenBattle: Boolean = false
-    private lateinit var battleId: String
+    private lateinit var battle: Battle
     private var startingLetter: String? = null
 
     private var authorIds = ArrayList<String>()
@@ -70,8 +69,8 @@ class NewCoupletActivity : BaseActivity() {
 
         appPreff = AppPreference.getInstance(this)
 
-        coupletsCount = intent.extras!!.getInt(COUPLETS_COUNT)
-        battleId = intent.extras!!.getString(BATTLE_ID)!!
+        battle = intent.extras!!.getSerializable(BATTLE) as Battle
+        coupletsCount = battle.coupletCount
         startingLetter = intent.extras!!.getString(STARTING_LETTER)
         shouldOpenBattle = intent.extras!!.getBoolean(SHOULD_OPEN_BATTLE)
 
@@ -92,7 +91,9 @@ class NewCoupletActivity : BaseActivity() {
 
 
         val couplet = Couplet()
-        couplet.id = "${battleId}_$coupletsCount"
+        couplet.id = "${battle.id}_$coupletsCount"
+        couplet.battleId = battle.id
+        couplet.battleName = battle.name
         couplet.line1 = line1
         couplet.line2 = line2
         val authorPenName = couplet_author.text.toString()
@@ -102,13 +103,13 @@ class NewCoupletActivity : BaseActivity() {
         couplet.endingLetter = CoupletUtils.getEndingLetter(line2)
         couplet.createdTime = Date()
         couplet.creatorId = appPreff.getUserId()
-        couplet.creatorFullname = appPreff.getUserFullname()
+        couplet.creatorName = appPreff.getUserName()
         couplet.creatorThumbnailUrl = appPreff.getUserThumbnail()
 
-        viewModel.saveCouplet(battleId, coupletsCount, couplet)
+        viewModel.saveCouplet(battle, couplet)
                 .addOnSuccessListener {
                     if (shouldOpenBattle){
-                        BattleActivity.newIntent(this, battleId)
+                        BattleActivity.newIntent(this, battle.id!!)
                     }
                     this.finish()
                 }

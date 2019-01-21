@@ -34,7 +34,7 @@ class AppPreference(context: Context) {
         return sharedPreferences.getString(USER_ID, null)!!
     }
 
-    fun getUserFullname(): String {
+    fun getUserName(): String {
         return sharedPreferences.getString(USER_NAME, null)!!
     }
 

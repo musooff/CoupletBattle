@@ -4,7 +4,10 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.ballboycorp.battle.GlideApp
 import com.ballboycorp.battle.R
 import com.ballboycorp.battle.common.base.BaseActivity
@@ -44,6 +47,8 @@ class UserActivity : BaseActivity() {
     private lateinit var appPreff: AppPreference
     private lateinit var actionButtonType: ActionButtonType
 
+    private lateinit var adapter: PostAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user)
@@ -77,6 +82,23 @@ class UserActivity : BaseActivity() {
             FriendListActivity.newIntent(this, userId, mUser.friendList.toTypedArray())
         }
 
+
+        val layoutManager = LinearLayoutManager(this)
+        posts_rv.layoutManager = layoutManager
+        adapter = PostAdapter()
+        posts_rv.adapter = adapter
+        val dividerItemDecoration = DividerItemDecoration(this, layoutManager.orientation)
+        dividerItemDecoration.setDrawable(resources.getDrawable(R.drawable.recycler_view_divider))
+        posts_rv.addItemDecoration(dividerItemDecoration)
+
+        viewModel.userPosts.observe(this, Observer {
+            adapter.submitList(it)
+        })
+
+
+        viewModel.getUserPosts(userId)
+
+
     }
 
     private fun setActionButtonType(user: User) {
@@ -99,7 +121,7 @@ class UserActivity : BaseActivity() {
             when (actionButtonType){
                 ActionButtonType.ADD_FRIEND -> {
                     val notification = Notification()
-                    notification.fromUser = appPreff.getUserFullname()
+                    notification.fromUser = appPreff.getUserName()
                     notification.fromUserId = appPreff.getUserId()
                     notification.notificationThumbUrl = appPreff.getUserThumbnail()
                     notification.type = NotificationType.FRIEND_REQUEST.value
@@ -111,7 +133,7 @@ class UserActivity : BaseActivity() {
                 }
                 ActionButtonType.FRIEND_REQUEST_PENDING -> {
                     val notification = Notification()
-                    notification.fromUser = appPreff.getUserFullname()
+                    notification.fromUser = appPreff.getUserName()
                     notification.fromUserId = appPreff.getUserId()
                     notification.notificationThumbUrl = appPreff.getUserThumbnail()
                     notification.type = NotificationType.FRIEND_ACCEPTED.value
