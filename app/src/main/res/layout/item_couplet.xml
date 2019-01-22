@@ -35,7 +35,7 @@
                             android:layout_height="match_parent"
                             android:id="@+id/couplet_creator_thumb"
                             android:scaleType="fitXY"
-                            android:src="@drawable/user_thumb_default"/>
+                            android:src="@drawable/default_thumbnail_too_small"/>
                     </androidx.cardview.widget.CardView>
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>

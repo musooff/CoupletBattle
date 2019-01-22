@@ -18,7 +18,7 @@ class HomeViewModel : ViewModel() {
         private const val WRITERS = "writers"
         private const val COUPLETS_REF = "couplets"
         private const val COUPLET_ID = "id"
-        private const val IS_FEATURED = "isFeatured"
+        private const val IS_FEATURED = "featured"
         private const val HAS_FEATURED_COUPLET = "hasFeaturedCouplet"
     }
 

@@ -27,8 +27,8 @@ class User() {
             user.email = firebaseUser.email
             user.name = firebaseUser.displayName
             user.phoneNumber = firebaseUser.phoneNumber
-            user.coverUrl = "user/covers/user_default_cover.jpg"
-            user.thumbnailUrl = "user/thumbnails/user_default_thumb.png"
+            user.coverUrl = "users/covers/user_default_cover.jpg"
+            user.thumbnailUrl = "users/thumbnails/user_default_thumb.png"
             return user
         }
 
