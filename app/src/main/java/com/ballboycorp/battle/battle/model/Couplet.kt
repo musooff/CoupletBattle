@@ -21,7 +21,7 @@ class Couplet() {
     var creatorThumbnailUrl: String? = null
     @ServerTimestamp
     var createdTime: Date? = null
-    var author: String? = null
+    var authorPenName: String? = null
     var authorId: String? = null
     var startingLetter: String? = null
     var endingLetter: String? = null

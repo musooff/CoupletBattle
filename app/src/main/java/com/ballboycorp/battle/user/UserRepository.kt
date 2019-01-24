@@ -15,12 +15,16 @@ class UserRepository {
         private const val COUPLETS_REF = "couplets"
         private const val NOTIFICATIONS_REF = "notifications"
         private const val CREATOR_FIELD = "creatorId"
+        private const val POSTS_REF = "posts"
     }
 
     private val firebaseDatabase = FirebaseFirestore.getInstance()
     private val firebaseStorage = FirebaseStorage.getInstance()
 
     fun getUser(userId: String) = firebaseDatabase.collection(USERS_REF).document(userId)
+
+    fun getPosts(userId: String) = getUser(userId).collection(POSTS_REF)
+
 
     fun getImageRef(imageUrl: String) = firebaseStorage.getReference(imageUrl)
 

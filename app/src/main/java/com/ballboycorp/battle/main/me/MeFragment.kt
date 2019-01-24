@@ -20,6 +20,9 @@ import kotlinx.android.synthetic.main.fragment_me.view.*
 import android.graphics.BitmapFactory
 import android.graphics.Bitmap
 import android.R.attr.data
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.google.firebase.database.ServerValue
+import com.google.firebase.firestore.ServerTimestamp
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageMetadata
 import com.google.firebase.storage.StorageReference
@@ -110,8 +113,12 @@ class MeFragment : BaseFragment() {
                         it.user_friend_count.text = "${user.friendCount}"
 
 
-                        GlideApp.with(it.context).load(viewModel.getImageUrl(user.thumbnailUrl!!)).into(it.user_thumb)
-                        GlideApp.with(it.context).load(viewModel.getImageUrl(user.coverUrl!!)).into(it.user_cover)
+                        GlideApp.with(it.context)
+                                .load(viewModel.getImageUrl(user.thumbnailUrl!!))
+                                .into(it.user_thumb)
+                        GlideApp.with(it.context)
+                                .load(viewModel.getImageUrl(user.coverUrl!!))
+                                .into(it.user_cover)
 
                         it.about_name.text = user.name
                         it.about_email.text = user.email ?: getString(R.string.does_not_exists)
@@ -131,7 +138,7 @@ class MeFragment : BaseFragment() {
                             .setContentType("image/jpeg")
                             .build()
                     val storageReference = FirebaseStorage.getInstance().reference
-                    val uploadTask = storageReference.child("users/covers/$userId.jpg").putFile(it, metadata)
+                    val uploadTask = storageReference.child("users/covers/${userId}_${System.currentTimeMillis()}.jpg").putFile(it, metadata)
                     uploadTask
                             .addOnProgressListener {taskSnapshot ->
                                 val progress = (100.0 * taskSnapshot.bytesTransferred) / taskSnapshot.totalByteCount
@@ -154,15 +161,17 @@ class MeFragment : BaseFragment() {
                             .setContentType("image/jpeg")
                             .build()
                     val storageReference = FirebaseStorage.getInstance().reference
-                    val uploadTask = storageReference.child("users/thumbnails/$userId.jpg").putFile(it, metadata)
+                    val uploadTask = storageReference.child("users/thumbnails/${userId}_${System.currentTimeMillis()}.jpg").putFile(it, metadata)
                     uploadTask
                             .addOnProgressListener {taskSnapshot ->
                                 val progress = (100.0 * taskSnapshot.bytesTransferred) / taskSnapshot.totalByteCount
-                                System.out.println("Upload is $progress% done")
+                                view!!.progress_circular.setProgressWithAnimation(progress.toFloat(), 2500)
                             }
-                            .addOnSuccessListener {
-                                viewModel.updateThumbnailUrl(userId, it.metadata?.path)
+                            .addOnSuccessListener { storage ->
+                                viewModel.updateThumbnailUrl(userId, storage.metadata?.path)
                                         .addOnSuccessListener {
+                                            view!!.progress_circular.progress = 0f
+                                            appPreff.setUserThumbnail(storage.metadata?.path!!)
                                             loadUserData()
                                         }
                             }

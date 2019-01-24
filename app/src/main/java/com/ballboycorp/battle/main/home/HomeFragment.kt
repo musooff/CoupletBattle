@@ -67,7 +67,7 @@ class HomeFragment : BaseFragment() {
         viewModel.featuredCouplet.observe(this, Observer {
             StringUtils.stylizeText(it.line1, view.couplet_line_1 as LinearLayout)
             StringUtils.stylizeText(it.line2, view.couplet_line_2 as LinearLayout)
-            couplet_author.text = it.author
+            couplet_author.text = it.authorPenName
         })
 
         viewModel.topUsers.observe(this, Observer {

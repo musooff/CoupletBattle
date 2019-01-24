@@ -62,13 +62,13 @@ class EditCoupletActivity : BaseActivity() {
                     mCouplet = couplet!!
                     couplet_line_1.setText(couplet.line1)
                     couplet_line_2.setText(couplet.line2)
-                    couplet_author.setText(couplet.author)
+                    couplet_author.setText(couplet.authorPenName)
                 }
 
         couplet_submit.setOnClickListener {
             mCouplet.line1 = couplet_line_1.text.toString()
             mCouplet.line2 = couplet_line_2.text.toString()
-            mCouplet.author = couplet_author.text.toString()
+            mCouplet.authorPenName = couplet_author.text.toString()
 
             viewModel.saveCouplet(getBattleId(coupletId!!),coupletId!!, mCouplet)
                     .addOnSuccessListener {
@@ -80,9 +80,5 @@ class EditCoupletActivity : BaseActivity() {
 
     private fun getBattleId(coupletId: String) : String{
         return coupletId.substring(0, coupletId.indexOf("_"))
-    }
-
-    private fun getCoupletNumber(coupletId: String) : String{
-        return coupletId.substring(coupletId.indexOf("_")+1)
     }
 }

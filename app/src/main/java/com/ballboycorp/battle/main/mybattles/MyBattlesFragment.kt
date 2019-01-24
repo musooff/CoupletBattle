@@ -60,11 +60,9 @@ class MyBattlesFragment : BaseFragment() {
             NewBattleActivity.newIntent(activity!!)
         }
 
-    }
-
-    override fun onResume() {
-        super.onResume()
         viewModel.getBattlesRef(true, appPreff.getUserId())
+
+
     }
 
     private fun invalidateEmptyList(isEmpty: Boolean){

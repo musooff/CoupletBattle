@@ -125,7 +125,6 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:textSize="20sp"
-                        android:textStyle="bold"
                         android:textColor="@color/colorBlackLight"
                         android:text="Байт"/>
                 </LinearLayout>
@@ -150,7 +149,6 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:textSize="20sp"
-                        android:textStyle="bold"
                         android:textColor="@color/colorBlackLight"
                         android:text="Дуст"/>
                 </LinearLayout>

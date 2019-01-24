@@ -67,6 +67,8 @@ class UserActivity : BaseActivity() {
                         val user = it.toObject(User::class.java)
                         mUser = user!!
 
+                        setLastPosts(mUser)
+
                         setActionButtonType(user)
                         user_name.text = user.name
                         user_couplet_count.text = user.coupletCount.toString()
@@ -74,6 +76,8 @@ class UserActivity : BaseActivity() {
 
                         GlideApp.with(this).load(viewModel.getImageUrl(user.thumbnailUrl!!)).into(user_thumb)
                         GlideApp.with(this).load(viewModel.getImageUrl(user.coverUrl!!)).into(user_cover)
+
+                        viewModel.getUserPosts(userId)
 
                     }
                 }
@@ -83,22 +87,20 @@ class UserActivity : BaseActivity() {
         }
 
 
-        val layoutManager = LinearLayoutManager(this)
-        posts_rv.layoutManager = layoutManager
-        adapter = PostAdapter()
-        posts_rv.adapter = adapter
-        val dividerItemDecoration = DividerItemDecoration(this, layoutManager.orientation)
-        dividerItemDecoration.setDrawable(resources.getDrawable(R.drawable.recycler_view_divider))
-        posts_rv.addItemDecoration(dividerItemDecoration)
-
         viewModel.userPosts.observe(this, Observer {
             adapter.submitList(it)
         })
 
+    }
 
-        viewModel.getUserPosts(userId)
-
-
+    private fun setLastPosts(user: User){
+        val layoutManager = LinearLayoutManager(this)
+        posts_rv.layoutManager = layoutManager
+        adapter = PostAdapter(user)
+        posts_rv.adapter = adapter
+        val dividerItemDecoration = DividerItemDecoration(this, layoutManager.orientation)
+        dividerItemDecoration.setDrawable(resources.getDrawable(R.drawable.recycler_view_divider))
+        posts_rv.addItemDecoration(dividerItemDecoration)
     }
 
     private fun setActionButtonType(user: User) {

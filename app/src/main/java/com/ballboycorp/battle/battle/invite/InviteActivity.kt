@@ -67,7 +67,7 @@ class InviteActivity  : BaseActivity(){
         viewModel.friedList.observe(this, Observer {
             adapter.submitList(
                     it.filter {
-                        !mBattle.writers.contains(it.id)
+                        !mBattle.followers.contains(it.id)
                     }
             )
             invalidateEmptyList(adapter.isEmpty())

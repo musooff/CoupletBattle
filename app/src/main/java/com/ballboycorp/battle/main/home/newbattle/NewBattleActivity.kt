@@ -11,7 +11,6 @@ import com.ballboycorp.battle.R
 import com.ballboycorp.battle.battle.BattleActivity
 import com.ballboycorp.battle.common.base.BaseActivity
 import com.ballboycorp.battle.common.preference.AppPreference
-import com.ballboycorp.battle.battle.newcouplet.NewCoupletActivity
 import com.ballboycorp.battle.main.home.model.Battle
 import com.ballboycorp.battle.main.home.model.Privacy
 import com.ballboycorp.battle.main.home.newbattle.choosefriends.ChooseFriendsActivity
@@ -45,7 +44,7 @@ class NewBattleActivity : BaseActivity() {
     private var privacy = Privacy.PUBLIC
     private lateinit var currentPrivacy: RadioButton
 
-    private var writers: ArrayList<String> = ArrayList()
+    private var followers: ArrayList<String> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,8 +62,8 @@ class NewBattleActivity : BaseActivity() {
             val battle = Battle()
             battle.name = battle_name.text.toString()
             battle.creatorId = appPreff.getUserId()
-            writers.add(appPreff.getUserId())
-            battle.writers = writers
+            followers.add(appPreff.getUserId())
+            battle.followers = followers
             battle.privacy = getString(privacy.text)
 
 
@@ -112,8 +111,8 @@ class NewBattleActivity : BaseActivity() {
             if (resultCode == Activity.RESULT_OK){
                 data?.extras?.getStringArrayList(ChooseFriendsActivity.SELECTED_LIST)
                         ?.let {
-                            writers = it
-                            if (writers.isNotEmpty()){
+                            followers = it
+                            if (followers.isNotEmpty()){
                                 selected_friends.text = String.format(getString(R.string.number_of_friends_added), it.size)
                             }
                             else{
@@ -123,7 +122,7 @@ class NewBattleActivity : BaseActivity() {
 
             }
             else{
-                writers = ArrayList()
+                followers = ArrayList()
                 selected_friends.text = getString(R.string.choose_friends_desc)
             }
         }

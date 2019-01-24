@@ -19,6 +19,7 @@ class Battle() : Serializable{
     var coupletCount: Long = 0
     var thumbnailUrl: String? = null
     var writers: List<String> = arrayListOf()
+    var followers: List<String> = arrayListOf()
     var privacy: String? = null
     var featured: Boolean = false
     var hasFeaturedCouplet: Boolean = false

@@ -15,7 +15,7 @@ class FriendListViewModel : ViewModel() {
     companion object {
         private const val FRIEND_LIST_REF = "friendList"
         private const val NOTIFICATION_ID = "id"
-        private const val WRITERS = "writers"
+        private const val FOLLOWERS = "followers"
     }
 
     private val repository = FriendListRepository()
@@ -49,7 +49,7 @@ class FriendListViewModel : ViewModel() {
         friendIds.forEach {
             createNotification(it, notification)
             repository.getBattle(notification.battleId!!)
-                    .update(WRITERS, FieldValue.arrayUnion(it))
+                    .update(FOLLOWERS, FieldValue.arrayUnion(it))
         }
     }
 

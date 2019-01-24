@@ -42,10 +42,22 @@ class AppPreference(context: Context) {
         return sharedPreferences.getString(USER_THUMB, null)!!
     }
 
+    fun setUserThumbnail(thumbnailUrl: String) {
+        editor.putString(USER_THUMB, thumbnailUrl).apply()
+    }
+
     fun saveCredentials(user: User){
         editor.putString(USER_ID, user.id).apply()
         editor.putString(USER_NAME, user.name).apply()
         editor.putString(USER_THUMB, user.thumbnailUrl).apply()
+    }
+
+    fun getCredentials() : User{
+        val user = User()
+        user.id = sharedPreferences.getString(USER_ID, null)
+        user.thumbnailUrl = sharedPreferences.getString(USER_THUMB, null)
+        user.name = sharedPreferences.getString(USER_NAME, null)
+        return user
     }
 
     fun signOut(){

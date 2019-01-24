@@ -1,6 +1,7 @@
 package com.ballboycorp.battle.common.utils
 
 import androidx.lifecycle.MutableLiveData
+import com.ballboycorp.battle.user.model.User
 
 /**
  * Created by musooff on 17/01/2019.
@@ -12,6 +13,22 @@ fun <T> MutableLiveData<List<T>>.add(item: T) {
         return
     }
     val updatedItems = this.value as ArrayList
+    updatedItems.add(item)
+    this.value = updatedItems
+}
+
+fun MutableLiveData<List<User>>.addIfNotExists(item: User) {
+    if (this.value == null){
+        this.value = arrayListOf(item)
+        return
+    }
+    val updatedItems = this.value as ArrayList
+
+    updatedItems.forEach {
+        if (it.id == item.id){
+            return
+        }
+    }
     updatedItems.add(item)
     this.value = updatedItems
 }

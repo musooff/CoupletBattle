@@ -76,6 +76,26 @@ class NewCoupletActivity : BaseActivity() {
 
         couplet_line_1.hint = CoupletUtils.allowedLetters(startingLetter)
 
+        viewModel.getAuthors()
+                .addOnSuccessListener {
+                    it.documents.forEach {
+                        authorIds.add(it.id)
+                        authorPenNames.add(it.getString(PEN_NAME)!!)
+                    }
+
+                    authorArrayAdapter = ArrayAdapter(this, android.R.layout.select_dialog_item, authorPenNames)
+                    couplet_author.setAdapter(authorArrayAdapter)
+                    couplet_author.threshold = 1
+                    couplet_author.setOnFocusChangeListener { v, hasFocus ->
+                        if (!hasFocus) {
+                            if (!authorPenNames.contains(couplet_author.text.toString())){
+                                Snackbar.make(couplet_author, R.string.no_author, Snackbar.LENGTH_LONG)
+                                        .show()
+                            }
+                        }
+                    }
+                }
+
     }
 
 
@@ -97,7 +117,7 @@ class NewCoupletActivity : BaseActivity() {
         couplet.line1 = line1
         couplet.line2 = line2
         val authorPenName = couplet_author.text.toString()
-        couplet.author = authorPenName
+        couplet.authorPenName = authorPenName
         couplet.authorId = authorIds[authorPenNames.indexOf(authorPenName)]
         couplet.startingLetter = startingLetter
         couplet.endingLetter = CoupletUtils.getEndingLetter(line2)
@@ -112,29 +132,6 @@ class NewCoupletActivity : BaseActivity() {
                         BattleActivity.newIntent(this, battle.id!!)
                     }
                     this.finish()
-                }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        viewModel.getAuthors()
-                .addOnSuccessListener {
-                    it.documents.forEach {
-                        authorIds.add(it.id)
-                        authorPenNames.add(it.getString(PEN_NAME)!!)
-                    }
-
-                    authorArrayAdapter = ArrayAdapter(this, android.R.layout.select_dialog_item, authorPenNames)
-                    couplet_author.setAdapter(authorArrayAdapter)
-                    couplet_author.threshold = 1
-                    couplet_author.setOnFocusChangeListener { v, hasFocus ->
-                        if (!hasFocus) {
-                            if (!authorPenNames.contains(couplet_author.text.toString())){
-                                Snackbar.make(couplet_author, R.string.no_author, Snackbar.LENGTH_LONG)
-                                        .show()
-                            }
-                        }
-                    }
                 }
     }
 }

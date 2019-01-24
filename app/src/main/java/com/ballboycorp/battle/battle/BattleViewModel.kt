@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.ballboycorp.battle.battle.model.Couplet
 import com.ballboycorp.battle.common.utils.add
+import com.ballboycorp.battle.common.utils.addIfNotExists
 import com.ballboycorp.battle.main.home.model.Battle
 import com.ballboycorp.battle.user.model.User
 
@@ -49,7 +50,7 @@ class BattleViewModel : ViewModel() {
                                         .get()
                                         .addOnSuccessListener {
                                             val friendRemote = it.toObject(User::class.java)
-                                            friends.add(friendRemote!!)
+                                            friends.addIfNotExists(friendRemote!!)
                                         }
                             }
                 }
@@ -65,7 +66,7 @@ class BattleViewModel : ViewModel() {
                     if (snapshot != null){
                         val battleRemote = snapshot.toObject(Battle::class.java)
                         battle.postValue(battleRemote)
-                        getFriends(battleRemote!!.writers, userId)
+                        getFriends(battleRemote!!.followers, userId)
 
                     }
                 }

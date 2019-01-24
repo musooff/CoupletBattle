@@ -22,10 +22,10 @@ class NewBattleViewModel : ViewModel() {
         return repository.getBattlesRef()
                 .add(battle)
                 .addOnSuccessListener {
-                    it.update(mapOf(Pair(BATTLE_ID, it.id)))
+                    it.update(BATTLE_ID, it.id)
                 }
                 .addOnSuccessListener {
-                    battle.writers
+                    battle.followers
                             .filter { it != notification.fromUserId }
                             .forEach { userId ->
                                 notification.battleId = it.id

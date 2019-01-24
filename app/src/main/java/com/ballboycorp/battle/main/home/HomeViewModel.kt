@@ -15,7 +15,7 @@ import com.ballboycorp.battle.user.model.User
 class HomeViewModel : ViewModel() {
 
     companion object {
-        private const val WRITERS = "writers"
+        private const val FOLLOWERS = "followers"
         private const val COUPLETS_REF = "couplets"
         private const val COUPLET_ID = "id"
         private const val IS_FEATURED = "featured"
@@ -34,7 +34,7 @@ class HomeViewModel : ViewModel() {
     fun getBattlesRef(isMyBattles: Boolean = false, userId: String? = null){
         if (isMyBattles){
             repository.getBattlesRef()
-                    .whereArrayContains(WRITERS, userId!!)
+                    .whereArrayContains(FOLLOWERS, userId!!)
                     .addSnapshotListener { snapshot, exception ->
                         if (exception != null){
                             Log.e("ERROR", exception.message)

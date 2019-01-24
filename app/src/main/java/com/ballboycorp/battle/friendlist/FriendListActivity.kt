@@ -61,10 +61,6 @@ class FriendListActivity : BaseActivity() {
         adapter = FriendListAdapter()
         friendlist_rv.adapter = adapter
 
-        if (userId == appPreff.getUserId()){
-            friend_add.visibility = View.VISIBLE
-        }
-
 
         viewModel.friedList.observe(this, Observer {
             adapter.submitList(it)
