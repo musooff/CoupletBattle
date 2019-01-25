@@ -12,6 +12,7 @@ import com.ballboycorp.battle.GlideApp
 import com.ballboycorp.battle.R
 import com.ballboycorp.battle.common.base.BaseActivity
 import com.ballboycorp.battle.common.preference.AppPreference
+import com.ballboycorp.battle.common.utils.ButtonUtils
 import com.ballboycorp.battle.friendlist.FriendListActivity
 import com.ballboycorp.battle.main.notification.model.Notification
 import com.ballboycorp.battle.main.notification.model.NotificationType
@@ -114,12 +115,12 @@ class UserActivity : BaseActivity() {
             else -> ActionButtonType.ADD_FRIEND
         }
 
-        action_button.visibility = View.VISIBLE
+        button_action_button.visibility = View.VISIBLE
 
-        action_button.text = getString(actionButtonType.text)
+        ButtonUtils.invalidateButton(button_action_button, getString(actionButtonType.text), actionButtonType.drawableLeft, true)
 
 
-        action_button.setOnClickListener {
+        button_action_button.setOnClickListener {
             when (actionButtonType){
                 ActionButtonType.ADD_FRIEND -> {
                     val notification = Notification()
@@ -130,7 +131,7 @@ class UserActivity : BaseActivity() {
                     viewModel.sendFriendRequest(userId, notification)
                             .addOnSuccessListener {
                                 actionButtonType = ActionButtonType.FRIEND_REQUEST_SENT
-                                action_button.text = getString(actionButtonType.text)
+                                ButtonUtils.invalidateButton(button_action_button, getString(actionButtonType.text), actionButtonType.drawableLeft, true)
                             }
                 }
                 ActionButtonType.FRIEND_REQUEST_PENDING -> {
@@ -142,7 +143,7 @@ class UserActivity : BaseActivity() {
                     viewModel.acceptFriendRequest(userId, notification)
                             .addOnSuccessListener {
                                 actionButtonType = ActionButtonType.MESSAGE
-                                action_button.text = getString(actionButtonType.text)
+                                ButtonUtils.invalidateButton(button_action_button, getString(actionButtonType.text), actionButtonType.drawableLeft, true)
                             }
                 }
                 ActionButtonType.FRIEND_REQUEST_SENT -> {

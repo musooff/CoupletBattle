@@ -11,6 +11,7 @@ import com.ballboycorp.battle.R
 import com.ballboycorp.battle.battle.BattleActivity
 import com.ballboycorp.battle.common.base.BaseActivity
 import com.ballboycorp.battle.common.preference.AppPreference
+import com.ballboycorp.battle.common.utils.ButtonUtils
 import com.ballboycorp.battle.main.home.model.Battle
 import com.ballboycorp.battle.main.home.model.Privacy
 import com.ballboycorp.battle.main.home.newbattle.choosefriends.ChooseFriendsActivity
@@ -57,7 +58,8 @@ class NewBattleActivity : BaseActivity() {
 
         currentPrivacy = privacy_public_rb
 
-        continue_bt.setOnClickListener {
+        ButtonUtils.invalidateButton(button_continue, getString(R.string.button_continue), null, true)
+        button_continue.setOnClickListener {
 
             val battle = Battle()
             battle.name = battle_name.text.toString()

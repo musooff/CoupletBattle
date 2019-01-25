@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.ballboycorp.battle.R
 import com.ballboycorp.battle.common.base.BaseActivity
 import com.ballboycorp.battle.common.preference.AppPreference
+import com.ballboycorp.battle.common.utils.ButtonUtils
 import com.ballboycorp.battle.friendlist.FriendListViewModel
 import kotlinx.android.synthetic.main.activity_choose_friends.*
 import kotlinx.android.synthetic.main.empty_list.*
@@ -59,19 +60,21 @@ class ChooseFriendsActivity  : BaseActivity(){
         viewModel.friedList.observe(this, Observer {
             adapter.submitList(it)
             invalidateEmptyList(adapter.isEmpty())
+            ButtonUtils.setEnabled(button_add_friends, !adapter.isEmpty())
         })
+
+        ButtonUtils.invalidateButton(button_add_friends, getString(R.string.button_add_friends), R.drawable.ic_group_add_white_24dp)
+        button_add_friends.setOnClickListener {
+            intent.putStringArrayListExtra(SELECTED_LIST, adapter.chosenFriends)
+            setResult(Activity.RESULT_OK, intent)
+            finish()
+        }
 
     }
 
     override fun onResume() {
         super.onResume()
         viewModel.getFriendIds(appPreff.getUserId())
-    }
-
-    fun selectFriends(view: View){
-        intent.putStringArrayListExtra(SELECTED_LIST, adapter.chosenFriends)
-        setResult(Activity.RESULT_OK, intent)
-        finish()
     }
 
     private fun invalidateEmptyList(isEmpty: Boolean){

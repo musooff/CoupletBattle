@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.ballboycorp.battle.R
 import com.ballboycorp.battle.common.base.BaseActivity
 import com.ballboycorp.battle.common.preference.AppPreference
+import com.ballboycorp.battle.common.utils.ButtonUtils
 import com.ballboycorp.battle.friendlist.FriendListViewModel
 import com.ballboycorp.battle.main.home.model.Battle
 import com.ballboycorp.battle.main.home.newbattle.choosefriends.ChooseFriendsAdapter
@@ -71,8 +72,10 @@ class InviteActivity  : BaseActivity(){
                     }
             )
             invalidateEmptyList(adapter.isEmpty())
+            ButtonUtils.setEnabled(button_invite_friends, !adapter.isEmpty())
         })
 
+        ButtonUtils.invalidateButton(button_invite_friends, getString(R.string.button_invite_friends), R.drawable.ic_group_add_white_24dp)
         button_invite_friends.setOnClickListener {
 
             val notification = Notification()

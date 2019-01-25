@@ -20,12 +20,14 @@ import kotlinx.android.synthetic.main.fragment_me.view.*
 import android.graphics.BitmapFactory
 import android.graphics.Bitmap
 import android.R.attr.data
+import com.ballboycorp.battle.common.utils.ButtonUtils
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.google.firebase.database.ServerValue
 import com.google.firebase.firestore.ServerTimestamp
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageMetadata
 import com.google.firebase.storage.StorageReference
+import kotlinx.android.synthetic.main.fragment_me.*
 import java.io.FileNotFoundException
 
 
@@ -67,6 +69,7 @@ class MeFragment : BaseFragment() {
 
         loadUserData()
 
+        ButtonUtils.invalidateButton(button_logout, getString(R.string.button_logout), R.drawable.ic_exit_white_24dp, true)
         view.button_logout.setOnClickListener {
             FirebaseAuth.getInstance().signOut()
             appPreff.signOut()

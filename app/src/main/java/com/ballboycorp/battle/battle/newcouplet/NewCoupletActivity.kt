@@ -11,11 +11,13 @@ import com.ballboycorp.battle.common.base.BaseActivity
 import com.ballboycorp.battle.common.preference.AppPreference
 import com.ballboycorp.battle.battle.BattleActivity
 import com.ballboycorp.battle.battle.model.Couplet
+import com.ballboycorp.battle.common.utils.ButtonUtils
 import com.ballboycorp.battle.common.utils.CoupletUtils
 import com.ballboycorp.battle.main.home.model.Battle
 import kotlinx.android.synthetic.main.activity_new_couplet.*
 import java.util.*
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.custom_button.*
 import kotlin.collections.ArrayList
 
 
@@ -76,6 +78,8 @@ class NewCoupletActivity : BaseActivity() {
 
         couplet_line_1.hint = CoupletUtils.allowedLetters(startingLetter)
 
+        ButtonUtils.invalidateButton(button_submit, getString(R.string.button_submit), null, true)
+
         viewModel.getAuthors()
                 .addOnSuccessListener {
                     it.documents.forEach {
@@ -95,11 +99,14 @@ class NewCoupletActivity : BaseActivity() {
                         }
                     }
                 }
+        button_submit.setOnClickListener {
+            submitCouplet(it)
+        }
 
     }
 
 
-    fun submitCouplet(view: View){
+    private fun submitCouplet(view: View){
 
         val line1 = couplet_line_1.text.toString()
         val line2 = couplet_line_2.text.toString()

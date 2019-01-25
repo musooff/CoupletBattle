@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -16,6 +17,7 @@ import com.ballboycorp.battle.common.preference.AppPreference
 import com.ballboycorp.battle.battle.invite.InviteActivity
 import com.ballboycorp.battle.battle.newcouplet.NewCoupletActivity
 import com.ballboycorp.battle.battle.utils.FriendUtil
+import com.ballboycorp.battle.common.utils.ButtonUtils
 import com.ballboycorp.battle.friendlist.FriendListActivity
 import com.ballboycorp.battle.main.home.model.Battle
 import com.google.android.material.snackbar.Snackbar
@@ -47,7 +49,7 @@ class BattleActivity : BaseActivity() {
 
     private lateinit var adapter: BattleAdapter
     private lateinit var battleId: String
-    private lateinit var mBattle: Battle
+    private var mBattle: Battle? = null
     private var coupletsCount: Int = 0
     private lateinit var lastPostedUserId: String
     private var startingLetter: String? = null
@@ -93,11 +95,12 @@ class BattleActivity : BaseActivity() {
 
         viewModel.battle.observe(this, Observer {
             mBattle = it
+            invalidateOptionsMenu()
             battle_name.text = it.name
             battle_count.text = String.format(getString(R.string.battle_couplet_count_format), it.coupletCount)
 
             container.setOnClickListener {
-                InviteActivity.newIntent(this, mBattle)
+                InviteActivity.newIntent(this, mBattle!!)
             }
         })
 
@@ -117,18 +120,23 @@ class BattleActivity : BaseActivity() {
         viewModel.getBattle(battleId, appPreff.getUserId())
         viewModel.getCouplets(battleId)
 
+        ButtonUtils.invalidateButton(button_new_couplet, getString(R.string.new_couplet), R.drawable.ic_add_white_24dp, true)
+        button_new_couplet.setOnClickListener {
+            newCouplet(it)
+        }
+
     }
 
     fun newCouplet(view: View){
         if (::lastPostedUserId.isInitialized && lastPostedUserId == appPreff.getUserId()){
             Snackbar.make(view, getString(R.string.not_your_turn), Snackbar.LENGTH_LONG)
                     .setAction(getString(R.string.action_invite)) {
-                        InviteActivity.newIntent(this, mBattle)
+                        InviteActivity.newIntent(this, mBattle!!)
                     }
                     .show()
         }
         else {
-            NewCoupletActivity.newIntent(this, mBattle, startingLetter, false)
+            NewCoupletActivity.newIntent(this, mBattle!!, startingLetter, false)
         }
     }
 
@@ -137,9 +145,30 @@ class BattleActivity : BaseActivity() {
         return true
     }
 
+    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
+        if (mBattle?.followers?.contains(appPreff.getUserId()) == true) {
+            menu?.findItem(R.id.action_follow)?.icon = this.resources.getDrawable(R.drawable.ic_check_circle_white_24dp)
+        }
+        else {
+            menu?.findItem(R.id.action_follow)?.icon = this.resources.getDrawable(R.drawable.ic_add_circle_outline_white_24dp)
+        }
+        return super.onPrepareOptionsMenu(menu)
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId){
             R.id.action_info -> {
+                return true
+            }
+            R.id.action_follow -> {
+                if (mBattle?.followers?.contains(appPreff.getUserId()) == true) {
+                    viewModel.unFollowBattle(battleId, appPreff.getUserId())
+                    Toast.makeText(this, "Пайрави катъ карда шуд.", Toast.LENGTH_SHORT).show()
+                }
+                 else {
+                    viewModel.followBattle(battleId, appPreff.getUserId())
+                    Toast.makeText(this, "Шумо аканун ин Байтбаракро пайрави мекунед", Toast.LENGTH_SHORT).show()
+                }
                 return true
             }
         }

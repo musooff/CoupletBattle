@@ -153,13 +153,15 @@
                         android:text="Дуст"/>
                 </LinearLayout>
             </LinearLayout>
-
-            <Button
+            <include
+                layout="@layout/custom_button"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:id="@+id/button_action_button"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                style="@style/ButtonDefault"
+                android:layout_height="48dp"
                 android:visibility="gone"
-                android:id="@+id/action_button"/>
+                />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

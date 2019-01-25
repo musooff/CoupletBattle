@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp">
+    android:padding="15dp">
 
     <include
         android:id="@+id/empty"
@@ -16,12 +16,12 @@
         android:layout_above="@id/button_add_friends">
     </androidx.recyclerview.widget.RecyclerView>
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+    <include
+        layout="@layout/custom_button"
         android:id="@+id/button_invite_friends"
-        style="@style/ButtonDefault"
-        android:text="@string/button_invite_friends"/>
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true"
+        />
 
 </RelativeLayout>

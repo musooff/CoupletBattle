@@ -39,12 +39,11 @@
 
         </LinearLayout>
     </ScrollView>
-    <Button
+    <include
+        layout="@layout/custom_button"
+        android:id="@+id/button_submit"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_alignParentBottom="true"
-        android:id="@+id/couplet_submit"
-        android:onClick="submitCouplet"
-        style="@style/ButtonDefault"
-        android:text="@string/button_submit"/>
+        />
 </RelativeLayout>

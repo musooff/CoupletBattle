@@ -16,14 +16,12 @@
         android:id="@+id/friendlist_rv"
         android:layout_above="@id/button_add_friends">
     </androidx.recyclerview.widget.RecyclerView>
-
-    <Button
+    <include
+        layout="@layout/custom_button"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_alignParentBottom="true"
         android:id="@+id/button_add_friends"
-        android:onClick="selectFriends"
-        style="@style/ButtonDefault"
-        android:text="@string/button_add_friends"/>
+        />
 
 </RelativeLayout>

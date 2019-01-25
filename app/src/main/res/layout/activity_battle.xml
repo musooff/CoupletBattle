@@ -41,22 +41,23 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/battle_header"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/new_couplet" />
+        app:layout_constraintBottom_toTopOf="@id/button_new_couplet" />
     <include layout="@layout/empty_list"
         android:id="@+id/empty_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@id/new_couplet"
+        app:layout_constraintBottom_toTopOf="@id/button_new_couplet"
         app:layout_constraintTop_toBottomOf="@id/battle_header"/>
-    <Button
+    <include
+        layout="@layout/custom_button"
+        android:id="@+id/button_new_couplet"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        style="@style/ButtonDefault"
-        android:id="@+id/new_couplet"
-        android:text="@string/new_couplet"
-        android:onClick="newCouplet"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="15dp"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

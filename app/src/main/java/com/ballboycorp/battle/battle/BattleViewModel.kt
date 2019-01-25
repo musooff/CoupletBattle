@@ -8,12 +8,17 @@ import com.ballboycorp.battle.common.utils.add
 import com.ballboycorp.battle.common.utils.addIfNotExists
 import com.ballboycorp.battle.main.home.model.Battle
 import com.ballboycorp.battle.user.model.User
+import com.google.firebase.firestore.FieldValue
 
 /**
  * Created by musooff on 12/01/2019.
  */
 
 class BattleViewModel : ViewModel() {
+
+    companion object {
+        private const val FOLLOWERS_REF = "followers"
+    }
 
     private val repository = BattleRepository()
 
@@ -72,7 +77,14 @@ class BattleViewModel : ViewModel() {
                 }
     }
 
-    fun getImageUrl(imageUrl: String) = repository.getImageRef(imageUrl)
+    fun followBattle(battleId: String, userId: String){
+        repository.getBattle(battleId)
+                .update(FOLLOWERS_REF, FieldValue.arrayUnion(userId))
+    }
 
+    fun unFollowBattle(battleId: String, userId: String){
+        repository.getBattle(battleId)
+                .update(FOLLOWERS_REF, FieldValue.arrayRemove(userId))
+    }
 
 }

@@ -262,12 +262,11 @@
                 android:id="@+id/posts_rv">
             </androidx.recyclerview.widget.RecyclerView>
         </LinearLayout>
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        <include
+            layout="@layout/custom_button"
             android:id="@+id/button_logout"
-            style="@style/ButtonDefault"
-            android:text="@string/button_logout"/>
+            android:layout_height="48dp"
+            android:layout_width="match_parent"
+            android:layout_margin="15dp"/>
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

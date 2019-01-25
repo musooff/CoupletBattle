@@ -32,8 +32,8 @@
     <string name="button_edit">Ивазкунии маълумот</string>
     <string name="button_message">Паёмак</string>
     <string name="button_logout">Баромад</string>
-    <string name="button_friend_request_sent">Дусти дархост карда шуд</string>
-    <string name="button_friend_request_pending">Дархости дустиро кабул кунед</string>
+    <string name="button_friend_request_sent">Дархост шуд</string>
+    <string name="button_friend_request_pending">Кабули дусти</string>
     <string name="button_add_friends">Дохил кунед</string>
     <string name="button_invite_friends">Фарёд кунед</string>
 
@@ -106,5 +106,6 @@
     <string name="about_phone">Телефон</string>
     <string name="does_not_exists">Нест</string>
     <string name="empty_battles">Байт вучуд надорад. Аввалин бошед ва байти худро гузоред.</string>
+    <string name="action_follow">Пайрави</string>
 
 </resources>
