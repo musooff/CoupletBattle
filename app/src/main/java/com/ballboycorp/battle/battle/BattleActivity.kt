@@ -15,6 +15,7 @@ import com.ballboycorp.battle.R
 import com.ballboycorp.battle.common.base.BaseActivity
 import com.ballboycorp.battle.common.preference.AppPreference
 import com.ballboycorp.battle.battle.invite.InviteActivity
+import com.ballboycorp.battle.battle.more.BattleMoreActivity
 import com.ballboycorp.battle.battle.newcouplet.NewCoupletActivity
 import com.ballboycorp.battle.battle.utils.FriendUtil
 import com.ballboycorp.battle.common.utils.ButtonUtils
@@ -127,7 +128,7 @@ class BattleActivity : BaseActivity() {
 
     }
 
-    fun newCouplet(view: View){
+    private fun newCouplet(view: View){
         if (::lastPostedUserId.isInitialized && lastPostedUserId == appPreff.getUserId()){
             Snackbar.make(view, getString(R.string.not_your_turn), Snackbar.LENGTH_LONG)
                     .setAction(getString(R.string.action_invite)) {
@@ -158,6 +159,7 @@ class BattleActivity : BaseActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId){
             R.id.action_info -> {
+                BattleMoreActivity.newIntent(this, mBattle!!)
                 return true
             }
             R.id.action_follow -> {

@@ -45,7 +45,7 @@ class ChooseFriendsAdapter : RecyclerView.Adapter<ChooseFriendsAdapter.ChooseFri
 
     inner class ChooseFriendsViewHolder(val view: View): RecyclerView.ViewHolder(view){
         fun bind(user: User){
-            view.user_fullname.text = user.name
+            view.user_name.text = user.name
             GlideApp.with(view.context).load(firebaseStorage.getReference(user.thumbnailUrl!!)).into(view.user_thumb)
             view.user_checkbox.setOnClickListener {
                 if (chosenFriends.contains(user.id)){

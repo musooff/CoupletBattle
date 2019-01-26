@@ -11,6 +11,7 @@ import com.ballboycorp.battle.common.base.BaseActivity
 import com.ballboycorp.battle.common.preference.AppPreference
 import com.ballboycorp.battle.battle.BattleActivity
 import com.ballboycorp.battle.battle.model.Couplet
+import com.ballboycorp.battle.battle.newcouplet.model.Input
 import com.ballboycorp.battle.common.utils.ButtonUtils
 import com.ballboycorp.battle.common.utils.CoupletUtils
 import com.ballboycorp.battle.main.home.model.Battle
@@ -76,7 +77,7 @@ class NewCoupletActivity : BaseActivity() {
         startingLetter = intent.extras!!.getString(STARTING_LETTER)
         shouldOpenBattle = intent.extras!!.getBoolean(SHOULD_OPEN_BATTLE)
 
-        couplet_line_1.hint = CoupletUtils.allowedLetters(startingLetter)
+        couplet_line_1.hint = CoupletUtils.firstLineHint(startingLetter)
 
         ButtonUtils.invalidateButton(button_submit, getString(R.string.button_submit), null, true)
 
@@ -92,7 +93,7 @@ class NewCoupletActivity : BaseActivity() {
                     couplet_author.threshold = 1
                     couplet_author.setOnFocusChangeListener { v, hasFocus ->
                         if (!hasFocus) {
-                            if (!authorPenNames.contains(couplet_author.text.toString())){
+                            if (!authorPenNames.contains(couplet_author.text.toString())) {
                                 Snackbar.make(couplet_author, R.string.no_author, Snackbar.LENGTH_LONG)
                                         .show()
                             }
@@ -106,13 +107,20 @@ class NewCoupletActivity : BaseActivity() {
     }
 
 
-    private fun submitCouplet(view: View){
+    private fun submitCouplet(view: View) {
 
         val line1 = couplet_line_1.text.toString()
         val line2 = couplet_line_2.text.toString()
+        val authorPenName = couplet_author.text.toString()
 
-        if (!CoupletUtils.canSubmit(startingLetter, line1, line2)){
-            Snackbar.make(couplet_author, R.string.incorrect_lines, Snackbar.LENGTH_SHORT).show()
+        val input = CoupletUtils.canSubmit(startingLetter, line1, line2, authorPenName, authorPenNames)
+
+        if (!input.isCorrect) {
+            var solution = input.solution
+            if (input == Input.WRONG_STARTING){
+                solution = String.format(solution, CoupletUtils.allowedLetters(startingLetter))
+            }
+            Snackbar.make(couplet_author, solution, Snackbar.LENGTH_LONG).show()
             return
         }
 
@@ -123,7 +131,6 @@ class NewCoupletActivity : BaseActivity() {
         couplet.battleName = battle.name
         couplet.line1 = line1
         couplet.line2 = line2
-        val authorPenName = couplet_author.text.toString()
         couplet.authorPenName = authorPenName
         couplet.authorId = authorIds[authorPenNames.indexOf(authorPenName)]
         couplet.startingLetter = startingLetter
@@ -135,7 +142,7 @@ class NewCoupletActivity : BaseActivity() {
 
         viewModel.saveCouplet(battle, couplet)
                 .addOnSuccessListener {
-                    if (shouldOpenBattle){
+                    if (shouldOpenBattle) {
                         BattleActivity.newIntent(this, battle.id!!)
                     }
                     this.finish()

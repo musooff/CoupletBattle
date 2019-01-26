@@ -71,7 +71,7 @@ class HomeFragment : BaseFragment() {
         })
 
         viewModel.topUsers.observe(this, Observer {
-            topUsersAdapter.submitList(it)
+            topUsersAdapter.submitList(it.take(10))
         })
 
         viewModel.authors.observe(this, Observer {

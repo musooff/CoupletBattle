@@ -13,14 +13,14 @@
             android:id="@+id/couplet_line_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
+            android:singleLine="true"
             android:lines="1"
             android:hint="@string/hint_couplet_line_1"/>
         <EditText
             android:id="@+id/couplet_line_2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
+            android:singleLine="true"
             android:lines="1"
             android:hint="@string/hint_couplet_line_2"/>
 

@@ -63,6 +63,7 @@ class NewBattleActivity : BaseActivity() {
 
             val battle = Battle()
             battle.name = battle_name.text.toString()
+            battle.description = battle_description.text.toString()
             battle.creatorId = appPreff.getUserId()
             followers.add(appPreff.getUserId())
             battle.followers = followers

@@ -107,5 +107,6 @@
     <string name="does_not_exists">Нест</string>
     <string name="empty_battles">Байт вучуд надорад. Аввалин бошед ва байти худро гузоред.</string>
     <string name="action_follow">Пайрави</string>
+    <string name="section_battle_description">Маълумот ва коидахо</string>
 
 </resources>

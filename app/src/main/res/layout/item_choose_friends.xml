@@ -39,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:text="Tyrian Lannester"
                 android:textStyle="bold"
-                android:id="@+id/user_fullname"
+                android:id="@+id/user_name"
                 android:textColor="@color/colorBlack"
                 android:layout_toRightOf="@id/user_thumb_cv"
                 android:layout_toEndOf="@id/user_thumb_cv"

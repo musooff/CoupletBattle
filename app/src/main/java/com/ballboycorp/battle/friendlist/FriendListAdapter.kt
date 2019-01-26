@@ -44,7 +44,7 @@ class FriendListAdapter : RecyclerView.Adapter<FriendListAdapter.FriendListViewH
 
     inner class FriendListViewHolder(val view: View): RecyclerView.ViewHolder(view){
         fun bind(friend: User){
-            view.user_fullname.text = friend.name
+            view.user_name.text = friend.name
             GlideApp.with(view.context).load(firebaseStorage.getReference(friend.thumbnailUrl!!)).into(view.user_thumb)
             view.setOnClickListener {
                 UserActivity.newIntent(view.context, friend.id!!)

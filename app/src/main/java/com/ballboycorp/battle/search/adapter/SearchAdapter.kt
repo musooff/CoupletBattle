@@ -53,9 +53,9 @@ class SearchAdapter(private val pagerListener: ViewPagerListener) : PagerAdapter
     }
 
     fun submitList(result: List<Any>){
-        allBattlesSearchResultAdapter.submitList(result[0] as List<Battle>)
-        allUsersSearchResultAdapter.submitList(result[1] as List<User>)
-        allAuthorsSearchResultAdapter.submitList(result[2] as List<Author>)
+        allBattlesSearchResultAdapter.submitList((result[0] as List<Battle>).take(3))
+        allUsersSearchResultAdapter.submitList((result[1] as List<User>).take(3))
+        allAuthorsSearchResultAdapter.submitList((result[2] as List<Author>).take(3))
 
         battlesSearchResultAdapter.submitList(result[0] as List<Battle>)
         usersSearchResultAdapter.submitList(result[1] as List<User>)
