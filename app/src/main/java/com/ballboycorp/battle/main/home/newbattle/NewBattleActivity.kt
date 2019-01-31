@@ -58,7 +58,7 @@ class NewBattleActivity : BaseActivity() {
 
         currentPrivacy = privacy_public_rb
 
-        ButtonUtils.invalidateButton(button_continue, getString(R.string.button_continue), null, true)
+        ButtonUtils.invalidateButton(button_continue, getString(R.string.button_submit), null, true)
         button_continue.setOnClickListener {
 
             val battle = Battle()
@@ -67,14 +67,10 @@ class NewBattleActivity : BaseActivity() {
             battle.creatorId = appPreff.getUserId()
             followers.add(appPreff.getUserId())
             battle.followers = followers
-            battle.privacy = getString(privacy.text)
+            battle.allowedWriters = followers
+            battle.privacy = privacy.text
 
-
-            val notification = Notification()
-            notification.fromUser = appPreff.getUserName()
-            notification.fromUserId = appPreff.getUserId()
-            notification.notificationThumbUrl = appPreff.getUserThumbnail()
-            notification.type = NotificationType.BATTLE_JOINED.value
+            val notification = Notification(appPreff, NotificationType.BATTLE_JOINED)
 
             viewModel.saveCouplet(battle, notification)
                     .addOnSuccessListener {

@@ -71,7 +71,7 @@ class EditCoupletActivity : BaseActivity() {
             mCouplet.authorPenName = couplet_author.text.toString()
 
             viewModel.saveCouplet(getBattleId(coupletId!!),coupletId!!, mCouplet)
-                    .addOnSuccessListener {
+                    ?.addOnSuccessListener {
                         this.finish()
                     }
         }

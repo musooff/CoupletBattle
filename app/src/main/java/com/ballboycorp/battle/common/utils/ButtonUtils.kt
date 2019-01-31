@@ -14,10 +14,8 @@ object ButtonUtils {
     fun invalidateButton(view: View, text: String, drawableLeft: Int? = null, enabled: Boolean = false){
         view.findViewById<TextView>(R.id.button_text).text = text
         if (drawableLeft != null){
+            view.findViewById<ImageView>(R.id.button_left_drawable).visibility = View.VISIBLE
             view.findViewById<ImageView>(R.id.button_left_drawable).setImageDrawable(view.context.resources.getDrawable(drawableLeft))
-        }
-        else {
-            view.findViewById<ImageView>(R.id.button_left_drawable).visibility = View.GONE
         }
         setEnabled(view, enabled)
     }

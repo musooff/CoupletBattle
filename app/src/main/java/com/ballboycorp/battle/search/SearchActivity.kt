@@ -17,6 +17,10 @@ import com.ballboycorp.battle.search.adapter.SearchAdapter
 import com.ballboycorp.battle.search.adapter.ViewPagerListener
 import com.ballboycorp.battle.user.model.User
 import kotlinx.android.synthetic.main.activity_search.*
+import android.app.ProgressDialog
+import com.ballboycorp.battle.common.preference.AppPreference
+import com.ballboycorp.battle.main.home.model.Privacy
+
 
 /**
  * Created by musooff on 17/01/2019.
@@ -32,6 +36,7 @@ class SearchActivity : BaseActivity(), ViewPagerListener {
     }
 
     private lateinit var adapter: SearchAdapter
+    private lateinit var appPref: AppPreference
 
     private val viewModel by lazy {
         ViewModelProviders
@@ -43,9 +48,15 @@ class SearchActivity : BaseActivity(), ViewPagerListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
 
+        appPref = AppPreference.getInstance(this)
+
         customAppBar(my_appbar)
 
+        val dialog = ProgressDialog.show(this, "",
+                "Лутфан интизор шавед...", true)
+
         viewModel.result.observe(this, Observer {
+            dialog.dismiss()
             search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String): Boolean {
                     return false
@@ -63,7 +74,12 @@ class SearchActivity : BaseActivity(), ViewPagerListener {
                         return false
                     }
                     content.visibility = View.VISIBLE
-                    resultToShow.add((it[0] as List<Battle>).filter {
+
+                    val accessibleBattles = (it[0] as List<Battle>)
+                            .filter { it.privacy != Privacy.SECRET.text || it.allowedWriters.contains(appPref.getUserId()) }
+
+
+                    resultToShow.add((accessibleBattles).filter {
                         it.name!!.toLowerCase().contains(newText.toLowerCase())
                     })
                     resultToShow.add((it[1] as List<User>).filter {

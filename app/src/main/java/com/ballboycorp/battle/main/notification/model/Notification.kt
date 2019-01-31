@@ -1,5 +1,6 @@
 package com.ballboycorp.battle.main.notification.model
 
+import com.ballboycorp.battle.common.preference.AppPreference
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.ServerTimestamp
 import java.util.*
@@ -17,6 +18,14 @@ class Notification() {
     var type: String? = null
     var notificationThumbUrl: String? = null
     var battleId: String? = null
+
+    constructor(appPreff: AppPreference, notificationType: NotificationType, battleId: String? = null): this(){
+        this.fromUser = appPreff.getUserName()
+        this.fromUserId = appPreff.getUserId()
+        this.notificationThumbUrl = appPreff.getUserThumbnail()
+        this.type = notificationType.value
+        this.battleId = battleId
+    }
 
     companion object {
         fun toNotificationList(documents: List<DocumentSnapshot>): List<Notification>{

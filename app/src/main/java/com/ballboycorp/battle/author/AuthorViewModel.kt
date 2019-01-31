@@ -1,6 +1,8 @@
 package com.ballboycorp.battle.author
 
 import androidx.lifecycle.ViewModel
+import com.ballboycorp.battle.network.FirebaseService
+import com.ballboycorp.battle.network.StorageService
 import com.google.firebase.firestore.DocumentReference
 
 /**
@@ -9,11 +11,13 @@ import com.google.firebase.firestore.DocumentReference
 
 class AuthorViewModel : ViewModel() {
 
-    private val repository = AuthorRepository()
+    private val firebaseService = FirebaseService()
+
+    private val storageService = StorageService()
 
     fun getAuthor(authorId: String): DocumentReference {
-        return repository.getAuthor(authorId)
+        return firebaseService.authorRef(authorId)
     }
 
-    fun getImageRef(imageUrl: String) = repository.getImageRef(imageUrl)
+    fun getImageRef(imageUrl: String) = storageService.getImageRef(imageUrl)
 }

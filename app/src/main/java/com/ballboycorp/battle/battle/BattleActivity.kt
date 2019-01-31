@@ -1,5 +1,6 @@
 package com.ballboycorp.battle.battle
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -21,6 +22,9 @@ import com.ballboycorp.battle.battle.utils.FriendUtil
 import com.ballboycorp.battle.common.utils.ButtonUtils
 import com.ballboycorp.battle.friendlist.FriendListActivity
 import com.ballboycorp.battle.main.home.model.Battle
+import com.ballboycorp.battle.main.home.model.Privacy
+import com.ballboycorp.battle.main.notification.model.Notification
+import com.ballboycorp.battle.main.notification.model.NotificationType
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_battle.*
 import kotlinx.android.synthetic.main.battle_header.*
@@ -50,7 +54,7 @@ class BattleActivity : BaseActivity() {
 
     private lateinit var adapter: BattleAdapter
     private lateinit var battleId: String
-    private var mBattle: Battle? = null
+    private lateinit var mBattle: Battle
     private var coupletsCount: Int = 0
     private lateinit var lastPostedUserId: String
     private var startingLetter: String? = null
@@ -101,7 +105,7 @@ class BattleActivity : BaseActivity() {
             battle_count.text = String.format(getString(R.string.battle_couplet_count_format), it.coupletCount)
 
             container.setOnClickListener {
-                InviteActivity.newIntent(this, mBattle!!)
+                InviteActivity.newIntent(this, mBattle)
             }
         })
 
@@ -129,15 +133,44 @@ class BattleActivity : BaseActivity() {
     }
 
     private fun newCouplet(view: View){
-        if (::lastPostedUserId.isInitialized && lastPostedUserId == appPreff.getUserId()){
+        if (!::mBattle.isInitialized){
+            return
+        }
+        if (mBattle.privacy == Privacy.PRIVATE.text && !mBattle.allowedWriters.contains(appPreff.getUserId())){
+            val alert = AlertDialog.Builder(this)
+                    .setTitle("Байтбараки пушида")
+
+            if (mBattle.requestedWriters.contains(appPreff.getUserId())){
+                alert.setMessage("Шумо аллакай дархости дохилшави рабона кардаед.")
+                        .setPositiveButton("Фахмо") {dialog, _ ->
+                            dialog.dismiss()
+                        }
+            }
+            else {
+                alert.setMessage("Лутфан аз сохибони байтбарак ичозати дохилшави пурсон шавед. Мехохед ичозатнома равон кунем?")
+                        .setPositiveButton("Бале") { _, _ ->
+                            val notification = Notification(appPreff, NotificationType.BATTLE_JOIN_REQUEST, mBattle.id)
+                            viewModel.requestJoin(mBattle, appPreff.getUserId(), notification)
+                            Toast.makeText(this, "Ичозатнома равон карда шуд.", Toast.LENGTH_SHORT).show()
+                        }
+                        .setNegativeButton("Не") { dialog,_ ->
+                            dialog.dismiss()
+                        }
+            }
+
+            alert.create().show()
+
+        }
+
+        else if (::lastPostedUserId.isInitialized && lastPostedUserId == appPreff.getUserId()){
             Snackbar.make(view, getString(R.string.not_your_turn), Snackbar.LENGTH_LONG)
                     .setAction(getString(R.string.action_invite)) {
-                        InviteActivity.newIntent(this, mBattle!!)
+                        InviteActivity.newIntent(this, mBattle)
                     }
                     .show()
         }
         else {
-            NewCoupletActivity.newIntent(this, mBattle!!, startingLetter, false)
+            NewCoupletActivity.newIntent(this, mBattle, startingLetter, false)
         }
     }
 
@@ -147,7 +180,10 @@ class BattleActivity : BaseActivity() {
     }
 
     override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
-        if (mBattle?.followers?.contains(appPreff.getUserId()) == true) {
+        if (!::mBattle.isInitialized){
+            return super.onPrepareOptionsMenu(menu)
+        }
+        else if (mBattle.followers.contains(appPreff.getUserId())) {
             menu?.findItem(R.id.action_follow)?.icon = this.resources.getDrawable(R.drawable.ic_check_circle_white_24dp)
         }
         else {
@@ -159,11 +195,11 @@ class BattleActivity : BaseActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId){
             R.id.action_info -> {
-                BattleMoreActivity.newIntent(this, mBattle!!)
+                BattleMoreActivity.newIntent(this, mBattle)
                 return true
             }
             R.id.action_follow -> {
-                if (mBattle?.followers?.contains(appPreff.getUserId()) == true) {
+                if (mBattle.followers.contains(appPreff.getUserId())) {
                     viewModel.unFollowBattle(battleId, appPreff.getUserId())
                     Toast.makeText(this, "Пайрави катъ карда шуд.", Toast.LENGTH_SHORT).show()
                 }

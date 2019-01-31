@@ -6,8 +6,8 @@ import com.ballboycorp.battle.R
  * Created by musooff on 14/01/2019.
  */
 
-enum class Privacy(val value: Int, val text: Int, val desc: Int) {
-    PUBLIC(0, R.string.privacy_public, R.string.privacy_private_desc),
-    PRIVATE(1, R.string.privacy_private, R.string.privacy_private_desc),
-    SECRET(2, R.string.privacy_secret, R.string.privacy_secret_desc),
+enum class Privacy(val value: Int, val text: String, val desc: Int) {
+    PUBLIC(0, "Кушод", R.string.privacy_private_desc),
+    PRIVATE(1, "Пушида", R.string.privacy_private_desc),
+    SECRET(2, "Махфи", R.string.privacy_secret_desc),
 }

@@ -73,6 +73,9 @@ class NotificationAdapter : RecyclerView.Adapter<NotificationAdapter.Notificatio
                     text.append(String.format(view.context.getString(R.string.notification_battle_invitation), notification.fromUser))
 
                 }
+                NotificationType.BATTLE_JOIN_REQUEST.value -> {
+                    text.append(String.format(view.context.getString(R.string.notification_battle_join_request, notification.fromUser)))
+                }
             }
             text.setSpan(StyleSpan(Typeface.BOLD), 0, notification.fromUser!!.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
             view.notification_text.text = text

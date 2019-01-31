@@ -26,6 +26,7 @@ class HomeFragment : BaseFragment() {
     private lateinit var featuredAdapter: HomeFeaturedAdapter
     private lateinit var authorsAdapted: HomeAuthorsAdapter
     private lateinit var topUsersAdapter: HomeTopUsersAdapter
+
     private val viewModel by lazy {
         ViewModelProviders
                 .of(this)

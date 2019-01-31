@@ -9,7 +9,6 @@ import com.ballboycorp.battle.R
 import com.ballboycorp.battle.common.base.BaseFragment
 import com.ballboycorp.battle.common.preference.AppPreference
 import com.ballboycorp.battle.main.home.adapters.HomeAdapter
-import com.ballboycorp.battle.main.home.HomeViewModel
 import com.ballboycorp.battle.main.home.newbattle.NewBattleActivity
 import com.ballboycorp.battle.search.SearchActivity
 import kotlinx.android.synthetic.main.empty_list.*
@@ -24,7 +23,7 @@ class MyBattlesFragment : BaseFragment() {
     private val viewModel by lazy {
         ViewModelProviders
                 .of(this)
-                .get(HomeViewModel::class.java)
+                .get(MyBattlesViewModel::class.java)
     }
     private lateinit var adapter: HomeAdapter
     private lateinit var appPreff: AppPreference
@@ -60,7 +59,7 @@ class MyBattlesFragment : BaseFragment() {
             NewBattleActivity.newIntent(activity!!)
         }
 
-        viewModel.getBattlesRef(true, appPreff.getUserId())
+        viewModel.getMyBattles(appPreff.getUserId())
 
 
     }

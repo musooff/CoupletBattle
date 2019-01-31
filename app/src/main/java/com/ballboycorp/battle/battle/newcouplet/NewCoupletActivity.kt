@@ -18,7 +18,6 @@ import com.ballboycorp.battle.main.home.model.Battle
 import kotlinx.android.synthetic.main.activity_new_couplet.*
 import java.util.*
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.custom_button.*
 import kotlin.collections.ArrayList
 
 

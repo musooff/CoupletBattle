@@ -78,12 +78,7 @@ class InviteActivity  : BaseActivity(){
         ButtonUtils.invalidateButton(button_invite_friends, getString(R.string.button_invite_friends), R.drawable.ic_group_add_white_24dp)
         button_invite_friends.setOnClickListener {
 
-            val notification = Notification()
-            notification.fromUser = appPreff.getUserName()
-            notification.fromUserId = appPreff.getUserId()
-            notification.notificationThumbUrl = appPreff.getUserThumbnail()
-            notification.type = NotificationType.BATTLE_INVITATION.value
-            notification.battleId = mBattle.id
+            val notification = Notification(appPreff, NotificationType.BATTLE_INVITATION, mBattle.id)
 
             viewModel.sendInvitations(adapter.chosenFriends, notification)
             Toast.makeText(this, "Invitations to join the battle has been sent.", Toast.LENGTH_SHORT).show()

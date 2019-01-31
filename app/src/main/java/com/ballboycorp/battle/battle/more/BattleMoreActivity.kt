@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
+import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.ballboycorp.battle.R
 import com.ballboycorp.battle.common.base.BaseActivity
 import com.ballboycorp.battle.common.preference.AppPreference
@@ -29,6 +31,13 @@ class BattleMoreActivity : BaseActivity(){
 
     private lateinit var mBattle: Battle
     private lateinit var appPref: AppPreference
+    private lateinit var requestAdapter: BattleJoinRequestAdapter
+
+    private val viewModel by lazy {
+        ViewModelProviders
+                .of(this)
+                .get(BattleMoreViewModel::class.java)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +50,12 @@ class BattleMoreActivity : BaseActivity(){
         mBattle = intent.extras!!.getSerializable(BATTLE) as Battle
 
         battle_description.text = mBattle.description
+
+        requestAdapter = BattleJoinRequestAdapter()
+        requests_rv.layoutManager = LinearLayoutManager(this)
+        requests_rv.adapter = requestAdapter
+
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

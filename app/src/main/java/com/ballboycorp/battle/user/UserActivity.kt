@@ -123,11 +123,7 @@ class UserActivity : BaseActivity() {
         button_action_button.setOnClickListener {
             when (actionButtonType){
                 ActionButtonType.ADD_FRIEND -> {
-                    val notification = Notification()
-                    notification.fromUser = appPreff.getUserName()
-                    notification.fromUserId = appPreff.getUserId()
-                    notification.notificationThumbUrl = appPreff.getUserThumbnail()
-                    notification.type = NotificationType.FRIEND_REQUEST.value
+                    val notification = Notification(appPreff, NotificationType.FRIEND_REQUEST)
                     viewModel.sendFriendRequest(userId, notification)
                             .addOnSuccessListener {
                                 actionButtonType = ActionButtonType.FRIEND_REQUEST_SENT
@@ -135,11 +131,7 @@ class UserActivity : BaseActivity() {
                             }
                 }
                 ActionButtonType.FRIEND_REQUEST_PENDING -> {
-                    val notification = Notification()
-                    notification.fromUser = appPreff.getUserName()
-                    notification.fromUserId = appPreff.getUserId()
-                    notification.notificationThumbUrl = appPreff.getUserThumbnail()
-                    notification.type = NotificationType.FRIEND_ACCEPTED.value
+                    val notification = Notification(appPreff, NotificationType.FRIEND_ACCEPTED)
                     viewModel.acceptFriendRequest(userId, notification)
                             .addOnSuccessListener {
                                 actionButtonType = ActionButtonType.MESSAGE

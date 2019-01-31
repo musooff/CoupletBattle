@@ -8,11 +8,12 @@ enum class NotificationType(val value: String) {
     FRIEND_REQUEST("friendRequest"),
     FRIEND_ACCEPTED("friendAccepted"),
     BATTLE_JOINED("battleJoined"),
+    BATTLE_JOIN_REQUEST("battleJoinRequest"),
     BATTLE_INVITATION("battleInvitation");
 
     companion object {
         fun isBattleType(value: String) : Boolean{
-            if (value == BATTLE_INVITATION.value || value == BATTLE_JOINED.value){
+            if (value == BATTLE_INVITATION.value || value == BATTLE_JOINED.value || value == BATTLE_JOIN_REQUEST.value){
                 return true
             }
             return false

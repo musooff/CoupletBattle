@@ -1,6 +1,8 @@
 package com.ballboycorp.battle.main.me
 
 import androidx.lifecycle.ViewModel
+import com.ballboycorp.battle.network.FirebaseService
+import com.ballboycorp.battle.network.StorageService
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.DocumentReference
 
@@ -15,13 +17,14 @@ class MeViewModel : ViewModel(){
         private const val COVER_FIELD = "coverUrl"
     }
 
-    private val repository = MeRepository()
+    private val firebaseService = FirebaseService()
+    private val storageService = StorageService()
 
     fun getUser(userId: String): DocumentReference {
-        return repository.getUser(userId)
+        return firebaseService.userRef(userId)
     }
 
-    fun getImageUrl(imageUrl: String) = repository.getImageRef(imageUrl)
+    fun getImageUrl(imageUrl: String) = storageService.getImageRef(imageUrl)
 
     fun updateThumbnailUrl(userId: String, thumbnailUrl: String?): Task<Void> {
         return getUser(userId)

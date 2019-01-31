@@ -3,6 +3,7 @@ package com.ballboycorp.battle.main.home.newbattle
 import androidx.lifecycle.ViewModel
 import com.ballboycorp.battle.main.home.model.Battle
 import com.ballboycorp.battle.main.notification.model.Notification
+import com.ballboycorp.battle.network.FirebaseService
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.DocumentReference
 
@@ -11,37 +12,18 @@ import com.google.firebase.firestore.DocumentReference
  */
 
 class NewBattleViewModel : ViewModel() {
-    companion object {
-        private const val BATTLE_ID = "id"
-        private const val NOTIFICATION_ID = "id"
-    }
 
-    private val repository = NewBattleRepository()
+    private val firebaseService = FirebaseService()
 
     fun saveCouplet(battle: Battle, notification: Notification): Task<DocumentReference> {
-        return repository.getBattlesRef()
-                .add(battle)
-                .addOnSuccessListener {
-                    it.update(BATTLE_ID, it.id)
-                }
+        return firebaseService.addBattle(battle)
                 .addOnSuccessListener {
                     battle.followers
                             .filter { it != notification.fromUserId }
                             .forEach { userId ->
                                 notification.battleId = it.id
-                                createNotification(userId, notification)
+                                firebaseService.addNotification(userId, notification)
                             }
-                }
-    }
-
-    private fun createNotification(userId: String, notification: Notification) {
-        repository.getNotificationRef(userId)
-                .add(notification)
-                .addOnSuccessListener {
-                    val notificationId = it.id
-                    repository.getNotificationRef(userId)
-                            .document(notificationId)
-                            .update(NOTIFICATION_ID, notificationId)
                 }
     }
 

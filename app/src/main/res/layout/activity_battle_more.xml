@@ -43,5 +43,23 @@
             android:textColor="@color/colorWhite"/>
 
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="5dp"
+        android:padding="15dp">
+        <TextView
+            android:text="@string/section_battle_join_requests"
+            style="@style/HomeSection"
+            android:background="@color/colorBlackLighter"
+            android:textColor="@color/colorWhite"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/requests_rv">
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </LinearLayout>
 
 </LinearLayout>

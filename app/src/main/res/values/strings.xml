@@ -108,5 +108,7 @@
     <string name="empty_battles">Байт вучуд надорад. Аввалин бошед ва байти худро гузоред.</string>
     <string name="action_follow">Пайрави</string>
     <string name="section_battle_description">Маълумот ва коидахо</string>
+    <string name="notification_battle_join_request">%s хохиши дохилшави ба байтбарак кардааст.</string>
+    <string name="section_battle_join_requests">Хохошмандони дохилшави</string>
 
 </resources>
