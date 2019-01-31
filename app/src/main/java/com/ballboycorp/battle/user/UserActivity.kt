@@ -62,7 +62,6 @@ class UserActivity : BaseActivity() {
         userId = intent.extras!!.getString(USER_ID)!!
 
         viewModel.getUser(userId)
-                .get()
                 .addOnSuccessListener {
                     if (it != null){
                         val user = it.toObject(User::class.java)

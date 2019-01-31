@@ -4,6 +4,7 @@ import com.ballboycorp.battle.battle.model.Couplet
 import com.ballboycorp.battle.battle.newcouplet.model.Post
 import com.ballboycorp.battle.main.home.model.Battle
 import com.ballboycorp.battle.main.notification.model.Notification
+import com.ballboycorp.battle.user.model.User
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -35,6 +36,12 @@ class FirebaseService {
         private const val AUTHOR_ID = "id"
         private const val POSTS_ID = "id"
         private const val COUPLET_COUNT = "coupletCount"
+        private const val FRIENDS_PENDING_FROM = "friendsPendingFrom"
+        private const val FRIENDS_PENDING_TO = "friendsPendingTo"
+        private const val FRIENDS_LIST = "friendList"
+        private const val FRIEND_COUNT = "friendCount"
+        private const val USER_EMAIL = "email"
+        private const val USER_PHONE_NUMBER = "phoneNumber"
 
 
 
@@ -45,6 +52,18 @@ class FirebaseService {
     fun usersRef() = firebaseDatabase.collection(USERS_REF)
 
     fun userRef(userId: String) = usersRef().document(userId)
+
+    fun userRefByEmail(email: String) = usersRef()
+            .whereEqualTo(USER_EMAIL, email)
+
+    fun userRefByPhoneNumber(phoneNumber: String) = usersRef()
+            .whereEqualTo(USER_PHONE_NUMBER, phoneNumber)
+
+    fun addUser(user: User) = usersRef()
+            .add(user)
+            .addOnSuccessListener {
+                it.update(USER_ID, it.id)
+            }
 
     fun battlesRef() = firebaseDatabase.collection(BATTLES_REF)
 
@@ -141,4 +160,43 @@ class FirebaseService {
 
                 incrementAuthorCoupletCount(couplet.authorId!!, 1)
             }
+
+    fun sendFriendRequest(userId: String, notification: Notification) =
+            addNotification(userId, notification)
+                    .addOnSuccessListener {
+                        userRef(notification.fromUserId!!)
+                                .update(FRIENDS_PENDING_FROM, FieldValue.arrayUnion(userId))
+                        userRef(userId)
+                                .update(FRIENDS_PENDING_TO, FieldValue.arrayUnion(notification.fromUserId))
+                    }
+
+    fun acceptFriendRequest(userId: String, notification: Notification) =
+            addNotification(userId, notification)
+                    .addOnSuccessListener {
+                        userRef(notification.fromUserId!!)
+                                .update(FRIENDS_PENDING_TO, FieldValue.arrayRemove(userId))
+
+                        userRef(userId)
+                                .update(FRIENDS_PENDING_FROM, FieldValue.arrayRemove(notification.fromUserId))
+
+                        userRef(notification.fromUserId!!)
+                                .update(FRIENDS_LIST, FieldValue.arrayUnion(userId))
+
+                        userRef(userId)
+                                .update(FRIENDS_LIST, FieldValue.arrayUnion(notification.fromUserId))
+                    }
+                    .addOnSuccessListener {
+                        increaseFriendCount(userId)
+                        increaseFriendCount(notification.fromUserId!!)
+                    }
+
+    private fun increaseFriendCount(userId: String){
+        userRef(userId)
+                .get()
+                .addOnSuccessListener {
+                    userRef(userId)
+                            .update(FRIEND_COUNT, it.getLong(FRIEND_COUNT)!!.plus(1))
+                }
+    }
+
 }

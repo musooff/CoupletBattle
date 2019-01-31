@@ -2,6 +2,7 @@ package com.ballboycorp.battle.splash
 
 import androidx.lifecycle.ViewModel
 import com.ballboycorp.battle.common.preference.AppPreference
+import com.ballboycorp.battle.network.FirebaseService
 import com.ballboycorp.battle.user.model.User
 
 /**
@@ -10,26 +11,17 @@ import com.ballboycorp.battle.user.model.User
 
 class SplashViewModel : ViewModel() {
 
-    companion object {
-
-        private const val USER_ID = "id"
-    }
-
-    private val repository = SplashRepository()
+    private val firebaseService = FirebaseService()
 
     private fun saveUserCredentials(user: User, appPreference: AppPreference){
-        repository.getUsersRef()
-                .add(user)
+        firebaseService.addUser(user)
                 .addOnSuccessListener {
-                    repository.getUsersRef().document(it.id)
-                            .update(USER_ID, it.id)
-                    user.id = it.id
                     appPreference.saveCredentials(user)
                 }
     }
 
     fun updateUserCredentials(user: User, appPreference: AppPreference){
-        repository.getUserRefByEmail(user.email!!)
+        firebaseService.userRefByEmail(user.email!!)
                 .get()
                 .addOnSuccessListener {
                     if (!it.isEmpty){

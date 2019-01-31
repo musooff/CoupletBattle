@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.ballboycorp.battle.author.model.Author
 import com.ballboycorp.battle.main.home.model.Battle
+import com.ballboycorp.battle.network.FirebaseService
 import com.ballboycorp.battle.user.model.User
 
 /**
@@ -12,23 +13,23 @@ import com.ballboycorp.battle.user.model.User
 
 class SearchViewModel : ViewModel() {
 
-    private val repository = SearchRepository()
 
+    private val firebaseService = FirebaseService()
 
     val result: MutableLiveData<List<Any>> = MutableLiveData()
     private val tempResult = ArrayList<Any>()
 
 
     fun loadDatabase() {
-        repository.getBattlesRef()
+        firebaseService.battlesRef()
                 .get()
                 .addOnSuccessListener {
                     tempResult.add(Battle.toCoupletList(it.documents))
-                    repository.getUsers()
+                    firebaseService.usersRef()
                             .get()
                             .addOnSuccessListener {
                                 tempResult.add(User.toUserList(it.documents))
-                                repository.getAuthors()
+                                firebaseService.authorsRef()
                                         .get()
                                         .addOnSuccessListener {
                                             tempResult.add(Author.toAuthorList(it.documents))

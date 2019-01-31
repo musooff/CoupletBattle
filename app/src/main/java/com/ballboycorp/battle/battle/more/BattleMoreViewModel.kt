@@ -10,18 +10,9 @@ import com.ballboycorp.battle.user.model.User
 
 class BattleMoreViewModel : ViewModel() {
 
-    companion object {
-        private const val REQUESTED_WRITERS = "requestedWriters"
-        private const val NOTIFICATION_ID = "id"
-        private const val ALLOWED_WRITERS = "allowedWriters"
-    }
-
-    private val repository = BattleRepository()
-
     var requestList: MutableLiveData<List<User>> = MutableLiveData()
 
     fun getRequestedUsers(){
-        repository.getUsers()
     }
 
 }
