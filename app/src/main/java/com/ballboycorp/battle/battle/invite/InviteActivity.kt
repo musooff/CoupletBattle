@@ -85,11 +85,9 @@ class InviteActivity  : BaseActivity(){
             finish()
         }
 
-    }
-
-    override fun onResume() {
-        super.onResume()
         viewModel.getFriendIds(appPreff.getUserId())
+
+
     }
 
     private fun invalidateEmptyList(isEmpty: Boolean){

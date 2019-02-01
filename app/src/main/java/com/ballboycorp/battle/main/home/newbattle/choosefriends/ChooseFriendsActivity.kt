@@ -70,12 +70,10 @@ class ChooseFriendsActivity  : BaseActivity(){
             finish()
         }
 
+        viewModel.getFriendIds(appPreff.getUserId())
+
     }
 
-    override fun onResume() {
-        super.onResume()
-        viewModel.getFriendIds(appPreff.getUserId())
-    }
 
     private fun invalidateEmptyList(isEmpty: Boolean){
         if (isEmpty){

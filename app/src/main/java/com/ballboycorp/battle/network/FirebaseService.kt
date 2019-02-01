@@ -27,6 +27,7 @@ class FirebaseService {
         private const val FOLLOWERS = "followers"
         private const val WRITERS = "writers"
         private const val REQUESTED_WRITERS = "requestedWriters"
+        private const val ALLOWED_WRITERS = "allowedWriters"
         private const val IS_FEATURED = "featured"
         private const val HAS_FEATURED_COUPLET = "hasFeaturedCouplet"
         private const val COUPLET_ID = "id"
@@ -88,6 +89,9 @@ class FirebaseService {
 
     fun requestJoinBattle(battleId: String, userId: String) = battleRef(battleId)
             .update(REQUESTED_WRITERS, FieldValue.arrayUnion(userId))
+
+    fun requestedWriterIds(battleId: String) = battleRef(battleId)
+
 
     fun authorsRef() = firebaseDatabase.collection(AUTHORS_REF)
 
@@ -198,5 +202,19 @@ class FirebaseService {
                             .update(FRIEND_COUNT, it.getLong(FRIEND_COUNT)!!.plus(1))
                 }
     }
+
+    fun confirmJoin(battleId: String, userId: String, notification: Notification) = battleRef(battleId)
+            .update(REQUESTED_WRITERS, FieldValue.arrayRemove(userId))
+            .addOnSuccessListener {
+                battleRef(battleId)
+                        .update(ALLOWED_WRITERS, FieldValue.arrayUnion(userId))
+                addNotification(userId, notification)
+            }
+
+    fun rejectJoin(battleId: String, userId: String, notification: Notification) = battleRef(battleId)
+            .update(REQUESTED_WRITERS, FieldValue.arrayRemove(userId))
+            .addOnSuccessListener {
+                addNotification(userId, notification)
+            }
 
 }

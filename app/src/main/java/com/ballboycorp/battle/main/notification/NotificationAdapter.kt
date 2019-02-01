@@ -61,20 +61,29 @@ class NotificationAdapter : RecyclerView.Adapter<NotificationAdapter.Notificatio
                 NotificationType.FRIEND_REQUEST.value -> {
                     text.append(String.format(view.context.getString(R.string.notification_friend_request), notification.fromUser))
                 }
+
                 NotificationType.FRIEND_ACCEPTED.value -> {
                     text.append(String.format(view.context.getString(R.string.notification_accpet_friend_request), notification.fromUser))
-
                 }
+
                 NotificationType.BATTLE_JOINED.value -> {
                     text.append(String.format(view.context.getString(R.string.notification_battle_join), notification.fromUser))
-
                 }
+
                 NotificationType.BATTLE_INVITATION.value -> {
                     text.append(String.format(view.context.getString(R.string.notification_battle_invitation), notification.fromUser))
-
                 }
+
                 NotificationType.BATTLE_JOIN_REQUEST.value -> {
                     text.append(String.format(view.context.getString(R.string.notification_battle_join_request, notification.fromUser)))
+                }
+
+                NotificationType.BATTLE_JOIN_CONFIRMED.value -> {
+                    text.append(String.format(view.context.getString(R.string.notification_battle_join_confirmed), notification.fromUserId))
+                }
+
+                NotificationType.BATTLE_JOIN_REJECTED.value -> {
+                    text.append(String.format(view.context.getString(R.string.notification_battle_join_rejected), notification.fromUserId))
                 }
             }
             text.setSpan(StyleSpan(Typeface.BOLD), 0, notification.fromUser!!.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)

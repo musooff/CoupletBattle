@@ -68,11 +68,8 @@ class FriendListActivity : BaseActivity() {
         })
 
 
-    }
-
-    override fun onResume() {
-        super.onResume()
         viewModel.getFriendList(friendIds.toList())
+
     }
 
     private fun invalidateEmptyList(isEmpty: Boolean){

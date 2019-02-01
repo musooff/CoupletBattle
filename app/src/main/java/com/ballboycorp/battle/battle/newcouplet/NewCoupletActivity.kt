@@ -15,6 +15,7 @@ import com.ballboycorp.battle.battle.newcouplet.model.Input
 import com.ballboycorp.battle.common.utils.ButtonUtils
 import com.ballboycorp.battle.common.utils.CoupletUtils
 import com.ballboycorp.battle.main.home.model.Battle
+import com.ballboycorp.battle.rules.CommunityGuidelines
 import kotlinx.android.synthetic.main.activity_new_couplet.*
 import java.util.*
 import com.google.android.material.snackbar.Snackbar
@@ -103,10 +104,19 @@ class NewCoupletActivity : BaseActivity() {
             submitCouplet(it)
         }
 
+        checkbox_agree.setOnClickListener {
+            CommunityGuidelines.newIntent(this)
+        }
+
     }
 
 
     private fun submitCouplet(view: View) {
+
+        if (!checkbox_agree.isEnabled){
+            Snackbar.make(couplet_author, "Лутфан ба коида конунхо розиги дихед.", Snackbar.LENGTH_LONG).show()
+            return
+        }
 
         val line1 = couplet_line_1.text.toString()
         val line2 = couplet_line_2.text.toString()

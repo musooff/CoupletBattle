@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -48,7 +49,9 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginTop="5dp"
-        android:padding="15dp">
+        android:padding="15dp"
+        android:visibility="gone"
+        android:id="@+id/requests_rv_container">
         <TextView
             android:text="@string/section_battle_join_requests"
             style="@style/HomeSection"
@@ -57,7 +60,8 @@
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/requests_rv">
+            android:id="@+id/requests_rv"
+            android:padding="10dp">
         </androidx.recyclerview.widget.RecyclerView>
 
     </LinearLayout>

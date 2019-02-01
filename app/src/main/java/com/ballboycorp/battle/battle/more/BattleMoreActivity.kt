@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
+import android.view.View
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ballboycorp.battle.R
@@ -51,15 +53,25 @@ class BattleMoreActivity : BaseActivity(){
 
         battle_description.text = mBattle.description
 
-        requestAdapter = BattleJoinRequestAdapter()
+        requestAdapter = BattleJoinRequestAdapter(mBattle.id!!, appPref)
         requests_rv.layoutManager = LinearLayoutManager(this)
         requests_rv.adapter = requestAdapter
 
+        viewModel.requestedWriters.observe(this, Observer {
+            requests_rv_container.visibility = View.VISIBLE
+            requestAdapter.submitList(it)
+        })
+
+        if (mBattle.creatorId == appPref.getUserId()){
+            viewModel.getRequestedWriters(mBattle.id!!)
+        }
 
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        //menuInflater.inflate(R.menu.battle_more, menu)
-        return super.onCreateOptionsMenu(menu)
+    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
+        if (mBattle.creatorId == appPref.getUserId()){
+            menuInflater.inflate(R.menu.battle_more, menu)
+        }
+        return super.onPrepareOptionsMenu(menu)
     }
 }

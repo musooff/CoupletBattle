@@ -37,8 +37,19 @@
                 android:inputType="textPersonName"
                 android:hint="@string/hint_author" />
 
+
         </LinearLayout>
     </ScrollView>
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:checked="true"
+        android:id="@+id/checkbox_agree"
+        android:layout_marginBottom="10dp"
+        android:layout_above="@id/button_submit"
+        android:layout_centerHorizontal="true"
+        android:text="@string/checkbox_agree"/>
     <include
         layout="@layout/custom_button"
         android:id="@+id/button_submit"

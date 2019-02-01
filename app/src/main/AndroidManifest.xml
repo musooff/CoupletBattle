@@ -46,6 +46,8 @@
         <activity android:name=".search.SearchActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateAlwaysVisible"/>
+        <activity android:name=".rules.CommunityGuidelines"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

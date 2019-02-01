@@ -110,5 +110,10 @@
     <string name="section_battle_description">Маълумот ва коидахо</string>
     <string name="notification_battle_join_request">%s хохиши дохилшави ба байтбарак кардааст.</string>
     <string name="section_battle_join_requests">Хохошмандони дохилшави</string>
+    <string name="notification_battle_join_confirmed">%s хохиши шумо доири дохилшави тасдик шуд.</string>
+    <string name="notification_battle_join_rejected">%s хохиши шумо доири дохилшави раъд карда шуд</string>
+    <string name="section_battle_rules">Коидахо оиди Байтбарак</string>
+    <string name="title_community_guidelines">Коидаву Конунхо</string>
+    <string name="checkbox_agree">Розигии коидаву конунхо</string>
 
 </resources>
